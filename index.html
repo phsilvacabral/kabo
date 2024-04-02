@@ -11,25 +11,25 @@
 <body>
     <header class="navegar">
         <nav class="barranav">
-            <img src="../img_principais/Component 2.png" alt="" class="menu">
+            <img src="img_principais/Component 2.png" alt="" class="menu">
             <div class="logodentro">
-                <a href=""><img src="../img_principais/Component 1.png" alt="logo 123 folhas" class="logo"></a>
+                <a href=""><img src="img_principais/Component 1.png" alt="logo 123 folhas" class="logo"></a>
             </div>
 
-            <div id="divbusca"><span>Busque aqui</span><img src="../img_principais/lupa.png" alt="Buscar"
+            <div id="divbusca"><span>Busque aqui</span><img src="img_principais/lupa.png" alt="Buscar"
                     id="lupa_busca">
             </div>
 
             <div class="spaceperfil">
                 <a href="">
                     <figure>
-                        <img src="../img_principais/Ellipse 1.png" alt="logo 123 folhas" class="perfil">
+                        <img src="img_principais/Ellipse 1.png" alt="logo 123 folhas" class="perfil">
                         <figcaption>Login</figcaption>
                     </figure>
                 </a>
                 <a href="">
                     <figure>
-                        <img src="../img_principais/Imagem1 1.png" alt="logo 123 folhas" class="carrinho">
+                        <img src="img_principais/Imagem1 1.png" alt="logo 123 folhas" class="carrinho">
                     </figure>
                 </a>
             </div>
@@ -52,16 +52,16 @@
         <div class="slideshow-container">
 
             <div class="mySlides">
-                <img src="../img_principais/3b46fa99-4268-411c-892c-7bc03de0f8a5.__CR0,0,970,600_PT0_SX970_V1___.jpeg"
+                <img src="img_principais/3b46fa99-4268-411c-892c-7bc03de0f8a5.__CR0,0,970,600_PT0_SX970_V1___.jpeg"
                     class="propaganda">
             </div>
 
             <div class="mySlides">
-                <img src="../img_principais/Component 1.png" class="propaganda">
+                <img src="img_principais/Component 1.png" class="propaganda">
             </div>
 
             <div class="mySlides">
-                <img src="../img_principais/Component 2.png" class="propaganda">
+                <img src="img_principais/Component 2.png" class="propaganda">
             </div>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -117,7 +117,7 @@
                             linkCaixa.classList.add('linkcaixa');
 
                             var fotoDentro = document.createElement('img');
-                            fotoDentro.setAttribute('src', '../img_principais/3b46fa99-4268-411c-892c-7bc03de0f8a5.__CR0,0,970,600_PT0_SX970_V1___.jpeg');
+                            fotoDentro.setAttribute('src', 'img_principais/3b46fa99-4268-411c-892c-7bc03de0f8a5.__CR0,0,970,600_PT0_SX970_V1___.jpeg');
                             fotoDentro.classList.add('fotodentro');
                             linkCaixa.appendChild(fotoDentro);
 
@@ -188,7 +188,7 @@
 
             moveButton.addEventListener('click', function () {
                 items.scrollBy({
-                    left: -500,
+                    left: 500,
                     behavior: 'smooth'
                 });
             });
@@ -199,7 +199,7 @@
             const moveButton = document.querySelector('.setaesquerda');
             moveButton.addEventListener('click', function () {
                 items.scrollBy({
-                    left: 500,
+                    left: -500,
                     behavior: 'smooth'
                 });
             });
