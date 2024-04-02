@@ -1,0 +1,429 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(30, 30, 30, 1);
+}
+
+.section {
+    min-height: 100vh;
+
+}
+
+.navegar {
+    background-color: rgba(107, 51, 53, 0.75);
+    height: 120px;
+    width: 100%;
+    border: 1px solid rgba(240, 51, 51, 1);
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 1;
+}
+
+.barranav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    font-family: 'poppins_medio';
+}
+
+.logo {
+    height: 35px;
+    min-width: 100px;
+
+}
+
+.logodentro {
+    min-width: 160px;
+    display: flex;
+    justify-content: center;
+
+}
+
+
+
+#divbusca {
+    background-color: rgba(107, 51, 53, 0.75);
+    margin: 12px;
+    height: 40px;
+    width: 100%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+    font-size: 15px;
+    display: flex;
+    padding: 0 30px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-family: 'poppins';
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid rgba(240, 51, 51, 1);
+}
+
+#lupa_busca {
+    width: 25px;
+}
+
+.letra {
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0px 10px 0px 10px;
+}
+
+.letra:hover {
+    transition: 0.3s;
+    background-color: rgba(107, 51, 53, 0.75);
+    border-radius: 20px;
+    color: black;
+}
+
+.letra:active {
+    background-color: rgba(107, 51, 53, 0.75);
+}
+
+.alinharletra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 700px;
+    margin: 0 30px 0 30px;
+}
+
+figcaption {
+    font-size: 12px;
+    color: white;
+}
+
+.perfil {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
+
+.spaceperfil {
+    min-width: 160px;
+    display: flex;
+    justify-content: center;
+}
+
+a:link {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+.secondnavbar {
+    height: 30px;
+    width: 100%;
+    position: fixed;
+    border: 1px solid rgba(240, 51, 51, 1);
+    background-color: rgba(107, 51, 53, 0.75);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.boxsecondnavbar {
+    width: 135px;
+    height: 30px;
+    color: white;
+    background-color: rgba(107, 51, 53, 0.75);
+    border-right: 1px solid rgba(240, 51, 51, 1);
+    border-left: 1px solid rgba(240, 51, 51, 1);
+    font-size: 12px;
+}
+
+.boxsecondnavbar:hover {
+    background-color: rgba(240, 51, 51, 1);
+}
+
+.slideshow-container {
+    width: 85%;
+    position: relative;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+    margin-top: 180px;
+}
+
+.propaganda{
+    min-width: 100%;
+    height: 400px;
+    
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    opacity: 1;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.moveboxfundo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+.boxfundo {
+    background-color: white;
+    width: 1240px;
+    height: 580px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.caixas {
+    display: flex;
+    flex-flow: nowrap row;
+    height: 470px;
+    width: 90%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.setadireita {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    right: 0;
+    margin-top: 220px;
+    background-image: url(img_principais/seta-para-a-direita.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 30%;
+}
+
+.setaesquerda {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    left: 0;
+    margin-top: 220px;
+    background-image: url(img_principais/botao-de-seta-para-a-esquerda.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.inlineboxseta {
+    display: flex;
+}
+
+.caixas::-webkit-scrollbar {
+    background-color: white;
+    height: 10px;
+}
+
+.caixas::-webkit-scrollbar-thumb {
+    background-color: rgba(169, 185, 178, 0.5);
+    ;
+    scrollbar-width: 10px;
+    border-radius: 5px;
+}
+
+
+
+.bordacaixas {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #bbb;
+    margin: 20px 20px 20px 0;
+    max-width: 340px;
+    height: 420px;
+    border-radius: 10px;
+    transition: box-shadow 0.15s, border-style 0.15s, border-color 0.15s, border-width 0.15s;
+    
+}
+
+.bordacaixas:hover {
+    cursor: pointer;
+    opacity: 0.9;
+    user-select: none;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+
+}
+
+.bordacaixas:active {
+    opacity: 0.8;
+    user-select: none;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
+}
+
+
+@media (min-width:451px) {
+    .caixas {
+        margin-bottom: 60px;
+    }
+
+    .bordacaixas {
+        min-width: 340px;
+    }
+
+    .escritacaixa::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .escritacaixa::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .escritacaixa::-webkit-scrollbar-thumb {
+        background-color: rgba(169, 185, 178, 0.8);
+        border-radius: 5px;
+    }
+}
+
+@media (max-width:450px) {
+    .caixas {
+        height: 370px;
+        margin-bottom: 20px;
+    }
+
+    .caixas::-webkit-scrollbar {
+        display: none;
+    }
+
+    .bordacaixas {
+        height: 320px;
+        min-width: 245px;
+    }
+
+    .fotodentro {
+        max-height: 170px;
+    }
+
+    .linha0 {
+        height: 100px;
+    }
+}
+
+
+.linha0 {
+    width: 100%;
+    max-height: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+.linha0::-webkit-scrollbar {
+    background-color: white;
+    width: 5px;
+
+}
+
+.linha0::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(169, 185, 178, 0.5);
+    ;
+}
+
+.linkcaixa{
+    width: 340px;
+}
+
+.fotodentro {
+    width: 100%;
+    height: 240px;
+    border-radius: 9px 9px 0 0;
+}
+
+.moverdescricaocaixa{
+    display: block;
+    width: 100%;
+}
+
+.titulocaixa {
+    font-size: 18px;
+    font-family: 'pt_serif';
+    color: #527265;
+    margin-left: 10px;
+}
+
+.lugarcaixa {
+    font-size: 12px;
+    font-family: 'poppins_medio';
+    color: #505550;
+    margin: 0 10px 10px 10px;
+}
+
+.escritacaixa {
+    font-size: 12px;
+    font-family: 'poppins_medio';
+    color: #505550;
+    margin: 15px 10px 0 10px;
+
+}
+
+.secaoprecodificuldade {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 90%;
+    margin-top: 10px;
+    color: #527265;
+    
+}
+
+.precocaixa {
+    font-size: 16px;
+    font-family: 'poppins_semibold';
+    color: #505550;
+    margin: 0 0 0 10px;
+}
+
+.dificuldadecaixa {
+    font-size: 12px;
+    font-family: 'poppins_medio';
+    color: #505550;
+    margin: 0 10px 0 0;
+
+}

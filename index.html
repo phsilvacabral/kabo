@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="navegar">
+        <nav class="barranav">
+            <img src="../img_principais/Component 2.png" alt="" class="menu">
+            <div class="logodentro">
+                <a href=""><img src="../img_principais/Component 1.png" alt="logo 123 folhas" class="logo"></a>
+            </div>
+
+            <div id="divbusca"><span>Busque aqui</span><img src="../img_principais/lupa.png" alt="Buscar"
+                    id="lupa_busca">
+            </div>
+
+            <div class="spaceperfil">
+                <a href="">
+                    <figure>
+                        <img src="../img_principais/Ellipse 1.png" alt="logo 123 folhas" class="perfil">
+                        <figcaption>Login</figcaption>
+                    </figure>
+                </a>
+                <a href="">
+                    <figure>
+                        <img src="../img_principais/Imagem1 1.png" alt="logo 123 folhas" class="carrinho">
+                    </figure>
+                </a>
+            </div>
+        </nav>
+
+        <section class="secondnavbar">
+            <button class="boxsecondnavbar">Monte seu PC</button>
+            <button class="boxsecondnavbar">PC pré-montado</button>
+            <button class="boxsecondnavbar">Notebook</button>
+            <button class="boxsecondnavbar">Placa de Vídeo</button>
+            <button class="boxsecondnavbar">Processador</button>
+            <button class="boxsecondnavbar">Memórias</button>
+            <button class="boxsecondnavbar">Placa Mãe</button>
+            <button class="boxsecondnavbar">Gabinete</button>
+
+        </section>
+    </header>
+
+    <section>
+        <div class="slideshow-container">
+
+            <div class="mySlides">
+                <img src="../img_principais/3b46fa99-4268-411c-892c-7bc03de0f8a5.__CR0,0,970,600_PT0_SX970_V1___.jpeg"
+                    class="propaganda">
+            </div>
+
+            <div class="mySlides">
+                <img src="../img_principais/Component 1.png" class="propaganda">
+            </div>
+
+            <div class="mySlides">
+                <img src="../img_principais/Component 2.png" class="propaganda">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        </div>
+
+        <script>
+            var slideIndex = 1;
+            showSlides(slideIndex);
+
+            function plusSlides(n) {
+                showSlides(slideIndex += n);
+            }
+
+            function showSlides(n) {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                if (n > slides.length) { slideIndex = 1 }
+                if (n < 1) { slideIndex = slides.length }
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                slides[slideIndex - 1].style.display = "block";
+            }
+        </script>
+    </section>
+
+    <section class="moveboxfundo">
+        <div class="boxfundo">
+
+            <div class="inlineboxseta">
+
+                <div class="moverseta">
+                    <button class="setaesquerda"></button>
+                </div>
+
+                <div class="caixas">
+                    
+                </div>
+
+                <script>
+                    window.onload = function () {
+                        var numClones = 10; // Defina o número de clones desejado
+                        var caixasContainer = document.querySelector('.caixas');
+
+                        for (var i = 0; i < numClones; i++) {
+                            var bordaCaixas = document.createElement('div');
+                            bordaCaixas.classList.add('bordacaixas');
+
+                            var linkCaixa = document.createElement('a');
+                            linkCaixa.setAttribute('href', '');
+                            linkCaixa.classList.add('linkcaixa');
+
+                            var fotoDentro = document.createElement('img');
+                            fotoDentro.setAttribute('src', '../img_principais/3b46fa99-4268-411c-892c-7bc03de0f8a5.__CR0,0,970,600_PT0_SX970_V1___.jpeg');
+                            fotoDentro.classList.add('fotodentro');
+                            linkCaixa.appendChild(fotoDentro);
+
+                            var linha0 = document.createElement('div');
+                            linha0.classList.add('linha0');
+
+                            var moverDescricaoCaixa = document.createElement('div');
+                            moverDescricaoCaixa.classList.add('moverdescricaocaixa');
+
+                            var tituloCaixa = document.createElement('p');
+                            tituloCaixa.classList.add('titulocaixa');
+                            tituloCaixa.textContent = 'Título Caixa';
+                            moverDescricaoCaixa.appendChild(tituloCaixa);
+
+                            var lugarCaixa = document.createElement('p');
+                            lugarCaixa.classList.add('lugarcaixa');
+                            lugarCaixa.textContent = 'Lugar caixa';
+                            moverDescricaoCaixa.appendChild(lugarCaixa);
+
+                            var escritaCaixa = document.createElement('div');
+                            escritaCaixa.classList.add('escritacaixa');
+
+                            var descricao = document.createElement('p');
+                            descricao.textContent = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam, illo asperiores hic cumque, libero debitis non excepturi at cum, veritatis voluptatum consequatur laborum? Architecto iusto quis odio laudantium tempore sunt.';
+                            escritaCaixa.appendChild(descricao);
+                            moverDescricaoCaixa.appendChild(escritaCaixa);
+
+                            linha0.appendChild(moverDescricaoCaixa);
+
+                            var secaoPrecoDificuldade = document.createElement('div');
+                            secaoPrecoDificuldade.classList.add('secaoprecodificuldade');
+
+                            var precoCaixa = document.createElement('p');
+                            precoCaixa.classList.add('precocaixa');
+                            precoCaixa.textContent = 'R$';
+                            secaoPrecoDificuldade.appendChild(precoCaixa);
+
+                            var dificuldadeCaixa = document.createElement('p');
+                            dificuldadeCaixa.classList.add('dificuldadecaixa');
+                            dificuldadeCaixa.textContent = '...';
+                            secaoPrecoDificuldade.appendChild(dificuldadeCaixa);
+
+                            linkCaixa.appendChild(linha0);
+                            linkCaixa.appendChild(secaoPrecoDificuldade);
+
+                            bordaCaixas.appendChild(linkCaixa);
+
+                            caixasContainer.appendChild(bordaCaixas);
+                        }
+                    };
+                </script>
+
+                <div class="moverseta">
+
+                    <button class="setadireita"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section"></section>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const items = document.querySelector('.caixas');
+            const moveButton = document.querySelector('.setadireita');
+
+            moveButton.addEventListener('click', function () {
+                items.scrollBy({
+                    left: -500,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const items = document.querySelector('.caixas');
+            const moveButton = document.querySelector('.setaesquerda');
+            moveButton.addEventListener('click', function () {
+                items.scrollBy({
+                    left: 500,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
