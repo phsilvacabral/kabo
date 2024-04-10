@@ -11,16 +11,13 @@
 
 <body>
     <main>
-        <?php
-        include("connection.php");
-        session_start();
-        if (isset($_SESSION["Cod_Cliente"])) {
-            header("Location: /123folhas/index.php");
-            exit();
-        }
-        ?>
         <section class="box">
             <span id="X" onclick="voltarPagina()">&times;</span>
+
+                    <div class="alinharelementos">
+                        <img src="../img/logo_neon.png" alt="" id="logo">
+                    </div>
+
                     <div class="alinharelementosescrita">
                         <p id="elemento1">Fazer Cadastro</p>
                         <p id="elemento2">Digite seus dados e crie uma senha</p>
@@ -47,12 +44,20 @@
                             <input type="password" name="txtSenha" value="" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
 
                         </div>
+
                         <input type="submit" value="Criar conta" id="enviarsubmit">
                     </form>
+
+                    <p id="folhascopy"><a href="../">&copy;kabo</a></p>
         </section>
     </main>
 
     <script>
+        function mostrarValorIntervalo() {
+            var valor = document.getElementById('valor').value;
+            document.getElementById('valorOutput').textContent = 'R$ ' + valor;
+        }
+
         const txtNome = document.getElementById('primeiroinput')
         const txtCPF = document.getElementById('cpf')
         const txtCEP = document.getElementById('CEP')
