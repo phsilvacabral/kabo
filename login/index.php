@@ -12,6 +12,14 @@
 <html>
 
 <body>
+    <?php
+        include("connection.php");
+        session_start();
+        if (isset($_SESSION["Cod_Usuario"])) {
+            header("Location: /kabo/index.php");
+            exit();
+        }
+    ?>
     <div id="div-login">
 
         <a id="voltar-home" onclick="voltarPagina()">&times;</a>
@@ -21,7 +29,7 @@
         <h3 class="login-h3">Fazer login</h3>
         <h5 class="login-h5">Digite seu e-mail e senha</h5>
 
-        <form name="form1" method="post" action="../perfil/admin/db0/login_php.php">
+        <form name="form1" method="post" action="../admin/login/login_php.php">
             <input type="email" class="input-login" placeholder="E-mail" name="txtLogin" maxlength="100" required>
             <input type="password" class="input-login" placeholder="Senha" name="txtPassword" maxlength="20" required>
 
