@@ -9,7 +9,10 @@
 </head>
 
 <body>
-
+    <?php
+        include('connection.php');
+        session_start();
+    ?>
     <footer>
         <div id="dados_div">
             <div class="dados_footer">

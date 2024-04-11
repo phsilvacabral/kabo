@@ -9,7 +9,10 @@
 </head>
 
 <body>
-
+    <?php
+        include('connection.php');
+        session_start();
+    ?>
     <iframe src="barrasNav.php" class="iframenav"></iframe>
 
     <section>
