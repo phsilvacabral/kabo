@@ -155,7 +155,7 @@ main{
     outline: none;
 }
 
-#cpf, #nascimento{
+#cpf, #nascimento, #logradouro, #numero{
     margin: 0 20px 20px 0;
 }
 
@@ -211,7 +211,7 @@ main{
         margin: 0 20px 20px 20px;
     }
     
-    #cpf, #nascimento{
+    #cpf, #nascimento, #logradouro, #numero{
         margin: 0 20px 20px 20px;
     }
     

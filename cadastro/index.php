@@ -36,39 +36,91 @@
                                 <option value="O">Outro</option>
                             </select>
 
-                            <input type="text" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" oninput="this.value = maskData(this.value)" class="campomedio" required>
-                            <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="" oninput="this.value = maskCEP(this.value)" maxlength="9" class="campomedio" required>
+                            <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" oninput="this.value = maskData(this.value)" class="campomedio" required>
+                            <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="" oninput="this.value = maskCEP(this.value); buscarCEP(this.value);" maxlength="9" class="campomedio" required>
+
+                            <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="" class="campomedio" maxlength="150" required>
+                            <input type="text" placeholder="Bairro" id="bairro" name="txtBairro" value="" class="campomedio" maxlength="50" required>
+                            <input type="number" placeholder="Numero" id="numero" name="txtNumero" value="" class="campomedio" oninput="limitarNumero(this)" min="0" required>
+                            <input type="text" placeholder="Cidade" id="cidade" name="txtCidade" value="" class="campomedio" maxlength="50" required>
+                            <input type="text" placeholder="Estado" id="estado" name="txtEstado" value="" class="campomedio" maxlength="2" required>
 
                             <input type="email" name="email" id="email" value="" placeholder="E-mail" maxlength="100" class="campocheio" required>
 
                             <input type="password" name="txtSenha" value="" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
 
                         </div>
-
                         <input type="submit" value="Criar conta" id="enviarsubmit">
                     </form>
-
                     <p id="folhascopy"><a href="../">&copy;kabo</a></p>
         </section>
     </main>
 
     <script>
-        function mostrarValorIntervalo() {
-            var valor = document.getElementById('valor').value;
-            document.getElementById('valorOutput').textContent = 'R$ ' + valor;
-        }
-
         const txtNome = document.getElementById('primeiroinput')
         const txtCPF = document.getElementById('cpf')
         const txtCEP = document.getElementById('CEP')
+        const txtLogradouro = document.getElementById('logradouro')
+        const txtBairro = document.getElementById('bairro')
+        const txtCidade = document.getElementById('cidade')
+        const txtestado = document.getElementById('estado')
         const email = document.getElementById('email')
+
+        function limitarNumero(input) {
+            var maxLength = 5;
+            var valor = input.value;
+            if (valor.length > maxLength) {
+                input.value = valor.slice(0, maxLength);
+            }
+        }
+
+        function buscarCEP(cep) {
+            // Verifica se o CEP possui o formato correto
+            if (/^\d{5}-\d{3}$/.test(cep)) {
+                // Faz a requisição para a API do ViaCEP
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            // Preenche os campos de endereço com os dados retornados pela API
+                            document.getElementById('logradouro').value = data.logradouro;
+                            document.getElementById('bairro').value = data.bairro;
+                            document.getElementById('cidade').value = data.localidade;
+                            document.getElementById('estado').value = data.uf;
+                        } else {
+                            alert('CEP não encontrado');
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar CEP:', error));
+            }
+        }
 
         function verificar() {
             if (isNomeValido(txtNome.value)) {
                 if (isCPFValido(txtCPF.value) && validarCPF(txtCPF.value)) {
                     if (isCEPValido(txtCEP.value)) {
                         if (isEmailValido(email.value)) {
-                            return true
+                            if(isNomeValido(txtLogradouro.value)){
+                                if(isNomeValido(txtBairro.value)){
+                                    if(isNomeValido(txtCidade.value)){
+                                        if(isNomeValido(txtEstado.value)){
+                                            return true;
+                                        } else {
+                                            window.alert('Estado inválido!')
+                                            return false
+                                        }
+                                    } else {
+                                        window.alert('Cidade inválido!')
+                                        return false
+                                    }
+                                } else {
+                                    window.alert('Bairro inválido!')
+                                    return false
+                                }
+                            } else {
+                                window.alert('Logradouro inválido!')
+                                return false
+                            }
                         } else {
                             window.alert('Email inválido!')
                             return false
@@ -151,16 +203,10 @@
         }
 
         function maskData(data) {
-            const digits = data.replace(/\D/g, '');
-            const formatted = digits
-                .replace(/^(\d{2})(\d)/, '$1/$2')
-                .replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3')
-                .substr(0, 10);
-
             const minDate = new Date('1900-01-01');
             const maxDate = new Date();
 
-            const enteredDate = new Date(formatted.split('/').reverse().join('-'));
+            const enteredDate = new Date(data.split('/').reverse().join('-'));
 
             if (enteredDate < minDate || enteredDate > maxDate) {
                 return data; // Retorna a data original se estiver fora do intervalo

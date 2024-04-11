@@ -3,13 +3,19 @@
     
     $Nome = $_POST['txtNome'];
     $CPF = $_POST['txtCPF'];
-    $CEP = $_POST['txtCEP'];
     $Genero = $_POST['selectGenero'];
     $Data_Nasc = $_POST['dateData_Nasc'];
     $dateData_Nasc = date('Y-m-d', strtotime($Data_Nasc));
     $Email = $_POST['email'];
     $Senha = $_POST['txtSenha'];
     $Tipo_Usuario = 0;
+
+    $CEP = $_POST['txtCEP'];
+    $Logradouro = $_POST['txtLogradouro'];
+    $Bairro = $_POST['txtBairro'];
+    $Numero = $_POST['txtNumero'];
+    $Cidade = $_POST['txtCidade'];
+    $Estado = $_POST['txtEstado'];
 
 
 
@@ -26,7 +32,12 @@
                 $row = $resultC->fetch_assoc();
                 session_start();
                 $_SESSION["Cod_Usuario"] = $row["Cod_Usuario"];
-                exit;
+                $sqlE = "INSERT INTO Endereco (CEP, Logradouro, Numero, Bairro, Cidade, Estado, fk_Usuario_Cod_Usuario) VALUES ('$CEP', '$Logradouro', '$Numero', '$Bairro', '$Cidade', '$Estado', {$_SESSION['Cod_Usuario']})";
+                if ($conn->query($sqlE) === TRUE) {
+                    exit;
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
             } else {
                 throw new Exception('Ocorreu um erro ao executar a operação.');
             }
