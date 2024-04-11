@@ -15,30 +15,20 @@
     <?php
     include('../connection.php');
     session_start();
-    $sqlN = "SELECT Nome FROM Cliente WHERE Cod_Cliente = '{$_SESSION['Cod_Cliente']}'";
+    $sqlN = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
     $resultN = $conn->query($sqlN);
     $rowN = $resultN->fetch_assoc();
     $nomeCompleto = $rowN['Nome'];
 
-    $sqlE = "SELECT Email FROM Cliente WHERE Cod_Cliente = '{$_SESSION['Cod_Cliente']}'";
+    $sqlE = "SELECT Email FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
     $resultE = $conn->query($sqlE);
     $rowE = $resultE->fetch_assoc();
     $EmailCompleto = $rowE['Email'];
 
-    if (!isset($_SESSION["Cod_Cliente"])) {
-        header("Location: /123folhas/");
+    if (!isset($_SESSION["Cod_Usuario"])) {
+        header("Location: /kabo/");
         exit();
     }
-
-    $sqlI = "SELECT COUNT(*) AS Total_Interesses FROM se_interessa WHERE fk_Cliente_Cod_Cliente = {$_SESSION['Cod_Cliente']}";
-    $resultI = $conn->query($sqlI);
-    $rowI = $resultI->fetch_assoc();
-    $InteresseCompleto = $rowI['Total_Interesses'];
-
-    $sqlV = "SELECT COUNT(*) AS Total_Viaja FROM viaja WHERE fk_Cliente_Cod_Cliente = {$_SESSION['Cod_Cliente']}";
-    $resultV = $conn->query($sqlV);
-    $rowV = $resultV->fetch_assoc();
-    $ViajaCompleto = $rowV['Total_Viaja'];
     ?>
     <div id="div_perfil">
 
@@ -52,7 +42,7 @@
             <div id="nome_email">
                 <p id="nome_completo"><?php echo $nomeCompleto ?></p>
                 <p id="email_user"><?php echo $EmailCompleto ?></p>
-                <?php if ($_SESSION['Cod_Cliente'] < 13) : ?>
+                <?php if ($_SESSION['Cod_Usuario'] < 13) : ?>
                     <div id="botoes_editar_admin">
                         <a href="editar/" id="botao_editar">Editar</a>
                         <a href="admin/db0/inicio.php" id="botao_admin">Admin</a>
@@ -80,7 +70,7 @@
             </a>
         </div>
 
-        <span id="botao_sair"><a href="../perfil/admin/db0/logout.php">Sair</a></span>
+        <span id="botao_sair"><a href="../admin/login/logout.php">Sair</a></span>
 
         <p id="text123"><a href="../">&copy;123folhas</a></p>
     </div>
