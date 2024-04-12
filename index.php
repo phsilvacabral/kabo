@@ -59,6 +59,10 @@
     <section class="moveboxfundo">
         <div class="boxfundo">
 
+            <div class="titulocaixa">
+                <p>Pcs pré-montados</p>
+                <a href="">Ver todos ></a>
+            </div>
             <div class="joinboxelements">
                 <button class="setaesquerda"></button>
 
