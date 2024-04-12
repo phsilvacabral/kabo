@@ -69,12 +69,12 @@ nav {
     background-size: contain;
 }
 
-.logodentro {
+/* .logodentro {
     display: flex;
     justify-content: center;
     gap: 20px;
     align-items: center;
-}
+} */
 
 
 
@@ -82,7 +82,7 @@ nav {
     background-color: rgba(107, 51, 53, 0.75);
     margin: 12px;
     height: 30px;
-    width: 560px;
+    width: 670px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
     font-size: 15px;
     display: flex;
