@@ -34,7 +34,13 @@ body {
     left: 0;
     right: 0;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
+nav {
+    height: 100vh;
 }
 
 .barranav {
@@ -51,14 +57,13 @@ body {
 .logo {
     height: 35px;
     min-width: 100px;
-
 }
 
 .menu {
     min-width: 26px;
     min-height: 20px;
     background-color: rgba(107, 51, 53, 0.75);
-    background-image: url(img_principais/Component2.png);
+    background-image: url(img/Component\ 2.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -73,10 +78,10 @@ body {
 
 
 
-#divbusca {
+.divbusca {
     background-color: rgba(107, 51, 53, 0.75);
     margin: 12px;
-    height: 40px;
+    height: 30px;
     width: 560px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
     font-size: 15px;
@@ -92,7 +97,7 @@ body {
 }
 
 #lupa_busca {
-    width: 25px;
+    width: 20px;
 }
 
 .letra {
@@ -128,9 +133,14 @@ figcaption {
 }
 
 .perfil {
-    height: 40px;
-    width: 40px;
+    height: 33px;
+    width: 33px;
     border-radius: 20px;
+}
+
+.carrinho {
+    width: 50px;
+    height: 50px;
 }
 
 
@@ -158,12 +168,11 @@ a:link {
 }
 
 .boxsecondnavbar {
-    width: 135px;
+    width: 160px;
     height: 30px;
     color: white;
     background-color: rgba(107, 51, 53, 0.75);
-    border-right: 1px solid rgba(240, 51, 51, 1);
-    border-left: 1px solid rgba(240, 51, 51, 1);
+    border: 1px solid rgba(240, 51, 51, 1);
     font-size: 12px;
 }
 
@@ -222,7 +231,7 @@ a:link {
 }
 
 @media (max-width:600px) {
-    .caixas{
+    .caixas {
         margin: auto;
     }
 
@@ -236,7 +245,7 @@ a:link {
         display: none;
     }
 
-    #divbusca {
+    .divbusca {
         display: none;
     }
 
@@ -266,19 +275,32 @@ a:link {
         display: none;
     }
 
-    footer{
+    footer {
         min-height: 100%;
     }
-    
-    #dados_div{
-        min-height: 100%;
-    }
-    
 
+    #dados_div {
+        min-height: 100%;
+    }
+
+    nav .divbusca:nth-child(2) {
+        display: inherit;
+        width: 90%;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 @media (min-width:601px) {
     .logodentro {
+        display: none;
+    }
+
+    nav .divbusca:nth-child(2) {
         display: none;
     }
 }
@@ -291,8 +313,8 @@ a:link {
     .caixas::-webkit-scrollbar {
         display: none;
     }
-    
-    .dados_footer{
+
+    .dados_footer {
         margin: 20px auto 10px auto;
     }
 }
@@ -357,6 +379,7 @@ a:link {
 
 .movecaixasrecomendadas {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -366,10 +389,6 @@ a:link {
 .caixasrecomendadas {
     border: 1px solid #bbb;
     border-radius: 10px;
-    background-image: url(img_principais/mouseTeclado.jpg);
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
     height: 190px;
     width: 270px;
 }
@@ -531,7 +550,7 @@ a:link {
 
 /*Rodapé*/
 footer {
-    
+
     background-image: url(../kabo/img_principais/ImgFooter.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -559,7 +578,7 @@ footer {
     font-size: 12px;
     max-width: 200px;
     flex-wrap: wrap;
-    
+
 }
 
 .dados_footer ul {

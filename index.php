@@ -10,8 +10,8 @@
 
 <body>
     <?php
-        include('connection.php');
-        session_start();
+    include ('connection.php');
+    session_start();
     ?>
     <iframe src="barrasNav.php" class="iframenav"></iframe>
 
@@ -19,11 +19,11 @@
         <div class="slideshow-container">
 
             <a href="" class="mySlides">
-                <img src="img_principais\Propaganda.jpeg" class="propaganda">
+                <img src="img/i581338.jpeg" class="propaganda">
             </a>
 
             <a href="" class="mySlides">
-                <img src="img_principais/Component 1.png" class="propaganda">
+                <img src="img/mouseTeclado.jpg" class="propaganda">
             </a>
 
             <a href="" class="mySlides">
@@ -65,19 +65,19 @@
                 <div class="caixas">
                     <div class="bordacaixas">
                         <a href="" class="linkcaixa">
-                            <img src="img_principais/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
                             <div class="linha0">
                                 <div class="moverdescricaocaixa">
                                     <div class="escritacaixa"></div>
                                 </div>
-                                    <p class="precocaixa">R$ </p>
-                                    <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
                             </div>
                         </a>
                     </div>
                     <div class="bordacaixas">
                         <a href="" class="linkcaixa">
-                            <img src="img_principais/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
                             <div class="linha0">
                                 <div class="moverdescricaocaixa">
                                     <div class="escritacaixa">Lorem ipsum, dolor sit amet consectetur</div>
@@ -93,22 +93,22 @@
                 <button class="setadireita"></button>
             </div>
 
-            <a href="" class="linkmovecaixasrecomendadas">
+            <div class="linkmovecaixasrecomendadas">
                 <div class="movecaixasrecomendadas">
-                    <div class="caixasrecomendadas"></div>
-                    <div class="caixasrecomendadas"></div>
-                    <div class="caixasrecomendadas"></div>
-                    <div class="caixasrecomendadas"></div>
-                    
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+
                 </div>
                 <div class="movecaixasrecomendadas">
-                    <div class="caixasrecomendadas"></div>
-                    <div class="caixasrecomendadas"></div>
-                    <div class="caixasrecomendadas"></div>
-                    <div class="caixasrecomendadas"></div>
-                    
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+
                 </div>
-            </a>
+            </div>
     </section>
 
     <script>
