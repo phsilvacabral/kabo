@@ -64,7 +64,7 @@
                 <a href="">Ver todos ></a>
             </div>
             <div class="joinboxelements">
-                <button class="setaesquerda"></button>
+                <button class="setaesquerda">&#10094;</button>
 
                 <div class="caixas">
                     <div class="bordacaixas">
@@ -94,22 +94,57 @@
                     </div>
                 </div>
 
-                <button class="setadireita"></button>
+                <button class="setadireita">&#10095;</button>
+            </div>
+            <div class="titulocaixa">
+                <p>Marcas</p>
             </div>
 
             <div class="linkmovecaixasrecomendadas">
                 <div class="movecaixasrecomendadas">
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                    <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
 
                 </div>
                 <div class="movecaixasrecomendadas">
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
-                    <a href=""><img src="img/i581338.jpeg" class="caixasrecomendadas"></a>
+                <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="" class="bordacaixasrecomendadas">
+                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
+                        <p class="marca">Samsung</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
 
                 </div>
             </div>
