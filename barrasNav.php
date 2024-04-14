@@ -57,7 +57,7 @@
         <section class="secondnavbar">
             <a href=""><button class="boxsecondnavbar">Monte seu PC</button></a>
             <button class="boxsecondnavbar">PC pré-montado</button>
-            <button class="boxsecondnavbar">Notebook</button>
+            <button class="boxsecondnavbar">CPU</button>
             <button class="boxsecondnavbar">Placa de Vídeo</button>
             <button class="boxsecondnavbar">Processador</button>
             <button class="boxsecondnavbar">Memórias</button>

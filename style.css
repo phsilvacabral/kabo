@@ -326,24 +326,24 @@ a:link {
         align-items: center;
     }
 
-    .movecaixasrecomendadas{
+    .movecaixasrecomendadas {
         gap: 20px;
     }
 
-    .bordacaixasrecomendadas{
+    .bordacaixasrecomendadas {
         padding: 0;
         height: 100px;
         width: 150px;
     }
 
-    .caixasrecomendadas{
+    .caixasrecomendadas {
         max-width: 130px;
         max-height: 80px;
     }
 
-    .titulocaixa{
+    .titulocaixa {
         margin: 0;
-        
+
     }
 }
 
@@ -354,6 +354,11 @@ a:link {
 
     nav .divbusca:nth-child(2) {
         display: none;
+    }
+
+    #dados_div {
+        bottom: 0;
+        width: 100vw;
     }
 }
 
@@ -419,12 +424,12 @@ a:link {
 }
 
 .boxfundo {
-
     background-color: #F5F5F7;
     max-width: 97%;
     width: 1455px;
     border-radius: 2px;
     border: 1px solid #F03333;
+    margin-bottom: 100px;
 }
 
 .linkmovecaixasrecomendadas {
@@ -450,13 +455,13 @@ a:link {
     background-color: white;
     border-radius: 2px;
     height: 200px;
-    width: 310px;
+    max-width: 310px;
 }
 
 .caixasrecomendadas {
     width: 290px;
     height: 120px;
-    margin-top: 10px;
+    margin: 10px;
 }
 
 .bordacaixasrecomendadas:hover {
@@ -673,21 +678,23 @@ a:link {
 
 /*Rodapé*/
 footer {
-    background-image: url(../kabo/img_principais/ImgFooter.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 30%;
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
 #dados_div {
-    background-color: rgba(107, 51, 53, 0.75);
+    background-image: url(img/imgrodapé.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30%;
+    background-color: #6B3335BF;
     display: flex;
     flex-wrap: wrap;
     padding: 0 60px;
     justify-content: space-between;
+    position: absolute;
+
 }
 
 .dados_footer {

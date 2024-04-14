@@ -96,6 +96,194 @@
 
                 <button class="setadireita">&#10095;</button>
             </div>
+
+            <div class="titulocaixa">
+                <p>CPU</p>
+                <a href="">Ver todos ></a>
+            </div>
+            <div class="joinboxelements">
+                <button class="setaesquerda">&#10094;</button>
+
+                <div class="caixas">
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa"></div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa">Lorem ipsum, dolor sit amet consectetur</div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="setadireita">&#10095;</button>
+            </div>
+            <div class="titulocaixa">
+                <p>Placa de vídeo</p>
+                <a href="">Ver todos ></a>
+            </div>
+            <div class="joinboxelements">
+                <button class="setaesquerda">&#10094;</button>
+
+                <div class="caixas">
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa"></div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa">Lorem ipsum, dolor sit amet consectetur</div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="setadireita">&#10095;</button>
+            </div>
+            <div class="titulocaixa">
+                <p>Memória</p>
+                <a href="">Ver todos ></a>
+            </div>
+            <div class="joinboxelements">
+                <button class="setaesquerda">&#10094;</button>
+
+                <div class="caixas">
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa"></div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa">Lorem ipsum, dolor sit amet consectetur</div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="setadireita">&#10095;</button>
+            </div>
+            <div class="titulocaixa">
+                <p>Placa Mãe</p>
+                <a href="">Ver todos ></a>
+            </div>
+            <div class="joinboxelements">
+                <button class="setaesquerda">&#10094;</button>
+
+                <div class="caixas">
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa"></div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa">Lorem ipsum, dolor sit amet consectetur</div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="setadireita">&#10095;</button>
+            </div>
+            <div class="titulocaixa">
+                <p>Gabinete</p>
+                <a href="">Ver todos ></a>
+            </div>
+            <div class="joinboxelements">
+                <button class="setaesquerda">&#10094;</button>
+
+                <div class="caixas">
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa"></div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="bordacaixas">
+                        <a href="" class="linkcaixa">
+                            <img src="img/produto-2615-cadeira-gamer-75495.jpg" alt="" class="fotodentro">
+                            <div class="linha0">
+                                <div class="moverdescricaocaixa">
+                                    <div class="escritacaixa">Lorem ipsum, dolor sit amet consectetur</div>
+                                </div>
+                                <p class="precocaixa">R$ </p>
+                                <p class="parcelamentopreco">10 x 190,00 sem juros no cartão de crédito</p>
+
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="setadireita">&#10095;</button>
+            </div>
+            
+            
             <div class="titulocaixa">
                 <p>Marcas</p>
             </div>
