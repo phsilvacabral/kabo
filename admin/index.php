@@ -20,15 +20,15 @@
     </nav>
 
     <main>
-        <p id="caminho">administrar recursos > </p>
+        <p id="caminho">administrar recursos &nbsp;> </p>
 
-        <section>
-            <div class="menu"><a href="produtos/">Produtos</a></div>
-            <div class="menu"><a href="usuarios/">Usuários</a></div>
-            <div class="menu"><a href="kits/">Kits personalizados</a></div>
-            <div class="menu"><a href="cupons/">Cupons</a></div>
-            <div class="menu"><a href="estatisticas/">Estatísticas</a></div>
-            <div class="menu"><a href="">Query livre</a></div>
+        <section id="menu">
+            <div class="opcoes_menu"><a href="produtos/">Produtos</a></div>
+            <div class="opcoes_menu"><a href="usuarios/">Usuários</a></div>
+            <div class="opcoes_menu"><a href="kits/">Kits personalizados</a></div>
+            <div class="opcoes_menu"><a href="cupons/">Cupons</a></div>
+            <div class="opcoes_menu"><a href="estatisticas/">Estatísticas</a></div>
+            <div class="opcoes_menu"><a href="">Query livre</a></div>
         </section>
     </main>
     
