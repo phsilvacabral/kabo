@@ -50,7 +50,7 @@
                     <input type="text" id="nome_arquivo" readonly>
                     <button type="button" id="botao_upload">Upload</button>
                     <input type="file" id="input_file" style="display: none;">
-                    <div id="imagemPreview"></div>
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -67,15 +67,15 @@
                 </div>
             </form>
         </section>
-        <!--
+        
         <section class="campo_inputs" id="campo_gpu" style="display: none;">
             <p class="titulo_tipo">Cadastrar GPU</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -94,11 +94,11 @@
         <section class="campo_inputs" id="campo_placa_mae" style="display: none;">
             <p class="titulo_tipo">Cadastrar placa mãe</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -118,11 +118,11 @@
         <section class="campo_inputs" id="campo_ram" style="display: none;">
             <p class="titulo_tipo">Cadastrar memória RAM</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -141,11 +141,11 @@
         <section class="campo_inputs" id="campo_armazenamento" style="display: none;">
             <p class="titulo_tipo">Cadastrar armazenamento</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -164,11 +164,11 @@
         <section class="campo_inputs" id="campo_fonte" style="display: none;">
             <p class="titulo_tipo">Cadastrar fonte</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -186,11 +186,11 @@
         <section class="campo_inputs" id="campo_gabinete" style="display: none;">
             <p class="titulo_tipo">Cadastrar gabinete</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -208,11 +208,11 @@
         <section class="campo_inputs" id="campo_monitor" style="display: none;">
             <p class="titulo_tipo">Cadastrar monitor</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -231,11 +231,11 @@
         <section class="campo_inputs" id="campo_teclado" style="display: none;">
             <p class="titulo_tipo">Cadastrar teclado</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -253,11 +253,11 @@
         <section class="campo_inputs" id="campo_mouse" style="display: none;">
             <p class="titulo_tipo">Cadastrar mouse</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -275,11 +275,11 @@
         <section class="campo_inputs" id="campo_headset" style="display: none;">
             <p class="titulo_tipo">Cadastrar headset</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
-                <div class="div_input_imagem">
-                    <input type="text" class="nome_arquivo" readonly>
-                    <button type="button" class="botao_upload">Enviar imagem</button>
-                    <input type="file" class="input_file" style="display: none;">
-                    <div class="imagePreview"></div>
+                <div id="div_input_imagem">
+                    <input type="text" id="nome_arquivo" readonly>
+                    <button type="button" id="botao_upload">Upload</button>
+                    <input type="file" id="input_file" style="display: none;">
+                    <div id="imagePreview"></div>
                 </div>
                 <div id="input_textos">
                     <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
@@ -292,7 +292,7 @@
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
-        </section> -->
+        </section>
 
     </main>
 
@@ -336,6 +336,8 @@
             };
             reader.readAsDataURL(e.target.files[0]);
         });
+
+        
     </script>
 </body>
 
