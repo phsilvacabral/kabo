@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../style.css">
-    <title>Cadastrar produto</title>
+    <title>Editar produto</title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         <div id="voltar"><a href="../">Cancelar</a></div>
 
         <div id="area_atual">
-            <p>Cadastrar produto</p>
+            <p>Editar produto</p>
         </div>
 
         <div id="perfil">
@@ -24,7 +24,7 @@
     </nav>
 
     <main>
-        <p id="caminho">administrar recursos &nbsp; > &nbsp; produtos &nbsp; > &nbsp; cadastrar</p>
+        <p id="caminho">administrar recursos &nbsp; > &nbsp; produtos &nbsp; > &nbsp; editar</p>
 
         <section class="campo_tipo">
             <select name="tipo" id="tipo">
@@ -44,7 +44,7 @@
         </section>
 
         <section class="campo_inputs" id="campo_cpu" style="display: none;">
-            <p class="titulo_tipo">Cadastrar CPU</p>
+            <p class="titulo_tipo">Editar CPU</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo0" class="nome_arquivo" readonly>
@@ -63,13 +63,13 @@
                     <input class="input_pequeno" type="text" name="tdp" placeholder="TDP">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_gpu" style="display: none;">
-            <p class="titulo_tipo">Cadastrar GPU</p>
+            <p class="titulo_tipo">Editar GPU</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo1" class="nome_arquivo" readonly>
@@ -86,13 +86,13 @@
                     <input class="input_pequeno" type="text" name="tdp" placeholder="TDP">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_placa_mae" style="display: none;">
-            <p class="titulo_tipo">Cadastrar placa mãe</p>
+            <p class="titulo_tipo">Editar placa mãe</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo2" class="nome_arquivo" readonly>
@@ -110,13 +110,13 @@
                     <input class="input_pequeno" type="text" name="tdp" placeholder="TDP">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_ram" style="display: none;">
-            <p class="titulo_tipo">Cadastrar memória RAM</p>
+            <p class="titulo_tipo">Editar memória RAM</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo3" class="nome_arquivo" readonly>
@@ -133,13 +133,13 @@
                     <input class="input_pequeno" type="text" name="latencia" placeholder="Latência">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_armazenamento" style="display: none;">
-            <p class="titulo_tipo">Cadastrar armazenamento</p>
+            <p class="titulo_tipo">Editar armazenamento</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo4" class="nome_arquivo" readonly>
@@ -156,13 +156,13 @@
                     <input class="input_pequeno" type="text" name="interface" placeholder="Interface">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_fonte" style="display: none;">
-            <p class="titulo_tipo">Cadastrar fonte</p>
+            <p class="titulo_tipo">Editar fonte</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo5" class="nome_arquivo" readonly>
@@ -178,13 +178,13 @@
                     <input class="input_pequeno" type="text" name="certificado" placeholder="Certificado">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_gabinete" style="display: none;">
-            <p class="titulo_tipo">Cadastrar gabinete</p>
+            <p class="titulo_tipo">Editar gabinete</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo6" class="nome_arquivo" readonly>
@@ -200,13 +200,13 @@
                     <input class="input_pequeno" type="text" name="fonte" placeholder="Fonte">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_monitor" style="display: none;">
-            <p class="titulo_tipo">Cadastrar monitor</p>
+            <p class="titulo_tipo">Editar monitor</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo7" class="nome_arquivo" readonly>
@@ -223,13 +223,13 @@
                     <input class="input_pequeno" type="text" name="taxa_atualizacao" placeholder="Taxa de atualização">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_teclado" style="display: none;">
-            <p class="titulo_tipo">Cadastrar teclado</p>
+            <p class="titulo_tipo">Editar teclado</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo8" class="nome_arquivo" readonly>
@@ -245,13 +245,13 @@
                     <input class="input_pequeno" type="text" name="conexão" placeholder="Conexão">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_mouse" style="display: none;">
-            <p class="titulo_tipo">Cadastrar mouse</p>
+            <p class="titulo_tipo">Editar mouse</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo9" class="nome_arquivo" readonly>
@@ -267,13 +267,13 @@
                     <input class="input_pequeno" type="text" name="conexão" placeholder="Conexão">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
 
         <section class="campo_inputs" id="campo_headset" style="display: none;">
-            <p class="titulo_tipo">Cadastrar headset</p>
+            <p class="titulo_tipo">Editar headset</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo10" class="nome_arquivo" readonly>
@@ -289,7 +289,7 @@
                     <input class="input_pequeno" type="text" name="conexão" placeholder="Conexão">
                     <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
                     <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Atualizar</button>
                 </div>
             </form>
         </section>
