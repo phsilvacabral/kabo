@@ -10,6 +10,20 @@
 </head>
 
 <body>
+    <?php
+        include("../../connection.php");
+
+        session_start();
+        if (!isset($_SESSION["Cod_Usuario"])) {
+            header("Location: /kabo/index.php");
+            exit();
+        }
+
+        if ($_SESSION["Tipo_Usuario"] == '0') {
+            header("Location: ../db0/erro.php");
+            exit();
+        }
+    ?>
     <nav>
         <div id="voltar"><a href="../">Cancelar</a></div>
 
@@ -18,8 +32,16 @@
         </div>
 
         <div id="perfil">
+            <?php
+                $sqlP = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+                $resultP = $conn->query($sqlP);
+                $rowP = $resultP->fetch_assoc();
+                $nomeCompleto = $rowP['Nome'];
+                $partesNome = explode(' ', $nomeCompleto);
+                $_clienteLogado = $partesNome[0];
+            ?>
             <img src="../img/perfil.png" alt="">
-            <p>Usuário</p>
+            <p><?php echo $_clienteLogado ?></p>
         </div>
     </nav>
 
@@ -45,7 +67,7 @@
 
         <section class="campo_inputs" id="campo_cpu" style="display: none;">
             <p class="titulo_tipo">Cadastrar CPU</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formCPU" name="formCPU" method="post" action="CPU_cadastro.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo0" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload0" class="botao_upload" onclick="uploadImg(0)">Upload</button>
@@ -53,16 +75,20 @@
                     <div id="imagePreview0" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="soquete" placeholder="Soquete">
-                    <input class="input_pequeno" type="text" name="nucleos" placeholder="Núcleos">
-                    <input class="input_pequeno" type="text" name="threads" placeholder="Threads">
-                    <input class="input_pequeno" type="text" name="frequencia" placeholder="Frequência">
-                    <input class="input_pequeno" type="text" name="tdp" placeholder="TDP">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" name="tipo_cat" value="CPU">
+                    <input class="input_grande" type="text" name="descricaoCPU" id="descricaoCPU" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloCPU" id="modeloCPU" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaCPU" id="marcaCPU" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="soqueteCPU" id="soqueteCPU" placeholder="Soquete" maxlength="10" required>
+                    <input class="input_pequeno" type="number" name="nucleosCPU" id="nucleosCPU" placeholder="Núcleos" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="threadsCPU" id="threadsCPU" placeholder="Threads" max="2147483647" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="frequenciaCPU" id="frequenciaCPU" placeholder="Frequência" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="tdpCPU" id="tdpCPU" placeholder="TDP" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="tipo_mem"CPU id="tipo_memCPU" placeholder="Tipo da memória compatível" maxlength="4" required>
+                    <input class="input_pequeno" type="number" name="vel_memCPU" id="vel_memCPU" placeholder="Velocidade da memória compatível" oninput="limitarNumero(this)" required>
+                    <input class="input_pequeno" type="text" name="GPUsCPU" id="GPUsCPU" placeholder="Placa de vídeo integrada" maxlength="100" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoCPU" id="precoCPU" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeCPU" id="quantidadeCPU" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
