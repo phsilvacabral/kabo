@@ -35,6 +35,7 @@
                 $_SESSION["Tipo_Usuario"] = $row["Tipo_Usuario"];
                 $sqlE = "INSERT INTO Endereco (CEP, Logradouro, Numero, Bairro, Cidade, Estado, fk_Usuario_Cod_Usuario) VALUES ('$CEP', '$Logradouro', '$Numero', '$Bairro', '$Cidade', '$Estado', {$_SESSION['Cod_Usuario']})";
                 if ($conn->query($sqlE) === TRUE) {
+                    header("Location: /kabo/");
                     exit;
                 } else {
                     throw new Exception('Ocorreu um erro ao executar a operação.');
