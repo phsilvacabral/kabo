@@ -4,7 +4,7 @@
     $login = $_POST["txtLogin"];
     $password = $_POST["txtPassword"];
 
-    $sql = "SELECT Cod_Usuario, Senha FROM Usuario WHERE Email = '$login'";
+    $sql = "SELECT Cod_Usuario, Senha, Tipo_Usuario FROM Usuario WHERE Email = '$login'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
