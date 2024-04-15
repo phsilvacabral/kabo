@@ -32,6 +32,7 @@
                 $row = $resultC->fetch_assoc();
                 session_start();
                 $_SESSION["Cod_Usuario"] = $row["Cod_Usuario"];
+                $_SESSION["Tipo_Usuario"] = $row["Tipo_Usuario"];
                 $sqlE = "INSERT INTO Endereco (CEP, Logradouro, Numero, Bairro, Cidade, Estado, fk_Usuario_Cod_Usuario) VALUES ('$CEP', '$Logradouro', '$Numero', '$Bairro', '$Cidade', '$Estado', {$_SESSION['Cod_Usuario']})";
                 if ($conn->query($sqlE) === TRUE) {
                     exit;
