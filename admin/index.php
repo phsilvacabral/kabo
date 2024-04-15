@@ -17,7 +17,7 @@
             exit();
         }
 
-        if ($_SESSION["Tipo_Usuario"] == '0') {
+        if ($_SESSION["Tipo_Usuario"] == 0) {
             header("Location: ../db0/erro.php");
             exit();
         }
