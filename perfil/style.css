@@ -25,7 +25,7 @@
 
 /* body */
 body {
-    background-color: #527265;
+    background-color: #1e1e1e;
     display: flex;
     justify-content: center;
 }
@@ -52,21 +52,23 @@ body {
 #voltar_home a{
     text-decoration: none;
     font-size: 40px;
-    color: #283228;    
+    color: #ffffff;    
 }
 
 /* div */
 #div_perfil {
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: #1e1e1e;
     width: 380px;
     height: 640px;
-    border-radius: 15px;
+    border-radius: 2px;
     text-align: center;
     font-family: 'poppins';
     padding: 0 40px;
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
+    border: 1px solid #f33333;
+    box-shadow: inset 0 0 20px #663234, 0 0 250px #663234;
 }
 
 #user_name{
@@ -79,7 +81,7 @@ body {
     height: 80px;
     margin: 0 20px 0 0;
     border-radius: 40px;
-    border: 1px solid #bbb;
+    border: 2px solid #f33333;
 }
 
 #nome_email{
@@ -90,7 +92,7 @@ body {
 #nome_completo{
     margin: 0;
     font-size: 18px;
-    color: #283228;
+    color: #ffffff;
     font-family: 'poppins_semibold';
 }
 
@@ -98,7 +100,7 @@ body {
     margin: 0px;
     font-size: 12px;
     font-family: 'poppins_semibold';
-    color: rgb(30, 30, 30, 0.5);
+    color: rgb(255, 255, 255, 0.8);
 }
 
 #botoes_editar_admin{
@@ -107,14 +109,15 @@ body {
     margin: 10px 0 0 0;
 }
 #botao_editar{
-    background-color: white;
+    background-color: rgba(88, 46, 47, 0.5);
+    border: 1px solid #f03333;
+    color: #ffffff;
     width: 70px;
     text-align: center;
     text-decoration: none;
     font-family: 'poppins_medio';
-    color: #283228;
     font-size: 15px;
-    border-radius: 5px;
+    border-radius: 2px;
     transition: box-shadow 0.15s, border-style 0.15s, border-color 0.15s, border-width 0.15s;
     user-select: none;
 }
@@ -124,20 +127,20 @@ body {
 }
 #botao_editar:active {
     user-select: none;
-    background-color: rgba(169, 185, 178, 1);
-    color: #283228;
+    background-color: rgba(88, 46, 47, 0.2);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
 }
 
 #botao_admin{
-    background-color: #527265;
+    background-color: rgba(167, 52, 55, 0.75);
+    border: 1px solid #f03333;
     width: 70px;
     text-align: center;
     text-decoration: none;
     font-family: 'poppins_medio';
-    color: white;
+    color: #ffffff;
     font-size: 15px;
-    border-radius: 5px;
+    border-radius: 2px;
     transition: box-shadow 0.15s, border-style 0.15s, border-color 0.15s, border-width 0.15s;
     user-select: none;
 }
@@ -149,8 +152,6 @@ body {
 #botao_admin:active {
     opacity: 0.8;
     user-select: none;
-    background-color: #527265;
-    color: white;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
 }
 
@@ -158,7 +159,7 @@ body {
     text-align: start;
 }
 #titulo_destinos{
-    color: #283228;
+    color: #ffffff;
     font-family: 'poppins_semibold';
     font-size: 18px;
 }
@@ -171,19 +172,19 @@ body {
     align-items: center;
     height: 50px;
     margin: 10px 0 0 0;
-    background-color: white;
-    border-radius: 10px;
+    background-color: #663234;
+    border-radius: 2px;
     user-select: none;
     transition: box-shadow 0.15s, border-style 0.15s, border-color 0.15s, border-width 0.15s;
 }
 .quero_fui:hover {
+    opacity: 0.9;
     user-select: none;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 .quero_fui:active {
+    opacity: 0.8;
     user-select: none;
-    background-color: rgba(169, 185, 178, 1);
-    color: #283228;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
 }
 .quero_fui img{
@@ -194,12 +195,12 @@ body {
 .quero_fui p{
     font-size: 15px;
     font-family: 'poppins_semibold';
-    color: #283228;
+    color: #ffffff;
 }
 .quero_fui span{
     font-size: 10px;
     font-family: 'poppins_medio';
-    color: rgb(30, 30, 30, 0.5);
+    color: rgb(255, 255, 255, 0.8);
     margin: 0 20px 0 auto;
 }
 
@@ -207,10 +208,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: rgba(88, 46, 47, 0.5);
+    border: 1px solid #f03333;
     width: 130px;
     height: 40px;
-    border-radius: 5px;
+    border-radius: 2px;
     margin: 80px 0 0 0;
     transition: box-shadow 0.15s, border-style 0.15s, border-color 0.15s, border-width 0.15s;
     user-select: none;
@@ -221,13 +223,12 @@ body {
 }
 #botao_sair:active {
     user-select: none;
-    background-color: rgba(169, 185, 178, 1);
-    color: #283228;
+    background-color: rgba(88, 46, 47, 0.2);
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
 }
 #botao_sair a{
     font-family: 'poppins_medio';
-    color: #283228;
+    color: #ffffff;
     font-size: 18px;
     text-decoration: none;
     width: 100%;
@@ -243,7 +244,7 @@ body {
 }
 #text123 a{
     text-decoration: none;
-    color: #283228;
+    color: #663234;
     font-size: 12px;
 }
 

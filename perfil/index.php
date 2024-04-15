@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="../img_principais/icon_logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/icon_logo.png" type="image/x-icon">
     <title>Perfil</title>
 </head>
 
@@ -34,7 +34,7 @@
 
         <span id="voltar_home" onclick="voltarPagina()"><a>&times;</a></span>
 
-        <a title="Voltar à Home" href="../"><img src="../img_principais/logo_login.png" alt="Logo 123 Folhas" id="logo"></a>
+        <a title="Voltar à Home" href="../"><img src="../img/logo_neon.png" alt="Logo 123 Folhas" id="logo"></a>
 
         <div id="user_name">
             <img src="../img_principais/perfil_padrao.jpg" alt="foto de perfil" id="foto_perfil">
@@ -55,24 +55,30 @@
             </div>
         </div>
         <div id="destinos_salvos">
-            <span id="titulo_destinos">Destinos salvos</span>
+            <span id="titulo_destinos">Dados</span>
 
             <a href="queroir/">
                 <div class="quero_fui"><img src="../img_principais/icone_queroir.png" alt="icone quero ir">
-                    <p>Quero ir</p><span><?php echo $InteresseCompleto ?> destinos</span>
+                    <p>Histórico de pedidos</p><span><?php echo $InteresseCompleto ?> pedidos</span>
                 </div>
             </a>
 
-            <a href="jafui/">
+            <a href="../carrinho/">
                 <div class="quero_fui"><img src="../img_principais/icone_jafui.png" alt="icone já fui">
-                    <p>Já fui</p><span><?php echo $ViajaCompleto ?> destinos</span>
+                    <p>Carrinho</p><span><?php echo $ViajaCompleto ?> itens</span>
+                </div>
+            </a>
+
+            <a href="../carrinho/">
+                <div class="quero_fui"><img src="../img_principais/icone_jafui.png" alt="icone já fui">
+                    <p>Meus cartões</p><span><?php echo $ViajaCompleto ?> adicionados</span>
                 </div>
             </a>
         </div>
 
         <span id="botao_sair"><a href="../admin/login/logout.php">Sair</a></span>
 
-        <p id="text123"><a href="../">&copy;123folhas</a></p>
+        <p id="text123"><a href="../">&copy;kabo</a></p>
     </div>
 
     <script>
