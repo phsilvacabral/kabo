@@ -27,7 +27,7 @@
         } else {
             $sql = "INSERT INTO Usuario (Nome, CPF, Email, Senha, Genero, Dt_Nascimento, Tipo_Usuario) VALUES ('$Nome', '$CPF', '$Email', '$Senha', '$Genero', '$dateData_Nasc', $Tipo_Usuario)";
             if ($conn->query($sql) === TRUE) {
-                $sqlC = "SELECT Cod_Usuario FROM Usuario WHERE CPF = '$CPF'";
+                $sqlC = "SELECT Cod_Usuario, Tipo_Usuario FROM Usuario WHERE CPF = '$CPF'";
                 $resultC = $conn->query($sqlC);
                 $row = $resultC->fetch_assoc();
                 session_start();
