@@ -39,7 +39,7 @@
                             <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" oninput="this.value = maskData(this.value)" class="campomedio" required>
                             <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="" oninput="this.value = maskCEP(this.value); buscarCEP(this.value);" maxlength="9" class="campomedio" required>
 
-                            <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="" class="campomedio" maxlength="150" required>
+                            <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="" class="campocheio" maxlength="150" required>
                             <input type="text" placeholder="Bairro" id="bairro" name="txtBairro" value="" class="campomedio" maxlength="50" required>
                             <input type="number" placeholder="Numero" id="numero" name="txtNumero" value="" class="campomedio" oninput="limitarNumero(this)" min="0" required>
                             <input type="text" placeholder="Cidade" id="cidade" name="txtCidade" value="" class="campomedio" maxlength="50" required>
