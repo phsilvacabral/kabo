@@ -8,14 +8,36 @@
     <title>Admin</title>
 </head>
 <body>
+    <?php
+        include("connection.php");
+
+        session_start();
+        if (!isset($_SESSION["Cod_Usuario"])) {
+            header("Location: /kabo/index.php");
+            exit();
+        }
+
+        if ($_SESSION["Tipo_Usuario"] == '0') {
+            header("Location: ../db0/erro.php");
+            exit();
+        }
+    ?>
     <nav>
         <div id="voltar"><a href="../perfil/">Voltar</a></div>
 
         <div id="area_atual"><p>Administrar recursos</p></div>
 
         <div id="perfil">
+            <?php
+                $sqlP = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+                $resultP = $conn->query($sqlP);
+                $rowP = $resultP->fetch_assoc();
+                $nomeCompleto = $rowP['Nome'];
+                $partesNome = explode(' ', $nomeCompleto);
+                $_clienteLogado = $partesNome[0];
+            ?>
             <img src="../img/perfil.png" alt="">
-            <p>Usuário</p>
+            <p><?php echo $_clienteLogado ?></p>
         </div>
     </nav>
 
