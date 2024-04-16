@@ -5,6 +5,7 @@
     $Nome = $_POST['txtNome'];
     $Genero = $_POST['selectGenero'];
     $Senha = $_POST['txtSenha'];
+    $senhaCriptografada = md5($Senha);
 
     $CEP = $_POST['txtCEP'];
     $Logradouro = $_POST['txtLogradouro'];
@@ -16,7 +17,7 @@
 
 
     try {
-        $sql = "UPDATE Usuario SET Nome = '$Nome', Genero = '$Genero', Senha = '$Senha' WHERE Cod_Usuario = {$_SESSION['Cod_Usuario']}";
+        $sql = "UPDATE Usuario SET Nome = '$Nome', Genero = '$Genero', Senha = '$senhaCriptografada' WHERE Cod_Usuario = {$_SESSION['Cod_Usuario']}";
         if ($conn->query($sql) === TRUE) {
             $sqlC = "SELECT Cod_Usuario FROM Usuario WHERE CPF = '$CPF'";
             $resultC = $conn->query($sqlC);
