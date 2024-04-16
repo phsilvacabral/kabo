@@ -101,7 +101,7 @@
 
                     <input type="email" name="email" id="email" value="<?php echo $Email ?>" placeholder="E-mail" maxlength="100" class="campocheio" readonly>
 
-                    <input type="password" name="txtSenha" value="<?php echo $Senha ?>" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
+                    <input type="password" name="txtSenha" value="" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
 
                 </div>
 
