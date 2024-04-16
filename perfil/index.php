@@ -13,22 +13,22 @@
 
 <body>
     <?php
-    include('../connection.php');
-    session_start();
-    $sqlN = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-    $resultN = $conn->query($sqlN);
-    $rowN = $resultN->fetch_assoc();
-    $nomeCompleto = $rowN['Nome'];
+        include('../connection.php');
+        session_start();
+        $sqlN = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+        $resultN = $conn->query($sqlN);
+        $rowN = $resultN->fetch_assoc();
+        $nomeCompleto = $rowN['Nome'];
 
-    $sqlE = "SELECT Email FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-    $resultE = $conn->query($sqlE);
-    $rowE = $resultE->fetch_assoc();
-    $EmailCompleto = $rowE['Email'];
+        $sqlE = "SELECT Email FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+        $resultE = $conn->query($sqlE);
+        $rowE = $resultE->fetch_assoc();
+        $EmailCompleto = $rowE['Email'];
 
-    if (!isset($_SESSION["Cod_Usuario"])) {
-        header("Location: /kabo/");
-        exit();
-    }
+        if (!isset($_SESSION["Cod_Usuario"])) {
+            header("Location: /kabo/");
+            exit();
+        }
     ?>
     <div id="div_perfil">
 
@@ -42,10 +42,10 @@
             <div id="nome_email">
                 <p id="nome_completo"><?php echo $nomeCompleto ?></p>
                 <p id="email_user"><?php echo $EmailCompleto ?></p>
-                <?php if ($_SESSION['Cod_Usuario'] < 13) : ?>
+                <?php if ($_SESSION["Tipo_Usuario"] == 1) : ?>
                     <div id="botoes_editar_admin">
                         <a href="editar/" id="botao_editar">Editar</a>
-                        <a href="admin/db0/inicio.php" id="botao_admin">Admin</a>
+                        <a href="../admin/" id="botao_admin">Admin</a>
                     </div>
                 <?php else : ?>
                     <div id="botoes_editar_admin">
@@ -59,19 +59,19 @@
 
             <a href="queroir/">
                 <div class="quero_fui"><img src="../img_principais/icone_queroir.png" alt="icone quero ir">
-                    <p>Histórico de pedidos</p><span><?php echo $InteresseCompleto ?> pedidos</span>
+                    <p>Histórico de pedidos</p><span>pedidos</span>
                 </div>
             </a>
 
             <a href="../carrinho/">
                 <div class="quero_fui"><img src="../img_principais/icone_jafui.png" alt="icone já fui">
-                    <p>Carrinho</p><span><?php echo $ViajaCompleto ?> itens</span>
+                    <p>Carrinho</p><span>itens</span>
                 </div>
             </a>
 
             <a href="../carrinho/">
                 <div class="quero_fui"><img src="../img_principais/icone_jafui.png" alt="icone já fui">
-                    <p>Meus cartões</p><span><?php echo $ViajaCompleto ?> adicionados</span>
+                    <p>Meus cartões</p><span>adicionados</span>
                 </div>
             </a>
         </div>
