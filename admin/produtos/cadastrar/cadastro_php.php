@@ -72,7 +72,6 @@
         $M2 = $_POST['M2PM'];
         $SATA = $_POST['sataPM'];
 
-
         try {
             $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
             $checkResult = $conn->query($checkQuery);
@@ -85,6 +84,42 @@
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
                     $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_PlacaMae) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_PlacaMae']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
+    } else if ($tipo_cat == "MemRAM") {
+        $Descricao = $_POST['descricaoRAM'];
+        $Modelo = $_POST['modeloRAM'];
+        $Marca = $_POST['marcaRAM'];
+        $Preco = $_POST['precoRAM'];
+        $Quantidade = $_POST['quantidadeRAM'];
+        $Tipo_Mem = $_POST['tipo_memRAM'];
+        $Vel_Mem = $_POST['vel_memRAM'];
+        $Cap_Mem = $_POST['cap_memRAM'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Memoria_Ram (Tipo_Mem, Vel_Mem, Cap_Mem) VALUES ('$Tipo_Mem', $Vel_Mem, $Cap_Mem)";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_MemRAM FROM Memoria_Ram WHERE Tipo_Mem = '$Tipo_Mem' AND Vel_Mem = $Vel_Mem AND Cap_Mem = $Cap_Mem";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_MemRAM) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_MemRAM']})";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
