@@ -21,7 +21,7 @@
             $sqlC = "SELECT Cod_Usuario FROM Usuario WHERE CPF = '$CPF'";
             $resultC = $conn->query($sqlC);
             $row = $resultC->fetch_assoc();
-            $sqlE = "UPDATE Endereco SET CEP = '$CEP', Logradouro = '$Logradouro', Bairro = '$Bairro', Cidade = '$Cidade', Estado = '$Estado', Numero = $Numero WHERE fk_Usuario_Cod_Usuario = {$_SESSION['Cod_Usuario']}";
+            $sqlE = "UPDATE Endereco SET CEP = '$CEP', Logradouro = '$Logradouro', Bairro = '$Bairro', Cidade = '$Cidade', Estado = '$Estado', Numero = $Numero WHERE fk_Cod_Usuario = {$_SESSION['Cod_Usuario']}";
             if ($conn->query($sqlE) === TRUE) {
                 header("Location: /kabo/perfil");
                 exit;
