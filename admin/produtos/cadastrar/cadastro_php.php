@@ -47,7 +47,6 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                    exit;
                 } else {
                     throw new Exception('Ocorreu um erro ao executar a operação.');
                 }
