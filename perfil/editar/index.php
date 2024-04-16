@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,38 +12,50 @@
 
 <body>
     <?php
-    include('connection.php');
+    include('../../connection.php');
     session_start();
 
-    if (!isset($_SESSION["Cod_Cliente"])) {
+    if (!isset($_SESSION["Cod_Usuario"])) {
         header("Location: /kabo/");
         exit();
     }
 
     $ERROR = '';
 
-    $sqlN = "SELECT Nome, CEP, Email, Senha_login, Inter_Nacional, Faixa_preco FROM Cliente WHERE Cod_Cliente = '{$_SESSION['Cod_Cliente']}'";
+    $sqlN = "SELECT Nome, Email, Senha, CPF, Dt_Nascimento, Genero FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
     $resultN = $conn->query($sqlN);
     $rowN = $resultN->fetch_assoc();
     $Nome = $rowN['Nome'];
-    $CEP = $rowN['CEP'];
     $Email = $rowN['Email'];
-    $Senha_login = $rowN['Senha_login'];
-    $Faixa_preco = $rowN['Faixa_preco'];
-    $Inter_Nacional = $rowN['Inter_Nacional'];
+    $Senha = $rowN['Senha'];
+    $CPF= $rowN['CPF'];
+    $Dt_Nascimento = $rowN['Dt_Nascimento'];
+    $Genero = $rowN['Genero'];
+
+    $sqlE = "SELECT CEP, Logradouro, Numero, Bairro, Estado, Cidade FROM Endereco WHERE fk_Usuario_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+    $resultE = $conn->query($sqlE);
+    $rowE = $resultE->fetch_assoc();
+    $CEP = $rowE['CEP'];
+    $Logradouro = $rowE['Logradouro'];
+    $Numero = $rowE['Numero'];
+    $Bairro = $rowE['Bairro'];
+    $Estado = $rowE['Estado'];
+    $Cidade = $rowE['Cidade'];
 
     if (isset($_GET['senha_excluir'])) {
-        $sqlS = "SELECT Senha_login FROM Cliente WHERE Cod_Cliente = '{$_SESSION['Cod_Cliente']}'";
+        $sqlS = "SELECT Senha FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
         $resultS = $conn->query($sqlS);
         $rowS = $resultS->fetch_assoc();
-        if ($rowS['Senha_login'] == $_GET['senha_excluir']) {
-            if ($_SESSION['Cod_Cliente'] <= 13) {
+        if ($rowS['Senha'] == $_GET['senha_excluir']) {
+            if ($_SESSION['Tipo_Usuario'] == 1) {
                 $ERROR = 'Não é possível deletar contas administadoras';
             } else {
-                $sql = "DELETE FROM cliente WHERE Cod_Cliente = {$_SESSION['Cod_Cliente']}";
+                $sqlE = "DELETE FROM Endereco WHERE fk_Usuario_Cod_Usuario = {$_SESSION['Cod_Usuario']}";
+                $conn->query($sqlE);
+                $sql = "DELETE FROM Usuario WHERE Cod_Usuario = {$_SESSION['Cod_Usuario']}";
                 $conn->query($sql);
                 session_destroy();
-                header("Location: /123folhas/");
+                header("Location: /kabo/");
                 exit();
             }
         } else {
@@ -67,34 +80,33 @@
             <form id="form1" name="form1" method="post" action="edit_php.php" onsubmit="return verificar()">
                 <div class="espacodentrobox">
 
-                    <input type="text" name="txtNome" value="" maxlength="100" id="primeiroinput" placeholder="Nome" class="campocheio" required>
+                    <input type="text" name="txtNome" value="<?php echo $Nome ?>" maxlength="100" id="primeiroinput" placeholder="Nome" class="campocheio" required>
 
-                    <input type="text" placeholder="CPF" id="cpf" name="txtCPF" value="" oninput="this.value = maskCPF(this.value)" maxlength="14" class="campomedio" required>
+                    <input type="text" placeholder="CPF" id="cpf" name="txtCPF" value="<?php echo $CPF ?>" maxlength="14" class="campomedio" readonly>
                     <select name="selectGenero" id="genero" class="campomedio" required>
-                        <option value="genero" disabled selected>Gênero</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="O">Outro</option>
+                        <option value="genero">Gênero</option>
+                        <option value="M" <?php if ($Genero == 'M') echo 'selected'; ?>>Masculino</option>
+                        <option value="F" <?php if ($Genero == 'F') echo 'selected'; ?>>Feminino</option>
+                        <option value="O" <?php if ($Genero == 'O') echo 'selected'; ?>>Outro</option>
                     </select>
 
-                    <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" oninput="this.value = maskData(this.value)" class="campomedio" required>
-                    <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="" oninput="this.value = maskCEP(this.value); buscarCEP(this.value);" maxlength="9" class="campomedio" required>
+                    <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" value="<?php echo date('Y-m-d', strtotime($Dt_Nascimento))?>" class="campomedio" readonly>
+                    <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="<?php echo $CEP ?>" oninput="this.value = maskCEP(this.value); buscarCEP(this.value);" maxlength="9" class="campomedio" required>
 
-                    <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="" class="campocheio" maxlength="150" required>
-                    <input type="text" placeholder="Bairro" id="bairro" name="txtBairro" value="" class="campomedio" maxlength="50" required>
-                    <input type="number" placeholder="Numero" id="numero" name="txtNumero" value="" class="campomedio" oninput="limitarNumero(this)" min="0" required>
-                    <input type="text" placeholder="Cidade" id="cidade" name="txtCidade" value="" class="campomedio" maxlength="50" required>
-                    <input type="text" placeholder="Estado" id="estado" name="txtEstado" value="" class="campomedio" maxlength="2" required>
+                    <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="<?php echo $Logradouro ?>" class="campocheio" maxlength="150" required>
+                    <input type="text" placeholder="Bairro" id="bairro" name="txtBairro" value="<?php echo $Bairro ?>" class="campomedio" maxlength="50" required>
+                    <input type="number" placeholder="Numero" id="numero" name="txtNumero" value="<?php echo $Numero ?>" class="campomedio" oninput="limitarNumero(this)" min="0" required>
+                    <input type="text" placeholder="Cidade" id="cidade" name="txtCidade" value="<?php echo $Cidade ?>" class="campomedio" maxlength="50" required>
+                    <input type="text" placeholder="Estado" id="estado" name="txtEstado" value="<?php echo $Estado ?>" class="campomedio" maxlength="2" required>
 
-                    <input type="email" name="email" id="email" value="" placeholder="E-mail" maxlength="100" class="campocheio" required>
+                    <input type="email" name="email" id="email" value="<?php echo $Email ?>" placeholder="E-mail" maxlength="100" class="campocheio" readonly>
 
-                    <input type="password" name="txtSenha" value="" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
+                    <input type="password" name="txtSenha" value="<?php echo $Senha ?>" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
 
                 </div>
 
                 <div id="botoes">
                     <input type="button" value="Excluir conta" id="excluirsubmit">
-
                     <input type="submit" value="Atualizar" id="enviarsubmit">
                 </div>
                 <span id="erro_senha"><?php echo $ERROR ?></span>
@@ -131,27 +143,79 @@
     <script>
         const txtNome = document.getElementById('primeiroinput')
         const txtCEP = document.getElementById('CEP')
+        const txtLogradouro = document.getElementById('logradouro')
+        const txtBairro = document.getElementById('bairro')
+        const txtCidade = document.getElementById('cidade')
+        const txtestado = document.getElementById('estado')
         const email = document.getElementById('email')
+
+        function limitarNumero(input) {
+            var maxLength = 5;
+            var valor = input.value;
+            if (valor.length > maxLength) {
+                input.value = valor.slice(0, maxLength);
+            }
+        }
+
+        function buscarCEP(cep) {
+            // Verifica se o CEP possui o formato correto
+            if (/^\d{5}-\d{3}$/.test(cep)) {
+                // Faz a requisição para a API do ViaCEP
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            // Preenche os campos de endereço com os dados retornados pela API
+                            document.getElementById('logradouro').value = data.logradouro;
+                            document.getElementById('bairro').value = data.bairro;
+                            document.getElementById('cidade').value = data.localidade;
+                            document.getElementById('estado').value = data.uf;
+                        } else {
+                            alert('CEP não encontrado');
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar CEP:', error));
+            }
+        }
 
         function verificar() {
             if (isNomeValido(txtNome.value)) {
-                if (isCEPValido(txtCEP.value)) {
-                    if (isEmailValido(email.value)) {
-                        return true
+                    if (isCEPValido(txtCEP.value)) {
+                        if (isEmailValido(email.value)) {
+                            if(isNomeValido(txtLogradouro.value)){
+                                if(isNomeValido(txtBairro.value)){
+                                    if(isNomeValido(txtCidade.value)){
+                                        if(isNomeValido(txtEstado.value)){
+                                            return true;
+                                        } else {
+                                            window.alert('Estado inválido!')
+                                            return false
+                                        }
+                                    } else {
+                                        window.alert('Cidade inválido!')
+                                        return false
+                                    }
+                                } else {
+                                    window.alert('Bairro inválido!')
+                                    return false
+                                }
+                            } else {
+                                window.alert('Logradouro inválido!')
+                                return false
+                            }
+                        } else {
+                            window.alert('Email inválido!')
+                            return false
+                        }
                     } else {
-                        window.alert('Email inválido!')
+                        window.alert('CEP inválido!')
                         return false
                     }
-                } else {
-                    window.alert('CEP inválido!')
-                    return false
-                }
             } else {
                 window.alert('Nome inválido!')
                 return false
             }
         }
-
 
         function isNomeValido(nome) {
             const reN = /^\w*[a-zA-ZÀ-ú\s]+$/
@@ -183,7 +247,12 @@
         document.getElementById("botao_excluir_popup").addEventListener("click", function() {
             document.getElementById("popup").style.display = "none";
         });
+
+        function voltarPagina() {
+            window.history.back();
+        }
     </script>
+
 
 </body>
 
