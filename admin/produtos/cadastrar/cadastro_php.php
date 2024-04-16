@@ -32,7 +32,16 @@
         try {
             $sql = "INSERT INTO CPU (Soquete, Frequencia, Nucleos, Threads, TDP, Tipo_Mem, Vel_Mem, GPUs) VALUES ('$Soquete', $Frequencia, $Nucleos, $Threads, $TDP, '$Tipo_mem', $Vel_mem, '$GPUs')";
             if ($conn->query($sql) === TRUE) {
-                header("Location: /kabo/admin/cadastrar");
+                $sqlCod = "SELECT Cod_CPU FROM CPU WHERE Soquete = '$Soquete' AND Frequencia >= $Frequencia AND Nucleos = $Nucleos AND Threads = $Threads AND TDP = $TDP AND Tipo_Mem = '$Tipo_mem' AND Vel_Mem = $Vel_mem AND GPUs = '$GPUs'";
+                $resultCod = $conn->query($sqlCod);
+                $row = $resultCod->fetch_assoc();
+                $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_CPU) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_CPU']})";
+                if ($conn->query($sqlP) === TRUE) {
+                    header("Location: /kabo/admin/produtos");
+                    exit;
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
                 exit;
             } else {
                 throw new Exception('Ocorreu um erro ao executar a operação.');
