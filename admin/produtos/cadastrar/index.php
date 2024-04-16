@@ -104,9 +104,10 @@
                     <div id="imagePreview1" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
+                    <input class="input_grande" type="text" name="descricaoPM" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloPM" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaPM" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="soquetePM" placeholder="Soquete" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="memoria" placeholder="Memória">
                     <input class="input_pequeno" type="text" name="frequencia" placeholder="Frequência">
                     <input class="input_pequeno" type="text" name="tdp" placeholder="TDP">
@@ -119,7 +120,7 @@
 
         <section class="campo_inputs" id="campo_placa_mae" style="display: none;">
             <p class="titulo_tipo">Cadastrar placa mãe</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formPlacaMae" name="formPlacaMae" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo2" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload2" class="botao_upload" onclick="uploadImg(2)">Upload</button>
@@ -127,15 +128,20 @@
                     <div id="imagePreview2" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="soquete" placeholder="Soquete">
-                    <input class="input_pequeno" type="text" name="memoria" placeholder="Memória">
-                    <input class="input_pequeno" type="text" name="frequencia" placeholder="Frequência">
-                    <input class="input_pequeno" type="text" name="tdp" placeholder="TDP">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="PlacaMae">
+                    <input class="input_grande" type="text" name="descricaoPM" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloPM" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaPM" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="tamanhoPM" placeholder="Tamanho" maxlength="15" required>
+                    <input class="input_pequeno" type="text" name="soquetePM" placeholder="Soquete" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="chipsetPM" placeholder="Chipset" maxlength="15" required>
+                    <input class="input_pequeno" type="text" name="tipo_memPM" placeholder="Tipo da memória compatível" maxlength="4" required>
+                    <input class="input_pequeno" type="number" name="vel_memPM" placeholder="Velocidade da memória compatível" oninput="limitarNumero(this)" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="PCIePM" placeholder="PCIe" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="M2PM" placeholder="Quantiade de conexões M2" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="sataPM" placeholder="Quantiade de conexões SATA" max="2147483647" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoPM" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadePM" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
