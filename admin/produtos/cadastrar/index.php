@@ -67,7 +67,7 @@
 
         <section class="campo_inputs" id="campo_cpu" style="display: none;">
             <p class="titulo_tipo">Cadastrar CPU</p>
-            <form id="formCPU" name="formCPU" method="post" action="CPU_cadastro.php" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formCPU" name="formCPU" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo0" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload0" class="botao_upload" onclick="uploadImg(0)">Upload</button>
@@ -75,7 +75,7 @@
                     <div id="imagePreview0" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input type="hidden" name="tipo_cat" value="CPU">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="CPU">
                     <input class="input_grande" type="text" name="descricaoCPU" id="descricaoCPU" placeholder="Descrição" maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloCPU" id="modeloCPU" placeholder="Modelo" maxlength="100" required>
                     <input class="input_medio" type="text" name="marcaCPU" id="marcaCPU" placeholder="Marca" maxlength="25" required>
@@ -84,7 +84,7 @@
                     <input class="input_pequeno" type="number" name="threadsCPU" id="threadsCPU" placeholder="Threads" max="2147483647" required>
                     <input class="input_pequeno" type="number" step="0.01" name="frequenciaCPU" id="frequenciaCPU" placeholder="Frequência" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="tdpCPU" id="tdpCPU" placeholder="TDP" max="2147483647" required>
-                    <input class="input_pequeno" type="text" name="tipo_mem"CPU id="tipo_memCPU" placeholder="Tipo da memória compatível" maxlength="4" required>
+                    <input class="input_pequeno" type="text" name="tipo_memCPU" id="tipo_memCPU" placeholder="Tipo da memória compatível" maxlength="4" required>
                     <input class="input_pequeno" type="number" name="vel_memCPU" id="vel_memCPU" placeholder="Velocidade da memória compatível" oninput="limitarNumero(this)" required>
                     <input class="input_pequeno" type="text" name="GPUsCPU" id="GPUsCPU" placeholder="Placa de vídeo integrada" maxlength="100" required>
                     <input class="input_pequeno" type="number" step="0.01" name="precoCPU" id="precoCPU" placeholder="Preço" max="2147483647" required>
@@ -330,13 +330,15 @@
         });
 
 
-        // Função para mostrar o campo de entrada correspondente à seleção do usuário
         document.getElementById('tipo').addEventListener('change', function() {
-            // Ocultar todos os campos de entrada e limpar os valores
+            // Ocultar todos os campos de entrada e limpar os valores, exceto o input desejado
             document.querySelectorAll('.campo_inputs').forEach(function(campo) {
                 campo.style.display = 'none';
                 campo.querySelectorAll('input').forEach(function(input) {
-                    input.value = '';
+                    // Verifique se o input não é o que você deseja excluir
+                    if (input.id !== 'tipo_cat') {
+                        input.value = '';
+                    }
                 });
             });
             // Mostrar o campo de entrada correspondente à seleção do usuário
@@ -345,6 +347,7 @@
                 document.getElementById('campo_' + tipo).style.display = 'block';
             }
         });
+
 
 
         // Função para mostrar a imagem selecionada no cadastro
