@@ -8,6 +8,7 @@
     $dateData_Nasc = date('Y-m-d', strtotime($Data_Nasc));
     $Email = $_POST['email'];
     $Senha = $_POST['txtSenha'];
+    $senhaCriptografada = md5($Senha);
     $Tipo_Usuario = 0;
 
     $CEP = $_POST['txtCEP'];
@@ -25,7 +26,7 @@
         if ($checkResult && $checkResult->num_rows > 0) {
             throw new Exception('Ocorreu um erro ao executar a operação.');
         } else {
-            $sql = "INSERT INTO Usuario (Nome, CPF, Email, Senha, Genero, Dt_Nascimento, Tipo_Usuario) VALUES ('$Nome', '$CPF', '$Email', '$Senha', '$Genero', '$dateData_Nasc', $Tipo_Usuario)";
+            $sql = "INSERT INTO Usuario (Nome, CPF, Email, Senha, Genero, Dt_Nascimento, Tipo_Usuario) VALUES ('$Nome', '$CPF', '$Email', '$senhaCriptografada', '$Genero', '$dateData_Nasc', $Tipo_Usuario)";
             if ($conn->query($sql) === TRUE) {
                 $sqlC = "SELECT Cod_Usuario, Tipo_Usuario FROM Usuario WHERE CPF = '$CPF'";
                 $resultC = $conn->query($sqlC);
