@@ -15,7 +15,7 @@
 
         session_start();
         if (!isset($_SESSION["Cod_Usuario"])) {
-            header("Location: /kabo/");
+            header("Location: /kabo/index.php");
             exit();
         }
 
@@ -149,7 +149,7 @@
 
         <section class="campo_inputs" id="campo_ram" style="display: none;">
             <p class="titulo_tipo">Cadastrar memória RAM</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formMemRAM" name="formMemRAM" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo3" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload3" class="botao_upload" onclick="uploadImg(3)">Upload</button>
@@ -157,14 +157,15 @@
                     <div id="imagePreview3" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="memoria" placeholder="Memória">
-                    <input class="input_pequeno" type="text" name="frequencia" placeholder="Frequência">
-                    <input class="input_pequeno" type="text" name="latencia" placeholder="Latência">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="MemRAM">
+                    <input class="input_grande" type="text" name="descricaoRAM" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloRAM" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaRAM" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="tipo_memRAM" placeholder="Tipo da memória" maxlength="4" required>
+                    <input class="input_pequeno" type="number" name="vel_memRAM" placeholder="Velocidade da memória" oninput="limitarNumero(this)" required>
+                    <input class="input_pequeno" type="number" name="cap_memRAM" placeholder="Capacidade da memória" oninput="limitarNumero(this)" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoRAM" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeRAM" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
@@ -331,7 +332,7 @@
     <script>
 
     function limitarNumero(input) {
-            var maxLength = 5;
+            var maxLength = 4;
             var valor = input.value;
             if (valor.length > maxLength) {
                 input.value = valor.slice(0, maxLength);
