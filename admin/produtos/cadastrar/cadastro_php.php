@@ -3,7 +3,7 @@
 
     session_start();
     if (!isset($_SESSION["Cod_Usuario"])) {
-        header("Location: /kabo/");
+        header("Location: /kabo/index.php");
         exit();
     }
 
@@ -30,26 +30,36 @@
         $GPUs = $_POST['GPUsCPU'];
 
         try {
-            $sql = "INSERT INTO CPU (Soquete, Frequencia, Nucleos, Threads, TDP, Tipo_Mem, Vel_Mem, GPUs) VALUES ('$Soquete', $Frequencia, $Nucleos, $Threads, $TDP, '$Tipo_mem', $Vel_mem, '$GPUs')";
-            if ($conn->query($sql) === TRUE) {
-                $sqlCod = "SELECT Cod_CPU FROM CPU WHERE Soquete = '$Soquete' AND Frequencia >= $Frequencia AND Nucleos = $Nucleos AND Threads = $Threads AND TDP = $TDP AND Tipo_Mem = '$Tipo_mem' AND Vel_Mem = $Vel_mem AND GPUs = '$GPUs'";
-                $resultCod = $conn->query($sqlCod);
-                $row = $resultCod->fetch_assoc();
-                $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_CPU) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_CPU']})";
-                if ($conn->query($sqlP) === TRUE) {
-                    header("Location: /kabo/admin/produtos");
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO CPU (Soquete, Frequencia, Nucleos, Threads, TDP, Tipo_Mem, Vel_Mem, GPUs) VALUES ('$Soquete', $Frequencia, $Nucleos, $Threads, $TDP, '$Tipo_mem', $Vel_mem, '$GPUs')";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_CPU FROM CPU WHERE Soquete = '$Soquete' AND Frequencia >= $Frequencia AND Nucleos = $Nucleos AND Threads = $Threads AND TDP = $TDP AND Tipo_Mem = '$Tipo_mem' AND Vel_Mem = $Vel_mem AND GPUs = '$GPUs'";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_CPU) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_CPU']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
                     exit;
                 } else {
                     throw new Exception('Ocorreu um erro ao executar a operação.');
                 }
-                exit;
-            } else {
-                throw new Exception('Ocorreu um erro ao executar a operação.');
             }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
         }
+    } else if ($tipo_cat == "GPU") {
+
+    } else if ($tipo_cat == "Placa_Mae") {
+
     }
 
 ?>
