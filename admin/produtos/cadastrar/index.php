@@ -323,6 +323,15 @@
     </main>
 
     <script>
+
+    function limitarNumero(input) {
+            var maxLength = 5;
+            var valor = input.value;
+            if (valor.length > maxLength) {
+                input.value = valor.slice(0, maxLength);
+            }
+        }
+
         // Função para voltar à página anterior
         document.getElementById('voltar').addEventListener('click', function(e) {
             e.preventDefault();
