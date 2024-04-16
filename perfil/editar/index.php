@@ -32,7 +32,7 @@
     $Dt_Nascimento = $rowN['Dt_Nascimento'];
     $Genero = $rowN['Genero'];
 
-    $sqlE = "SELECT CEP, Logradouro, Numero, Bairro, Estado, Cidade FROM Endereco WHERE fk_Usuario_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+    $sqlE = "SELECT CEP, Logradouro, Numero, Bairro, Estado, Cidade FROM Endereco WHERE fk_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
     $resultE = $conn->query($sqlE);
     $rowE = $resultE->fetch_assoc();
     $CEP = $rowE['CEP'];
@@ -50,7 +50,7 @@
             if ($_SESSION['Tipo_Usuario'] == 1) {
                 $ERROR = 'Não é possível deletar contas administadoras';
             } else {
-                $sqlE = "DELETE FROM Endereco WHERE fk_Usuario_Cod_Usuario = {$_SESSION['Cod_Usuario']}";
+                $sqlE = "DELETE FROM Endereco WHERE fk_Cod_Usuario = {$_SESSION['Cod_Usuario']}";
                 $conn->query($sqlE);
                 $sql = "DELETE FROM Usuario WHERE Cod_Usuario = {$_SESSION['Cod_Usuario']}";
                 $conn->query($sql);
