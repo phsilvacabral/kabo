@@ -15,7 +15,7 @@
 
         session_start();
         if (!isset($_SESSION["Cod_Usuario"])) {
-            header("Location: /kabo/index.php");
+            header("Location: /kabo/");
             exit();
         }
 
