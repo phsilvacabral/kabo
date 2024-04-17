@@ -173,7 +173,7 @@
 
         <section class="campo_inputs" id="campo_armazenamento" style="display: none;">
             <p class="titulo_tipo">Cadastrar armazenamento</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formArma" name="formArma" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo4" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload4" class="botao_upload" onclick="uploadImg(4)">Upload</button>
@@ -181,14 +181,16 @@
                     <div id="imagePreview4" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="capacidade" placeholder="Capacidade">
-                    <input class="input_pequeno" type="text" name="tipo" placeholder="Tipo">
-                    <input class="input_pequeno" type="text" name="interface" placeholder="Interface">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="Armazenamento">
+                    <input class="input_grande" type="text" name="descricaoArma" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloArma" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaArma" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="tipoArma" placeholder="Tipo de armazenamento" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="conexaoArma" placeholder="Tipo de conexão" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="capacidadeArma" placeholder="Capacidade" maxlength="10" required>
+                    <input class="input_pequeno" type="number" name="velocidadeArma" placeholder="Velocidade" oninput="limitarNumero(this)" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoArma" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeArma" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
