@@ -171,6 +171,46 @@
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
         }
+    } else if ($tipo_cat == "fonte"){
+        $Descricao = $_POST['descricaoFonte'];
+        $Modelo = $_POST['modeloFonte'];
+        $Marca = $_POST['marcaFonte'];
+        $Preco = $_POST['precoFonte'];
+        $Quantidade = $_POST['quantidadeFonte'];
+        $Potencia = $_POST['potenciaFonte'];
+        $Voltagem = $_POST['voltagemFonte'];
+        $Corrente = $_POST['correnteFonte'];
+        $Certificacao = $_POST['certificadoFonte'];
+        $Tamanho = $_POST['tamanhoFonte'];
+        $Modular = $_POST['modularFonte'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Fonte (Potencia, Voltagem, Corrente, Certificacao, Tamanho, Modular) VALUES ($Potencia, $Voltagem, $Corrente, '$Certificacao', '$Tamanho', $Modular)";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_Fonte FROM Fonte WHERE Potencia = $Potencia AND Voltagem = $Voltagem AND Corrente = $Corrente AND Certificacao = '$Certificacao' AND Tamanho = '$Tamanho' AND Modular = $Modular";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Fonte) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Fonte']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
+
     }
 
 ?>
