@@ -96,7 +96,7 @@
 
         <section class="campo_inputs" id="campo_gpu" style="display: none;">
             <p class="titulo_tipo">Cadastrar GPU</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formGPU" name="formGPU" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo1" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload1" class="botao_upload" onclick="uploadImg(1)">Upload</button>
@@ -104,15 +104,21 @@
                     <div id="imagePreview1" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricaoPM" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloPM" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaPM" placeholder="Marca" maxlength="25" required>
-                    <input class="input_pequeno" type="text" name="soquetePM" placeholder="Soquete" maxlength="10" required>
-                    <input class="input_pequeno" type="text" name="memoria" placeholder="Memória">
-                    <input class="input_pequeno" type="text" name="frequencia" placeholder="Frequência">
-                    <input class="input_pequeno" type="text" name="tdp" placeholder="TDP">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="GPU">
+                    <input class="input_grande" type="text" name="descricaoGPU" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloGPU" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaGPU" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="number" name="nucleosGPU" placeholder="Núcleos CUDA" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="capacidade_memoriaGPU" placeholder="Capacidade da Memória" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="velocidadeGPU" placeholder="Velocidade da Memória" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="tipo_memGPU" placeholder="Tipo da memória" maxlength="10" required>
+                    <input class="input_pequeno" type="number" name="tdpGPU" placeholder="TDP" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="conectorGPU" placeholder="Conector" maxlength="20" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="pcieGPU" placeholder="PCIe" max="2147483647" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="slotGPU" placeholder="Slots" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="tamanhoGPU" placeholder="Tamanho" maxlength="30" required>
+                    <input class="input_pequeno" type="number" name="quantidadeGPU" id="quantidadeGPU" placeholder="Quantidade" max="2147483647" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoGPU" id="precoGPU" placeholder="Preço" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
