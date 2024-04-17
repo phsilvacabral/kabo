@@ -198,7 +198,7 @@
 
         <section class="campo_inputs" id="campo_fonte" style="display: none;">
             <p class="titulo_tipo">Cadastrar fonte</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formFonte" name="formFonte" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo5" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload5" class="botao_upload" onclick="uploadImg(5)">Upload</button>
@@ -206,13 +206,21 @@
                     <div id="imagePreview5" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="potencia" placeholder="Potência">
-                    <input class="input_pequeno" type="text" name="certificado" placeholder="Certificado">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="fonte">
+                    <input class="input_grande" type="text" name="descricaoFonte" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloFonte" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaFonte" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="number" name="potenciaFonte" placeholder="Potência" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="voltagemFonte" placeholder="Voltagem" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="correnteFonte" placeholder="Corrente" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="certificadoFonte" placeholder="Certificado" maxlength="20" required>
+                    <input class="input_pequeno" type="text" name="tamanhoFonte" placeholder="Tamanho" maxlength="20" required>
+                    <select name="modularFonte" class="input_pequeno" required>
+                        <option value="TRUE">Modular</option>
+                        <option value="FALSE">Com cabo</option>
+                    </select>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoFonte" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeFonte" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
@@ -333,13 +341,13 @@
 
     <script>
 
-    function limitarNumero(input) {
-            var maxLength = 4;
-            var valor = input.value;
-            if (valor.length > maxLength) {
-                input.value = valor.slice(0, maxLength);
+        function limitarNumero(input) {
+                var maxLength = 4;
+                var valor = input.value;
+                if (valor.length > maxLength) {
+                    input.value = valor.slice(0, maxLength);
+                }
             }
-        }
 
         // Função para voltar à página anterior
         document.getElementById('voltar').addEventListener('click', function(e) {
