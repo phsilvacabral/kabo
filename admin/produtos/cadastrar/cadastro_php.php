@@ -134,6 +134,43 @@
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
         }
+    } else if ($tipo_cat == "Armazenamento"){
+        $Descricao = $_POST['descricaoArma'];
+        $Modelo = $_POST['modeloArma'];
+        $Marca = $_POST['marcaArma'];
+        $Preco = $_POST['precoArma'];
+        $Quantidade = $_POST['quantidadeArma'];
+        $Tipo = $_POST['tipoArma'];
+        $Conexao = $_POST['conexaoArma'];
+        $Capacidade = $_POST['capacidadeArma'];
+        $Velocidade = $_POST['velocidadeArma'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Armazenamento (Tipo, Capacidade, Velocidade, Conexao) VALUES ('$Tipo', '$Capacidade', $Velocidade, '$Conexao')";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_Armazenamento FROM Armazenamento WHERE Tipo = '$Tipo' AND Capacidade = '$Capacidade' AND Velocidade = $Velocidade AND Conexao = '$Conexao'";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Armazenamento) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Armazenamento']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
     }
 
 ?>
