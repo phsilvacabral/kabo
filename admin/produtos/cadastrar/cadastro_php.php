@@ -56,7 +56,49 @@
             exit;
         }
     } else if ($tipo_cat == "GPU") {
+        $Descricao = $_POST['descricaoGPU'];
+        $Modelo = $_POST['modeloGPU'];
+        $Marca = $_POST['marcaGPU'];
+        $Preco = $_POST['precoGPU'];
+        $Quantidade = $_POST['quantidadeGPU'];
+        $PCIE = $_POST['pcieGPU'];
+        $Nucleos = $_POST['nucleosGPU'];
+        $Capacidade = $_POST['capacidade_memoriaGPU'];
+        $Velocidade = $_POST['velocidadeGPU'];
+        $TDP = $_POST['tdpGPU'];
+        $SLOT = $_POST['slotGPU'];
+        $Tamanho = $_POST['tamanhoGPU'];
+        $TipoMem = $_POST['tipo_memGPU'];
+        $Conector = $_POST['conectorGPU'];
 
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO GPU (PCIe, Nucleos, Tam_Memoria, Vel_Mem, TDP, Slot, Tamanho, Tipo_Mem, Conector)
+                VALUES ($PCIE, $Nucleos, $Capacidade, $Velocidade, $TDP, $SLOT, '$Tamanho', '$TipoMem', '$Conector')";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_GPU FROM GPU WHERE PCIe >= $PCIE AND Nucleos = $Nucleos AND Tam_Memoria = $Capacidade AND Vel_Mem = $Velocidade AND TDP = $TDP AND Slot >= $SLOT AND Tamanho = '$Tamanho' AND Tipo_Mem = '$TipoMem' AND Conector = '$Conector'";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_GPU) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_GPU']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("' . $e->getMessage() . '"); history.go(-1);</script>';
+            exit;
+        }
     } else if ($tipo_cat == "PlacaMae") {
         $Descricao = $_POST['descricaoPM'];
         $Modelo = $_POST['modeloPM'];
