@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../style.css">
     <title>Editar produto</title>
 </head>
@@ -18,7 +18,7 @@
         </div>
 
         <div id="perfil">
-            <img src="../img/perfil.png" alt="">
+            <img src="../../../img/perfil_padrao.png" alt="perfil">
             <p>Usuário</p>
         </div>
     </nav>
@@ -26,21 +26,27 @@
     <main>
         <p id="caminho">administrar recursos &nbsp; > &nbsp; produtos &nbsp; > &nbsp; editar</p>
 
-        <section class="campo_tipo">
-            <select name="tipo" id="tipo">
-                <option value="" selected>Selecione um tipo</option>
-                <option value="cpu">CPU</option>
-                <option value="gpu">GPU</option>
-                <option value="placa_mae">Placa mãe</option>
-                <option value="ram">Memória RAM</option>
-                <option value="armazenamento">Armazenamento</option>
-                <option value="fonte">Fonte</option>
-                <option value="gabinete">Gabinete</option>
-                <option value="monitor">Monitor</option>
-                <option value="teclado">Teclado</option>
-                <option value="mouse">Mouse</option>
-                <option value="headset">Headset</option>
-            </select>
+        <section id="pesquisa">
+            <form action="" method="post">
+                <input type="text" name="busca" id="busca" placeholder="Buscar produto"  onclick="createPopup('title', 'text', 'button1Text', 'button2Text')">
+                <input type="submit" value="Buscar" style="display: none;">
+            </form>
+
+            <div id="resultado_pesquisa" style="display: none;">
+                <div class="caixa_produto">
+                    <div class="botao_editar_produto" id="cpu">Editar</div>
+                    <div class="imagem_produto"><img src="../../img/logo_neon.png" alt=""></div>
+                    <div class="nome_produto">
+                        <p>PC Gamer AMD Ryzen 5 5600G 6 Núcleos 4.40Ghz, Gráficos
+                    </div>
+                    <div class="preco_produto">
+                        <p>R$1.900,00</p>
+                    </div>
+                    <div class="qtd_produto">
+                        <p>25 unidades</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="campo_inputs" id="campo_cpu" style="display: none;">
@@ -304,21 +310,100 @@
         });
 
 
-        // Função para mostrar o campo de entrada correspondente à seleção do usuário
-        document.getElementById('tipo').addEventListener('change', function() {
-            // Ocultar todos os campos de entrada e limpar os valores
+
+        // Função para mostrar a div "resultado_pesquisa" ao submeter o formulário
+        document.querySelector('#pesquisa form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede que o formulário seja submetido normalmente
+            // Mostra a div "resultado_pesquisa"
+            document.getElementById('resultado_pesquisa').style.display = 'block';
+            document.getElementById('campo_cpu').style.display = 'none';
+        });
+
+
+
+        // Função para mostrar a seção correspondente ao clique do usuário
+        document.getElementById('cpu').addEventListener('click', function() {
+            // Ocultar todas as seções e limpar os valores
             document.querySelectorAll('.campo_inputs').forEach(function(campo) {
                 campo.style.display = 'none';
                 campo.querySelectorAll('input').forEach(function(input) {
                     input.value = '';
                 });
             });
-            // Mostrar o campo de entrada correspondente à seleção do usuário
-            var tipo = this.value;
+            // Mostrar a seção correspondente ao clique do usuário
+            var tipo = this.id;
             if (tipo) {
                 document.getElementById('campo_' + tipo).style.display = 'block';
             }
+            // Ocultar a div "resultado_pesquisa"
+            document.getElementById('resultado_pesquisa').style.display = 'none';
         });
+
+
+
+        // Função para tornar os inputs somente para leitura após o envio do formulário
+        var forms = document.querySelectorAll('.form_cadastro');
+        // Adiciona um ouvinte de evento a cada formulário
+        forms.forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                // Percorre todos os inputs do formulário
+                var inputs = form.querySelectorAll('input');
+                inputs.forEach(function(input) {
+                    // Torna o input somente para leitura
+                    input.readOnly = true;
+                });
+            });
+        });
+
+
+
+        // Função para criar um pop-up
+        function createPopup(title, text, button1Text, button2Text = null) {
+            // Cria o pop-up
+            let popup = document.createElement('div');
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.backgroundColor = '#1e1e1e';
+            popup.style.color = '#ffffff';
+            popup.style.width = '300px';
+            popup.style.height = '200px';
+            popup.style.boxShadow = 'inset 0 0 20px #663234, 5px 5px 50px #rgba(0, 0, 0, 0.3)';
+            popup.style.border= '1px solid #f33333'
+            popup.style.padding = '20px';
+            popup.style.borderRadius = '2px';
+            popup.style.zIndex = '1000';
+        
+            // Cria o título
+            let popupTitle = document.createElement('h1');
+            popupTitle.textContent = title;
+            popup.appendChild(popupTitle);
+        
+            // Cria o texto
+            let popupText = document.createElement('p');
+            popupText.textContent = text;
+            popup.appendChild(popupText);
+        
+            // Cria o primeiro botão
+            let button1 = document.createElement('button');
+            button1.textContent = button1Text;
+            button1.addEventListener('click', function() {
+                document.body.removeChild(popup);
+            });
+            popup.appendChild(button1);
+        
+            // Cria o segundo botão, se fornecido
+            if (button2Text) {
+                let button2 = document.createElement('button');
+                button2.textContent = button2Text;
+                popup.appendChild(button2);
+            }
+        
+            // Adiciona o pop-up ao corpo do documento
+            document.body.appendChild(popup);
+        }
+
 
 
         // Função para mostrar a imagem selecionada no cadastro
