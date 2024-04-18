@@ -1,7 +1,6 @@
+DROP DATABASE kabo;
 CREATE DATABASE kabo;
 USE kabo;
-
-
 
 CREATE TABLE Usuario (
     Cod_Usuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -13,12 +12,12 @@ CREATE TABLE Usuario (
     Genero CHAR(1),
     Tipo_Usuario CHAR(1),
 	Imagem BLOB,
+    fk_Cod_Endereco INT,
     UNIQUE (Email, CPF)
 );
 
 CREATE TABLE Endereco (
     Cod_Endereco INT PRIMARY KEY AUTO_INCREMENT,
-    fk_Cod_Usuario INT,
     CEP CHAR(9),
     Logradouro VARCHAR(150),
     Numero VARCHAR(5),
@@ -204,9 +203,9 @@ CREATE TABLE Tem (
     Quantidade INT
 );
  
-ALTER TABLE Endereco ADD CONSTRAINT FK_Endereco_2
-    FOREIGN KEY (fk_Cod_Usuario)
-    REFERENCES Usuario (Cod_Usuario)
+ALTER TABLE Usuario ADD CONSTRAINT FK_Endereco_2
+    FOREIGN KEY (fk_Cod_Endereco)
+    REFERENCES Endereco (Cod_Endereco)
     ON DELETE RESTRICT;
  
 ALTER TABLE Cartao_pagamento ADD CONSTRAINT FK_Cartao_pagamento_2
