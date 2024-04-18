@@ -253,6 +253,44 @@
             exit;
         }
 
+    } else if ($tipo_cat == "gabinete") {
+        $Descricao = $_POST['descricaoGabinete'];
+        $Modelo = $_POST['modeloGabinete'];
+        $Marca = $_POST['marcaGabinete'];
+        $Preco = $_POST['precoGabinete'];
+        $Quantidade = $_POST['quantidadeGabinete'];
+        $Tamanho = $_POST['tamanhoGabinete'];
+        $Tamanho_PM = $_POST['tamanhoPMGabinete'];
+        $Tamanho_GPU = $_POST['tamanhoGPUGabinete'];
+        $Slot_GPU = $_POST['slotGabinete'];
+        $Tamanho_FT = $_POST['tamanhoFonteGabinete'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Gabinete (Tamanho, Tamanho_PM, Tamanho_FT, Tamanho_GPU, Slot_GPU) VALUES ('$Tamanho', '$Tamanho_PM', '$Tamanho_FT', '$Tamanho_GPU', $Slot_GPU)";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_Gabinete FROM Gabinete WHERE Tamanho = '$Tamanho' AND Tamanho_PM = '$Tamanho_PM' AND Tamanho_FT = '$Tamanho_FT' AND Tamanho_GPU = '$Tamanho_GPU' AND Slot_GPU >= $Slot_GPU";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Gabinete) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Gabinete']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
     }
 
 ?>
