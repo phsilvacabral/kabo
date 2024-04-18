@@ -291,6 +291,171 @@
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
         }
+    } else if ($tipo_cat == "monitor") {
+        $Descricao = $_POST['descricaoMonitor'];
+        $Modelo = $_POST['modeloMonitor'];
+        $Marca = $_POST['marcaMonitor'];
+        $Preco = $_POST['precoMonitor'];
+        $Quantidade = $_POST['quantidadeMonitor'];
+        $Tamanho = $_POST['tamanhoMonitor'];
+        $Resolucao = $_POST['resolucaoMonitor'];
+        $Proporcao = $_POST['proporcaoMonitor'];
+        $Tipo_Painel = $_POST['tipoMonitor'];
+        $Taxa_Att = $_POST['taxaMonitor'];
+        $Tempo_Resposta = $_POST['tempoMonitor'];
+        $HDMI = $_POST['hdmiMonitor'];
+        $DP = $_POST['dpMonitor'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Monitor (Tamanho, Resolucao, Proporcao, Tipo_Painel, Taxa_Att, Tempo_Resposta, HDMI, DP) VALUES ('$Tamanho', '$Resolucao', '$Proporcao', '$Tipo_Painel', $Taxa_Att, $Tempo_Resposta, $HDMI, $DP)";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_Monitor FROM Monitor WHERE Tamanho = '$Tamanho' AND Resolucao = '$Resolucao' AND Proporcao = '$Proporcao' AND Tipo_Painel = '$Tipo_Painel' AND Taxa_Att = $Taxa_Att AND Tempo_Resposta >= $Tempo_Resposta AND HDMI = $HDMI AND DP = $DP";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Monitor) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Monitor']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
+    } else if ($tipo_cat == "teclado") {
+        $Descricao = $_POST['descricaoTeclado'];
+        $Modelo = $_POST['modeloTeclado'];
+        $Marca = $_POST['marcaTeclado'];
+        $Preco = $_POST['precoTeclado'];
+        $Quantidade = $_POST['quantidadeTeclado'];
+        $Tipo = $_POST['tipoTeclado'];
+        $Tamanho = $_POST['tamanhoTeclado'];
+        $Layout = $_POST['layoutTeclado'];
+        $Formato = $_POST['formatoTeclado'];
+        $Switch = $_POST['switchTeclado'];
+        $Cor = $_POST['corTeclado'];
+        $Iluminacao = $_POST['iluminacaoTeclado'];
+        $Conexao = $_POST['conexaoTeclado'];
+        $Tipo_Conexao = $_POST['conexao_tipoTeclado'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Teclado (Tipo, Tamanho, Layout, Formato, Switch, Cor, Iluminacao, Conexao, Tipo_Conexao) VALUES ('$Tipo', '$Tamanho', '$Layout', '$Formato', '$Switch', '$Cor', '$Iluminacao', '$Conexao', '$Tipo_Conexao')";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_Teclado FROM Teclado WHERE Tipo = '$Tipo' AND Tamanho = '$Tamanho' AND Layout = '$Layout' AND Formato = '$Formato' AND Switch = '$Switch' AND Cor = '$Cor' AND Iluminacao = '$Iluminacao' AND Conexao = '$Conexao' AND Tipo_Conexao = '$Tipo_Conexao'";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Teclado) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Teclado']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
+    } else if ($tipo_cat == "mouse") {
+        $Descricao = $_POST['descricaoMouse'];
+        $Modelo = $_POST['modeloMouse'];
+        $Marca = $_POST['marcaMouse'];
+        $Preco = $_POST['precoMouse'];
+        $Quantidade = $_POST['quantidadeMouse'];
+        $DPI = $_POST['dpiMouse'];
+        $Polling_Rate = $_POST['pollingMouse'];
+        $Botoes = $_POST['botoesMouse'];
+        $Cor = $_POST['corMouse'];
+        $Iluminacao = $_POST['iluminacaoMouse'];
+        $Conexao = $_POST['conexaoMouse'];
+        $Tipo_Conexao = $_POST['conexao_tipoMouse'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Mouse (DPI, Polling_Rate, Botoes, Cor, Iluminacao, Conexao, Tipo_Conexao) VALUES ($DPI, $Polling_Rate, $Botoes, '$Cor', '$Iluminacao', '$Conexao', '$Tipo_Conexao')";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_Mouse FROM Mouse WHERE DPI = $DPI AND Polling_Rate = $Polling_Rate AND Botoes = $Botoes AND Cor = '$Cor' AND Iluminacao = '$Iluminacao' AND Conexao = '$Conexao' AND Tipo_Conexao = '$Tipo_Conexao'";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Mouse) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Mouse']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
+
+    } else if ($tipo_cat == 'headset'){
+        $Descricao = $_POST['descricaoHeadset'];
+        $Modelo = $_POST['modeloHeadset'];
+        $Marca = $_POST['marcaHeadset'];
+        $Preco = $_POST['precoHeadset'];
+        $Quantidade = $_POST['quantidadeHeadset'];
+        $Cor = $_POST['corHeadset'];
+        $Iluminacao = $_POST['iluminacaoHeadset'];
+        $Conexao = $_POST['conexaoHeadset'];
+        $Tipo_Conexao = $_POST['conexao_tipoHeadset'];
+        $Driver = $_POST['driverHeadset'];
+        $Frequencia_Audio = $_POST['frequencia_audioHeadset'];
+        $Frequencia_Mic = $_POST['frequencia_micHeadset'];
+        $Padrao_Polar = $_POST['padraoHeadset'];
+
+        try {
+            $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+            $checkResult = $conn->query($checkQuery);
+            if ($checkResult && $checkResult->num_rows > 0) {
+                throw new Exception('Modelo de produto já existente!');
+            } else {
+                $sql = "INSERT INTO Headset (Driver, Frequencia_Audio, Frequencia_Mic, Padrao_Polar, Cor, Iluminacao, Conexao, Tipo_Conexao) VALUES ($Driver, $Frequencia_Audio, $Frequencia_Mic, $Padrao_Polar, '$Cor', '$Iluminacao', '$Conexao', '$Tipo_Conexao')";
+                if ($conn->query($sql) === TRUE) {
+                    $sqlCod = "SELECT Cod_Headset FROM Headset WHERE Driver = $Driver AND Frequencia_Audio = $Frequencia_Audio AND Frequencia_Mic = $Frequencia_Mic AND Padrao_Polar = $Padrao_Polar AND Cor = '$Cor' AND Iluminacao = '$Iluminacao' AND Conexao = '$Conexao' AND Tipo_Conexao = '$Tipo_Conexao'";
+                    $resultCod = $conn->query($sqlCod);
+                    $row = $resultCod->fetch_assoc();
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Headset) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Headset']})";
+                    if ($conn->query($sqlP) === TRUE) {
+                        header("Location: /kabo/admin/produtos");
+                        exit;
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    throw new Exception('Ocorreu um erro ao executar a operação.');
+                }
+            }
+        } catch (Exception $e) {
+            echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
+            exit;
+        }
     }
 
 ?>
