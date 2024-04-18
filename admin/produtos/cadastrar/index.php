@@ -138,7 +138,7 @@
                     <input class="input_grande" type="text" name="descricaoPM" placeholder="Descrição" maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloPM" placeholder="Modelo" maxlength="100" required>
                     <input class="input_medio" type="text" name="marcaPM" placeholder="Marca" maxlength="25" required>
-                    <input class="input_pequeno" type="text" name="tamanhoPM" placeholder="Tamanho" maxlength="15" required>
+                    <input class="input_pequeno" type="text" name="tamanhoPM" placeholder="Tamanho" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="soquetePM" placeholder="Soquete" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="chipsetPM" placeholder="Chipset" maxlength="15" required>
                     <input class="input_pequeno" type="text" name="tipo_memPM" placeholder="Tipo da memória compatível" maxlength="4" required>
@@ -234,7 +234,7 @@
 
         <section class="campo_inputs" id="campo_gabinete" style="display: none;">
             <p class="titulo_tipo">Cadastrar gabinete</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formGabinete" name="formGabinete" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo6" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload6" class="botao_upload" onclick="uploadImg(6)">Upload</button>
@@ -242,13 +242,17 @@
                     <div id="imagePreview6" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="tipo" placeholder="Tipo">
-                    <input class="input_pequeno" type="text" name="fonte" placeholder="Fonte">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="gabinete">
+                    <input class="input_grande" type="text" name="descricaoGabinete" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloGabinete" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaGabinete" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="tamanhoGabinete" placeholder="Tamanho do gabinete" maxlength="30" required>
+                    <input class="input_pequeno" type="text" name="tamanhoPMGabinete" placeholder="Tamanho da placa mãe compatível" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="tamanhoGPUGabinete" placeholder="Tamanho da gpu compatível" maxlength="30" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="slotGabinete" placeholder="Número de slots de gpu" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="tamanhoFonteGabinete" placeholder="Tamanho da fonte compatível" maxlength="20" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoGabinete" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeGabinete" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
