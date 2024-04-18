@@ -260,7 +260,7 @@
 
         <section class="campo_inputs" id="campo_monitor" style="display: none;">
             <p class="titulo_tipo">Cadastrar monitor</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formMonitor" name="formMonitor" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo7" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload7" class="botao_upload" onclick="uploadImg(7)">Upload</button>
@@ -268,14 +268,20 @@
                     <div id="imagePreview7" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="tamanho" placeholder="Tamanho">
-                    <input class="input_pequeno" type="text" name="resolucao" placeholder="Resolução">
-                    <input class="input_pequeno" type="text" name="taxa_atualizacao" placeholder="Taxa de atualização">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="monitor">
+                    <input class="input_grande" type="text" name="descricaoMonitor" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloMonitor" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaMonitor" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="tamanhoMonitor" placeholder="Tamanho" maxlength="20" required>
+                    <input class="input_pequeno" type="text" name="resolucaoMonitor" placeholder="Resolução" maxlength="20" required>
+                    <input class="input_pequeno" type="text" name="proporcaoMonitor" placeholder="Proporção" maxlength="5" required>
+                    <input class="input_pequeno" type="text" name="tipoMonitor" placeholder="Tipo do painel" maxlength="5" required>
+                    <input class="input_pequeno" type="number" name="taxaMonitor" placeholder="Taxa de atualização" max="2147483647" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="tempoMonitor" placeholder="Tempo de resposta" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="hdmiMonitor" placeholder="Número de entradas HDMI" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="dpMonitor" placeholder="Número de entradas DP" max="2147483647" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoMonitor" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeMonitor" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
@@ -283,7 +289,7 @@
 
         <section class="campo_inputs" id="campo_teclado" style="display: none;">
             <p class="titulo_tipo">Cadastrar teclado</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formTeclado" name="formTeclado" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo8" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload8" class="botao_upload" onclick="uploadImg(8)">Upload</button>
@@ -291,13 +297,21 @@
                     <div id="imagePreview8" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="tipo" placeholder="Tipo">
-                    <input class="input_pequeno" type="text" name="conexão" placeholder="Conexão">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="teclado">
+                    <input class="input_grande" type="text" name="descricaoTeclado" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloTeclado" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaTeclado" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="text" name="tipoTeclado" placeholder="Tipo" maxlength="50" required>
+                    <input class="input_pequeno" type="text" name="tamanhoTeclado" placeholder="Tamanho" maxlength="30" required>
+                    <input class="input_pequeno" type="text" name="layoutTeclado" placeholder="Layout" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="formatoTeclado" placeholder="Formato" maxlength="5" required>
+                    <input class="input_pequeno" type="text" name="switchTeclado" placeholder="Switch" maxlength="30" required>
+                    <input class="input_pequeno" type="text" name="corTeclado" placeholder="Cor" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="iluminacaoTeclado" placeholder="Iluminação" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="conexaoTeclado" placeholder="Conexão" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="conexao_tipoTeclado" placeholder="Tipo de conexão" maxlength="10" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoTeclado" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeTeclado" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
@@ -305,7 +319,7 @@
 
         <section class="campo_inputs" id="campo_mouse" style="display: none;">
             <p class="titulo_tipo">Cadastrar mouse</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formMouse" name="formMouse" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo9" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload9" class="botao_upload" onclick="uploadImg(9)">Upload</button>
@@ -313,13 +327,19 @@
                     <div id="imagePreview9" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="tipo" placeholder="Tipo">
-                    <input class="input_pequeno" type="text" name="conexão" placeholder="Conexão">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="mouse">
+                    <input class="input_grande" type="text" name="descricaoMouse" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloMouse" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaMouse" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="number" name="dpiMouse" placeholder="DPI" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="pollingMouse" placeholder="Polling Rate" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="botoesMouse" placeholder="Quantidade de botões" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="corMouse" placeholder="Cor" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="iluminacaoMouse" placeholder="Iluminação" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="conexaoMouse" placeholder="Conexão" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="conexao_tipoMouse" placeholder="Tipo de conexão" maxlength="10" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoMouse" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeMouse" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
@@ -327,7 +347,7 @@
 
         <section class="campo_inputs" id="campo_headset" style="display: none;">
             <p class="titulo_tipo">Cadastrar headset</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_cadastro">
+            <form id="formHeadset" name="formHeadset" method="post" action="cadastro_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <input type="text" id="nome_arquivo10" class="nome_arquivo" readonly>
                     <button type="button" id="botao_upload10" class="botao_upload" onclick="uploadImg(10)">Upload</button>
@@ -335,13 +355,20 @@
                     <div id="imagePreview10" class="imagePreview"></div>
                 </div>
                 <div class="input_textos">
-                    <input class="input_grande" type="text" name="descricao" placeholder="Descrição">
-                    <input class="input_medio" type="text" name="modelo" placeholder="Modelo">
-                    <input class="input_medio" type="text" name="marca" placeholder="Marca">
-                    <input class="input_pequeno" type="text" name="tipo" placeholder="Tipo">
-                    <input class="input_pequeno" type="text" name="conexão" placeholder="Conexão">
-                    <input class="input_pequeno" type="number" name="preco" placeholder="Preço">
-                    <input class="input_pequeno" type="text" name="estoque" placeholder="Estoque">
+                    <input type="hidden" id="tipo_cat" name="tipo_cat" value="headset">
+                    <input class="input_grande" type="text" name="descricaoHeadset" placeholder="Descrição" maxlength="300" required>
+                    <input class="input_medio" type="text" name="modeloHeadset" placeholder="Modelo" maxlength="100" required>
+                    <input class="input_medio" type="text" name="marcaHeadset" placeholder="Marca" maxlength="25" required>
+                    <input class="input_pequeno" type="number" name="driverHeadset" placeholder="Driver" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="frequencia_audioHeadset" placeholder="Frequência de áudio" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="frequencia_micHeadset" placeholder="Frequência de microfone" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="padraoHeadset" placeholder="Padrão polar" max="2147483647" required>
+                    <input class="input_pequeno" type="text" name="corHeadset" placeholder="Cor" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="iluminacaoHeadset" placeholder="Iluminação" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="conexaoHeadset" placeholder="Conexão" maxlength="10" required>
+                    <input class="input_pequeno" type="text" name="conexao_tipoHeadset" placeholder="Tipo de conexão" maxlength="10" required>
+                    <input class="input_pequeno" type="number" step="0.01" name="precoHeadset" placeholder="Preço" max="2147483647" required>
+                    <input class="input_pequeno" type="number" name="quantidadeHeadset" placeholder="Quantidade" max="2147483647" required>
                     <button type="submit">Cadastrar</button>
                 </div>
             </form>
