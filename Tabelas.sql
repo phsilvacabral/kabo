@@ -1,7 +1,6 @@
+DROP DATABASE kabo;
 CREATE DATABASE kabo;
 USE kabo;
-
-
 
 CREATE TABLE Usuario (
     Cod_Usuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -13,12 +12,12 @@ CREATE TABLE Usuario (
     Genero CHAR(1),
     Tipo_Usuario CHAR(1),
 	Imagem BLOB,
+    fk_Cod_Endereco INT,
     UNIQUE (Email, CPF)
 );
 
 CREATE TABLE Endereco (
     Cod_Endereco INT PRIMARY KEY AUTO_INCREMENT,
-    fk_Cod_Usuario INT,
     CEP CHAR(9),
     Logradouro VARCHAR(150),
     Numero VARCHAR(5),
@@ -65,10 +64,10 @@ CREATE TABLE GPU (
     Tam_Memoria INT,
     Vel_Mem INT,
     TDP INT,
-    Slot FLOAT,
-    Tamanho VARCHAR(30),
+    Slot INT,
+    Tamanho VARCHAR(20),
     Tipo_Mem VARCHAR(10),
-    Conector VARCHAR(20)
+    Conector VARCHAR(10)
 );
 
 CREATE TABLE Placa_Mae (
@@ -113,8 +112,8 @@ CREATE TABLE Gabinete (
     Tamanho VARCHAR(20),
     Tamanho_PM VARCHAR(10),
     Tamanho_FT VARCHAR(10),
-    Tamanho_GPU VARCHAR(30),
-    Slot_GPU FLOAT
+    Tamanho_GPU VARCHAR(20),
+    Slot_GPU INT
 );
 
 CREATE TABLE Monitor (
@@ -133,9 +132,9 @@ CREATE TABLE Teclado (
     Cod_Teclado INT PRIMARY KEY AUTO_INCREMENT,
     Tipo VARCHAR(50),
     Layout VARCHAR(10),
-    Tamanho VARCHAR(30),
+    Tamanho VARCHAR(20),
     Formato VARCHAR(5),
-    Switch VARCHAR(30),
+    Switch VARCHAR(20),
     Cor VARCHAR(10),
     Iluminacao VARCHAR(10),
     Conexao VARCHAR(10),
@@ -204,9 +203,9 @@ CREATE TABLE Tem (
     Quantidade INT
 );
  
-ALTER TABLE Endereco ADD CONSTRAINT FK_Endereco_2
-    FOREIGN KEY (fk_Cod_Usuario)
-    REFERENCES Usuario (Cod_Usuario)
+ALTER TABLE Usuario ADD CONSTRAINT FK_Endereco_2
+    FOREIGN KEY (fk_Cod_Endereco)
+    REFERENCES Endereco (Cod_Endereco)
     ON DELETE RESTRICT;
  
 ALTER TABLE Cartao_pagamento ADD CONSTRAINT FK_Cartao_pagamento_2
