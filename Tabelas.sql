@@ -4,13 +4,13 @@ USE kabo;
 
 CREATE TABLE Usuario (
     Cod_Usuario INT PRIMARY KEY AUTO_INCREMENT,
-    Nome VARCHAR(100),
-    Email VARCHAR(100),
-    CPF CHAR(14),
+    Nome VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    CPF CHAR(14) NOT NULL,
     Dt_Nascimento DATE,
-    Senha CHAR(32),
+    Senha CHAR(32) NOT NULL,
     Genero CHAR(1),
-    Tipo_Usuario CHAR(1),
+    Tipo_Usuario CHAR(1) NOT NULL,
 	Imagem BLOB,
     fk_Cod_Endereco INT,
     UNIQUE (Email, CPF)
@@ -18,22 +18,22 @@ CREATE TABLE Usuario (
 
 CREATE TABLE Endereco (
     Cod_Endereco INT PRIMARY KEY AUTO_INCREMENT,
-    CEP CHAR(9),
-    Logradouro VARCHAR(150),
+    CEP CHAR(9) NOT NULL,
+    Logradouro VARCHAR(150) NOT NULL,
     Numero VARCHAR(5),
-    Bairro VARCHAR(50),
-    Estado CHAR(2),
-    Cidade VARCHAR(30)
+    Bairro VARCHAR(50) NOT NULL,
+    Estado CHAR(2) NOT NULL,
+    Cidade VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Cartao_pagamento (
     Cod_Cartao INT PRIMARY KEY AUTO_INCREMENT,
     fk_Cod_Usuario INT,
-    Numero CHAR(16) UNIQUE,
-    CVC CHAR(3),
-    Dt_Vencimento DATE,
-    Nome_Titular VARCHAR(100),
-    CPF_Titular CHAR(14)
+    Numero CHAR(16) UNIQUE NOT NULL,
+    CVC CHAR(3) NOT NULL,
+    Dt_Vencimento DATE NOT NULL,
+    Nome_Titular VARCHAR(100) NOT NULL,
+    CPF_Titular CHAR(14) NOT NULL
 );
 
 CREATE TABLE Pedido (
@@ -177,12 +177,12 @@ CREATE TABLE Cupom (
 
 CREATE TABLE Produto_Tipo (
     Cod_Produto INT PRIMARY KEY AUTO_INCREMENT,
-    Descricao VARCHAR(100),
-    Preco INT,
-    Modelo VARCHAR(100),
-    Marca VARCHAR(100),
-    Qtd_estoque INT,
-    Imagem BLOB,
+    Descricao VARCHAR(100) NOT NULL,
+    Preco INT NOT NULL,
+    Modelo VARCHAR(100) NOT NULL,
+    Marca VARCHAR(100) NOT NULL,
+    Qtd_estoque INT NOT NULL,
+    Imagem BLOB NOT NULL,
     fk_Cod_PlacaMae INT,
     fk_Cod_GPU INT,
     fk_Cod_Fonte INT,
