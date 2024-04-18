@@ -58,9 +58,6 @@ CREATE TABLE CPU (
     TDP INT
 );
 
-ALTER TABLE GPU
-MODIFY Tamanho VARCHAR(30);
-
 CREATE TABLE GPU (
     Cod_GPU INT PRIMARY KEY AUTO_INCREMENT,
     PCIe FLOAT,
@@ -136,9 +133,9 @@ CREATE TABLE Teclado (
     Cod_Teclado INT PRIMARY KEY AUTO_INCREMENT,
     Tipo VARCHAR(50),
     Layout VARCHAR(10),
-    Tamanho VARCHAR(20),
+    Tamanho VARCHAR(30),
     Formato VARCHAR(5),
-    Switch VARCHAR(20),
+    Switch VARCHAR(30),
     Cor VARCHAR(10),
     Iluminacao VARCHAR(10),
     Conexao VARCHAR(10),
