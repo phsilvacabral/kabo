@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sem permissão</title>
-    <link rel="shortcut icon" href="../../../img_principais/icon_logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../img/icon.png" type="image/x-icon">
 </head>
 
 <style>
