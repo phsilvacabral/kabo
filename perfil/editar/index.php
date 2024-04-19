@@ -46,7 +46,7 @@
         $sqlS = "SELECT Senha FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
         $resultS = $conn->query($sqlS);
         $rowS = $resultS->fetch_assoc();
-        if ($rowS['Senha'] == $_GET['senha_excluir']) {
+        if ($rowS['Senha'] == md5($_GET['senha_excluir'])) {
             if ($_SESSION['Tipo_Usuario'] == 1) {
                 $ERROR = 'Não é possível deletar contas administadoras';
             } else {
@@ -101,7 +101,9 @@
 
                     <input type="email" name="email" id="email" value="<?php echo $Email ?>" placeholder="E-mail" maxlength="100" class="campocheio" readonly>
 
-                    <input type="password" name="txtSenha" value="" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
+                    <input type="password" name="txtSenhaAtual" value="" id="senhaAtual" placeholder="Digite a senha atual" class="campocheio" maxlength="20" required>
+                    <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a nova senha" class="campocheio" maxlength="20">
+                    <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a nova senha" class="campocheio" maxlength="20">
 
                 </div>
 
@@ -139,8 +141,12 @@
         </div>
 
     </main>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
     <script>
+        const txtSenhaAtual = document.getElementById('senhaAtual')
+        const txtSenhaNova = document.getElementById('senhaNova')
+        const txtSenhaConfirmar = document.getElementById('senhaConfirmar')
         const txtNome = document.getElementById('primeiroinput')
         const txtCEP = document.getElementById('CEP')
         const txtLogradouro = document.getElementById('logradouro')
@@ -185,8 +191,18 @@
                             if(isNomeValido(txtLogradouro.value)){
                                 if(isNomeValido(txtBairro.value)){
                                     if(isNomeValido(txtCidade.value)){
-                                        if(isNomeValido(txtEstado.value)){
-                                            return true;
+                                        if(isNomeValido(txtestado.value)){
+                                            if (CryptoJS.MD5(txtSenhaAtual.value).toString() === '<?php echo $rowN['Senha'];?>') {
+                                                if (txtSenhaNova.value === txtSenhaConfirmar.value){
+                                                    return true;
+                                                } else {
+                                                    window.alert('As senhas não combinam!')
+                                                    return false
+                                                }
+                                            } else {
+                                                window.alert('Senha atual incorreta!')
+                                                return false
+                                            }   
                                         } else {
                                             window.alert('Estado inválido!')
                                             return false
