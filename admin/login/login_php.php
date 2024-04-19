@@ -13,7 +13,7 @@
                 session_start();
                 $_SESSION["Cod_Usuario"] = $row["Cod_Usuario"];
                 $_SESSION["Tipo_Usuario"] = $row["Tipo_Usuario"];
-                header("Location: /kabo/index.php");
+                header("Location: /kabo/perfil/");
             } else {
 ?>
 <script>
