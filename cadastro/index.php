@@ -47,7 +47,8 @@
 
                             <input type="email" name="email" id="email" value="" placeholder="E-mail" maxlength="100" class="campocheio" required>
 
-                            <input type="password" name="txtSenha" value="" id="senha" placeholder="Senha" class="campocheio" maxlength="20" required>
+                            <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a nova senha" class="campocheio" maxlength="20" required>
+                            <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a nova senha" class="campocheio" maxlength="20" required>
 
                         </div>
                         <input type="submit" value="Criar conta" id="enviarsubmit">
@@ -57,6 +58,8 @@
     </main>
 
     <script>
+        const txtSenhaNova = document.getElementById('senhaNova')
+        const txtSenhaConfirmar = document.getElementById('senhaConfirmar')
         const txtNome = document.getElementById('primeiroinput')
         const txtCPF = document.getElementById('cpf')
         const txtCEP = document.getElementById('CEP')
@@ -103,8 +106,13 @@
                             if(isNomeValido(txtLogradouro.value)){
                                 if(isNomeValido(txtBairro.value)){
                                     if(isNomeValido(txtCidade.value)){
-                                        if(isNomeValido(txtEstado.value)){
-                                            return true;
+                                        if(isNomeValido(txtestado.value)){
+                                            if (txtSenhaNova.value === txtSenhaConfirmar.value){
+                                                    return true
+                                                } else {
+                                                    window.alert('As senhas não combinam!')
+                                                    return false
+                                                }
                                         } else {
                                             window.alert('Estado inválido!')
                                             return false
