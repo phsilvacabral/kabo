@@ -9,6 +9,6 @@
     session_destroy();
 
     // Redireciona para a página de login ou outra página desejada
-    header("Location: /kabo/index.php");
+    header("Location: /kabo/");
     exit();
 ?>
