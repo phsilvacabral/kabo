@@ -10,50 +10,105 @@
 </head>
 
 <body>
+    <script>
+        // Função para mostrar a imagem selecionada na edição do perfil
+        function validaImagem(input) {
+            var caminho = input.value;
+
+            if (caminho) {
+                var comecoCaminho = (caminho.indexOf('\\') >= 0 ? caminho.lastIndexOf('\\') : caminho.lastIndexOf('/'));
+                var nomeArquivo = caminho.substring(comecoCaminho);
+
+                if (nomeArquivo.indexOf('\\') === 0 || nomeArquivo.indexOf('/') === 0) {
+                    nomeArquivo = nomeArquivo.substring(1);
+                }
+
+                var extensaoArquivo = nomeArquivo.indexOf('.') < 1 ? '' : nomeArquivo.split('.').pop();
+
+                if (extensaoArquivo != 'gif' &&
+                    extensaoArquivo != 'png' &&
+                    extensaoArquivo != 'jpg' &&
+                    extensaoArquivo != 'jpeg') {
+                    input.value = '';
+                    alert("É preciso selecionar um arquivo de imagem (gif, png, jpg ou jpeg)");
+                }
+            } else {
+                input.value = '';
+                alert("Selecione um caminho de arquivo válido");
+            }
+            if (input.files && input.files[0]) {
+                var arquivoTam = input.files[0].size / 1024 / 1024;
+                if (arquivoTam < 16) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+
+                        document.getElementById(`imagemCadastro`).style.visibility = "visible";
+                        document.getElementById(`imagemCadastro`).setAttribute('src', e.target.result);
+
+
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    input.value = '';
+                    alert("O arquivo precisa ser uma imagem com menos de 16 MB");
+                }
+            } else {
+
+                document.getElementById(`imagemCadastro`).setAttribute('src', '#');
+            }
+        }
+    </script>
+
     <main>
         <section class="box">
             <span id="X" onclick="voltarPagina()">&times;</span>
 
-                    <div class="alinharelementos">
-                        <img src="../img/logo_neon.png" alt="" id="logo">
+            <div class="alinharelementos">
+                <img src="../img/logo_neon.png" alt="" id="logo">
+            </div>
+
+            <div class="alinharelementosescrita">
+                <p id="elemento1">Fazer Cadastro</p>
+                <p id="elemento2">Digite seus dados e crie uma senha</p>
+            </div>
+
+            <form id="form1" name="form1" method="post" action="cadastro_php.php" onsubmit="return verificar()">
+                <div class="espacodentrobox">
+
+                    <div class="div_input_imagem">
+                        <label for="input_file" class="label_input_file">Foto perfil</label>
+                        <input type="file" id="input_file" class="input_file" onchange="validaImagem(this);">
+                        <img src="" id="imagemCadastro" class="imagePreview" alt="Foto perfil">
                     </div>
 
-                    <div class="alinharelementosescrita">
-                        <p id="elemento1">Fazer Cadastro</p>
-                        <p id="elemento2">Digite seus dados e crie uma senha</p>
-                    </div>
+                    <input type="text" name="txtNome" value="" maxlength="100" id="primeiroinput" placeholder="Nome" class="campocheio" required>
 
-                    <form id="form1" name="form1" method="post" action="cadastro_php.php" onsubmit="return verificar()">
-                        <div class="espacodentrobox">
+                    <input type="text" placeholder="CPF" id="cpf" name="txtCPF" value="" oninput="this.value = maskCPF(this.value)" maxlength="14" class="campomedio" required>
+                    <select name="selectGenero" id="genero" class="campomedio" required>
+                        <option value="genero" disabled selected>Gênero</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="O">Outro</option>
+                    </select>
 
-                            <input type="text" name="txtNome" value="" maxlength="100" id="primeiroinput" placeholder="Nome" class="campocheio" required>
+                    <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" oninput="this.value = maskData(this.value)" class="campomedio" required>
+                    <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="" oninput="this.value = maskCEP(this.value); buscarCEP(this.value);" maxlength="9" class="campomedio" required>
 
-                            <input type="text" placeholder="CPF" id="cpf" name="txtCPF" value="" oninput="this.value = maskCPF(this.value)" maxlength="14" class="campomedio" required>
-                            <select name="selectGenero" id="genero" class="campomedio" required>
-                                <option value="genero" disabled selected>Gênero</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                                <option value="O">Outro</option>
-                            </select>
+                    <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="" class="campocheio" maxlength="150" required>
+                    <input type="text" placeholder="Bairro" id="bairro" name="txtBairro" value="" class="campomedio" maxlength="50" required>
+                    <input type="number" placeholder="Numero" id="numero" name="txtNumero" value="" class="campomedio" oninput="limitarNumero(this)" min="0" required>
+                    <input type="text" placeholder="Cidade" id="cidade" name="txtCidade" value="" class="campomedio" maxlength="50" required>
+                    <input type="text" placeholder="Estado" id="estado" name="txtEstado" value="" class="campomedio" maxlength="2" required>
 
-                            <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" oninput="this.value = maskData(this.value)" class="campomedio" required>
-                            <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="" oninput="this.value = maskCEP(this.value); buscarCEP(this.value);" maxlength="9" class="campomedio" required>
+                    <input type="email" name="email" id="email" value="" placeholder="E-mail" maxlength="100" class="campocheio" required>
 
-                            <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="" class="campocheio" maxlength="150" required>
-                            <input type="text" placeholder="Bairro" id="bairro" name="txtBairro" value="" class="campomedio" maxlength="50" required>
-                            <input type="number" placeholder="Numero" id="numero" name="txtNumero" value="" class="campomedio" oninput="limitarNumero(this)" min="0" required>
-                            <input type="text" placeholder="Cidade" id="cidade" name="txtCidade" value="" class="campomedio" maxlength="50" required>
-                            <input type="text" placeholder="Estado" id="estado" name="txtEstado" value="" class="campomedio" maxlength="2" required>
+                    <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a nova senha" class="campocheio" maxlength="20" required>
+                    <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a nova senha" class="campocheio" maxlength="20" required>
 
-                            <input type="email" name="email" id="email" value="" placeholder="E-mail" maxlength="100" class="campocheio" required>
-
-                            <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a nova senha" class="campocheio" maxlength="20" required>
-                            <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a nova senha" class="campocheio" maxlength="20" required>
-
-                        </div>
-                        <input type="submit" value="Criar conta" id="enviarsubmit">
-                    </form>
-                    <p id="folhascopy"><a href="../">&copy;kabo</a></p>
+                </div>
+                <input type="submit" value="Criar conta" id="enviarsubmit">
+            </form>
+            <p id="folhascopy"><a href="../">&copy;kabo</a></p>
         </section>
     </main>
 
@@ -103,16 +158,16 @@
                 if (isCPFValido(txtCPF.value) && validarCPF(txtCPF.value)) {
                     if (isCEPValido(txtCEP.value)) {
                         if (isEmailValido(email.value)) {
-                            if(isNomeValido(txtLogradouro.value)){
-                                if(isNomeValido(txtBairro.value)){
-                                    if(isNomeValido(txtCidade.value)){
-                                        if(isNomeValido(txtestado.value)){
-                                            if (txtSenhaNova.value === txtSenhaConfirmar.value){
-                                                    return true
-                                                } else {
-                                                    window.alert('As senhas não combinam!')
-                                                    return false
-                                                }
+                            if (isNomeValido(txtLogradouro.value)) {
+                                if (isNomeValido(txtBairro.value)) {
+                                    if (isNomeValido(txtCidade.value)) {
+                                        if (isNomeValido(txtestado.value)) {
+                                            if (txtSenhaNova.value === txtSenhaConfirmar.value) {
+                                                return true
+                                            } else {
+                                                window.alert('As senhas não combinam!')
+                                                return false
+                                            }
                                         } else {
                                             window.alert('Estado inválido!')
                                             return false

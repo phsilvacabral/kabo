@@ -131,6 +131,66 @@ main{
     justify-content: center;
 }
 
+.div_input_imagem{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #f33333;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+}
+.fileInput {
+    display: none;
+    width: 100px;
+    height: 100px;
+}
+.input_file{
+    display: none;
+}
+.label_input_file{
+    color: white;
+    width: 100px;
+    height: 100px;
+}
+.label_input_file {
+    z-index: -1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 30px;
+    padding: 10px;
+    background-color: rgba(88, 46, 47, 0.9);
+    border: 1px solid #f33333;
+    color: white;
+    cursor: pointer;
+    font-family: 'poppins_medio';
+    font-size: 12px;
+    border-radius: 2px;
+    transition: opacity 0.2s, box-shadow 0.2s;
+}
+.div_input_imagem:hover .label_input_file {
+    z-index: 1;
+}
+.label_input_file:hover {
+    opacity: 0.8;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+.label_input_file:active {
+    opacity: 0.7;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+}
+.imagePreview {
+    width: 200px;
+    height: 200px;
+    visibility: hidden;
+    border: 1px solid #f33333;
+}
+
 .campocheio, .campomedio{
     width: 380px;
     height: 40px;
@@ -158,6 +218,10 @@ main{
 
 #cpf, #nascimento, #bairro, #cidade{
     margin: 0 20px 20px 0;
+}
+#numero::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
 
 #enviarsubmit{
@@ -201,10 +265,6 @@ main{
         transform: translate(0, 0);
         text-align: center;
     }
-
-    .conteudocaixarange{
-        margin: 0 20px;
-    }
     
     .campocheio, .campomedio{
         width: 380px;
@@ -212,15 +272,8 @@ main{
         margin: 0 20px 20px 20px;
     }
     
-    #cpf, #nascimento, #logradouro, #numero{
+    #cpf, #nascimento, #logradouro, #numero, #bairro, #cidade{
         margin: 0 20px 20px 20px;
-    }
-    
-    .justifydestinos{
-        flex-wrap: wrap;
-    }
-    .justifydestinos div{
-        margin: 0 10px 0 0;
     }
     
 }
