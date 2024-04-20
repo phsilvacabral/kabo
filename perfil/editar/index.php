@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="../../img/logo_neon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/icon.png" type="image/x-icon">
     <title>Editar perfil</title>
 </head>
 
@@ -22,25 +22,25 @@
 
     $ERROR = '';
 
-    $sqlN = "SELECT Nome, Email, Senha, CPF, Dt_Nascimento, Genero FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-    $resultN = $conn->query($sqlN);
-    $rowN = $resultN->fetch_assoc();
-    $Nome = $rowN['Nome'];
-    $Email = $rowN['Email'];
-    $Senha = $rowN['Senha'];
-    $CPF= $rowN['CPF'];
-    $Dt_Nascimento = $rowN['Dt_Nascimento'];
-    $Genero = $rowN['Genero'];
+    $sql = "SELECT u.Nome, u.Email, u.Senha, u.CPF, u.Dt_Nascimento, u.Genero, e.CEP, e.Logradouro, e.Numero, e.Bairro, e.Estado, e.Cidade 
+        FROM Usuario u
+        INNER JOIN Endereco e ON u.fk_Cod_Endereco = e.Cod_Endereco
+        WHERE u.Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
 
-    $sqlE = "SELECT CEP, Logradouro, Numero, Bairro, Estado, Cidade FROM Endereco WHERE fk_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-    $resultE = $conn->query($sqlE);
-    $rowE = $resultE->fetch_assoc();
-    $CEP = $rowE['CEP'];
-    $Logradouro = $rowE['Logradouro'];
-    $Numero = $rowE['Numero'];
-    $Bairro = $rowE['Bairro'];
-    $Estado = $rowE['Estado'];
-    $Cidade = $rowE['Cidade'];
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $Nome = $row['Nome'];
+    $Email = $row['Email'];
+    $Senha = $row['Senha'];
+    $CPF= $row['CPF'];
+    $Dt_Nascimento = $row['Dt_Nascimento'];
+    $Genero = $row['Genero'];
+    $CEP = $row['CEP'];
+    $Logradouro = $row['Logradouro'];
+    $Numero = $row['Numero'];
+    $Bairro = $row['Bairro'];
+    $Estado = $row['Estado'];
+    $Cidade = $row['Cidade'];
 
     if (isset($_GET['senha_excluir'])) {
         $sqlS = "SELECT Senha FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
@@ -50,8 +50,6 @@
             if ($_SESSION['Tipo_Usuario'] == 1) {
                 $ERROR = 'Não é possível deletar contas administadoras';
             } else {
-                $sqlE = "DELETE FROM Endereco WHERE fk_Cod_Usuario = {$_SESSION['Cod_Usuario']}";
-                $conn->query($sqlE);
                 $sql = "DELETE FROM Usuario WHERE Cod_Usuario = {$_SESSION['Cod_Usuario']}";
                 $conn->query($sql);
                 session_destroy();
@@ -66,7 +64,7 @@
     ?>
     <main>
         <section class="box">
-            <span id="X"><a href="../">&times;</a></span>
+            <span id="X" onclick="voltarPagina()"><a href="../">&times;</a></span>
 
             <div class="alinharelementos">
                 <img src="../../img/logo_neon.png" alt="logo" id="logo">

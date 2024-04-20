@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="../img_principais/icon_logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
     <title>Login</title>
 </head>
 
@@ -16,7 +16,7 @@
         include("connection.php");
         session_start();
         if (isset($_SESSION["Cod_Usuario"])) {
-            header("Location: /kabo/index.php");
+            header("Location: /kabo/");
             exit();
         }
     ?>
