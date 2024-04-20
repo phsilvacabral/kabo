@@ -344,6 +344,7 @@ select{
     width: 270px;
     height: 270px;
     visibility: hidden;
+    border: 1px solid #f33333;
 }
 
 .input_textos{
