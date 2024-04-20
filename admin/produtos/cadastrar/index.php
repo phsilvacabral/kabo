@@ -74,7 +74,6 @@
                     <label for="input_file0" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file0" class="input_file" onchange="validaImagem(this, 0);">
                     <img src="" id="imagemCadastro0" class="imagePreview" alt="">
-                    <!-- <div id="imagePreview0" class="imagePreview"></div> -->
                 </div>
                 <div class="input_textos">
                     <input type="hidden" id="tipo_cat" name="tipo_cat" value="CPU">
@@ -118,7 +117,6 @@
                     <label for="input_file1" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file1" class="input_file" onchange="validaImagem(this, 1);">
                     <img src="" id="imagemCadastro1" class="imagePreview" alt="">
-
                 </div>
                 <div class="input_textos">
                     <input type="hidden" id="tipo_cat" name="tipo_cat" value="GPU">
