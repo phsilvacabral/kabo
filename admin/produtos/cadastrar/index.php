@@ -70,7 +70,6 @@
             <form id="formCPU" name="formCPU" method="post" action="cadastro_php.php" enctype="multipart/form-data"
                 class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo0" class="nome_arquivo" readonly>
                     <label for="input_file0" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file0" class="input_file" onchange="validaImagem(this, 0);">
                     <img src="" id="imagemCadastro0" class="imagePreview" alt="">
@@ -113,7 +112,6 @@
             <form id="formGPU" name="formGPU" method="post" action="cadastro_php.php" enctype="multipart/form-data"
                 class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo1" class="nome_arquivo" readonly>
                     <label for="input_file1" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file1" class="input_file" onchange="validaImagem(this, 1);">
                     <img src="" id="imagemCadastro1" class="imagePreview" alt="">
@@ -157,7 +155,6 @@
             <form id="formPlacaMae" name="formPlacaMae" method="post" action="cadastro_php.php"
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo2" class="nome_arquivo" readonly>
                     <label for="input_file2" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file2" class="input_file" onchange="validaImagem(this, 2);">
                     <img src="" id="imagemCadastro2" class="imagePreview" alt="">
@@ -199,7 +196,6 @@
             <form id="formMemRAM" name="formMemRAM" method="post" action="cadastro_php.php"
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo3" class="nome_arquivo" readonly>
                     <label for="input_file3" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file3" class="input_file" onchange="validaImagem(this, 3);">
                     <img src="" id="imagemCadastro3" class="imagePreview" alt="">
@@ -231,7 +227,6 @@
             <form id="formArma" name="formArma" method="post" action="cadastro_php.php" enctype="multipart/form-data"
                 class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo4" class="nome_arquivo" readonly>
                     <label for="input_file4" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file4" class="input_file" onchange="validaImagem(this, 4);">
                     <img src="" id="imagemCadastro4" class="imagePreview" alt="">
@@ -265,7 +260,6 @@
             <form id="formFonte" name="formFonte" method="post" action="cadastro_php.php" enctype="multipart/form-data"
                 class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo5" class="nome_arquivo" readonly>
                     <label for="input_file5" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file5" class="input_file" onchange="validaImagem(this, 5);">
                     <img src="" id="imagemCadastro5" class="imagePreview" alt="">
@@ -306,7 +300,6 @@
             <form id="formGabinete" name="formGabinete" method="post" action="cadastro_php.php"
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo6" class="nome_arquivo" readonly>
                     <label for="input_file6" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file6" class="input_file" onchange="validaImagem(this, 6);">
                     <img src="" id="imagemCadastro6" class="imagePreview" alt="">
@@ -343,7 +336,6 @@
             <form id="formMonitor" name="formMonitor" method="post" action="cadastro_php.php"
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo7" class="nome_arquivo" readonly>
                     <label for="input_file7" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file7" class="input_file" onchange="validaImagem(this, 7);">
                     <img src="" id="imagemCadastro7" class="imagePreview" alt="">
@@ -386,7 +378,6 @@
             <form id="formTeclado" name="formTeclado" method="post" action="cadastro_php.php"
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo8" class="nome_arquivo" readonly>
                     <label for="input_file8" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file8" class="input_file" onchange="validaImagem(this, 8);">
                     <img src="" id="imagemCadastro8" class="imagePreview" alt="">
@@ -431,7 +422,6 @@
             <form id="formMouse" name="formMouse" method="post" action="cadastro_php.php" enctype="multipart/form-data"
                 class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo9" class="nome_arquivo" readonly>
                     <label for="input_file9" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file9" class="input_file" onchange="validaImagem(this, 9);">
                     <img src="" id="imagemCadastro9" class="imagePreview" alt="">
@@ -471,7 +461,6 @@
             <form id="formHeadset" name="formHeadset" method="post" action="cadastro_php.php"
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
-                    <input type="text" id="nome_arquivo10" class="nome_arquivo" readonly>
                     <label for="input_file10" class="label_input_file">Escolher arquivo</label>
                     <input type="file" id="input_file10" class="input_file" onchange="validaImagem(this, 10);">
                     <img src="" id="imagemCadastro10" class="imagePreview" alt="">
