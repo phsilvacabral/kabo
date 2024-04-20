@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -32,7 +31,7 @@
     $Nome = $row['Nome'];
     $Email = $row['Email'];
     $Senha = $row['Senha'];
-    $CPF= $row['CPF'];
+    $CPF = $row['CPF'];
     $Dt_Nascimento = $row['Dt_Nascimento'];
     $Genero = $row['Genero'];
     $CEP = $row['CEP'];
@@ -75,8 +74,98 @@
                 <p id="elemento2">Edite seu nome, e-mail, senha, CEP e interesses</p>
             </div>
 
+
+
+            <script>
+                // Máscara para o CEP
+                function maskCEP(cep) {
+                    return cep.trim().replace(/^(\d{5})(\d{3})$/, '$1-$2')
+                }
+
+
+                // API correios
+                function buscarCEP(cep) {
+                    // Verifica se o CEP possui o formato correto
+                    if (/^\d{5}-\d{3}$/.test(cep)) {
+                        // Faz a requisição para a API do ViaCEP
+                        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (!data.erro) {
+                                    // Preenche os campos de endereço com os dados retornados pela API
+                                    document.getElementById('logradouro').value = data.logradouro;
+                                    document.getElementById('bairro').value = data.bairro;
+                                    document.getElementById('cidade').value = data.localidade;
+                                    document.getElementById('estado').value = data.uf;
+                                } else {
+                                    alert('CEP não encontrado');
+                                }
+                            })
+                            .catch(error => console.error('Erro ao buscar CEP:', error));
+                    }
+                }
+
+
+
+                // Função para mostrar a imagem selecionada na edição do perfil
+                function validaImagem(input) {
+                    var caminho = input.value;
+
+                    if (caminho) {
+                        var comecoCaminho = (caminho.indexOf('\\') >= 0 ? caminho.lastIndexOf('\\') : caminho.lastIndexOf('/'));
+                        var nomeArquivo = caminho.substring(comecoCaminho);
+
+                        if (nomeArquivo.indexOf('\\') === 0 || nomeArquivo.indexOf('/') === 0) {
+                            nomeArquivo = nomeArquivo.substring(1);
+                        }
+
+                        var extensaoArquivo = nomeArquivo.indexOf('.') < 1 ? '' : nomeArquivo.split('.').pop();
+
+                        if (extensaoArquivo != 'gif' &&
+                            extensaoArquivo != 'png' &&
+                            extensaoArquivo != 'jpg' &&
+                            extensaoArquivo != 'jpeg') {
+                            input.value = '';
+                            alert("É preciso selecionar um arquivo de imagem (gif, png, jpg ou jpeg)");
+                        }
+                    } else {
+                        input.value = '';
+                        alert("Selecione um caminho de arquivo válido");
+                    }
+                    if (input.files && input.files[0]) {
+                        var arquivoTam = input.files[0].size / 1024 / 1024;
+                        if (arquivoTam < 16) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+
+                                document.getElementById(`imagemCadastro`).style.visibility = "visible";
+                                document.getElementById(`imagemCadastro`).setAttribute('src', e.target.result);
+
+
+                            };
+                            reader.readAsDataURL(input.files[0]);
+                        } else {
+                            input.value = '';
+                            alert("O arquivo precisa ser uma imagem com menos de 16 MB");
+                        }
+                    } else {
+
+                        document.getElementById(`imagemCadastro`).setAttribute('src', '#');
+                    }
+                }
+            </script>
+
+
+
+
             <form id="form1" name="form1" method="post" action="edit_php.php" onsubmit="return verificar()">
                 <div class="espacodentrobox">
+
+                    <div class="div_input_imagem">
+                        <label for="input_file" class="label_input_file">Foto perfil</label>
+                        <input type="file" id="input_file" class="input_file" onchange="validaImagem(this);">
+                        <img src="" id="imagemCadastro" class="imagePreview" alt="Foto perfil">
+                    </div>
 
                     <input type="text" name="txtNome" value="<?php echo $Nome ?>" maxlength="100" id="primeiroinput" placeholder="Nome" class="campocheio" required>
 
@@ -88,7 +177,7 @@
                         <option value="O" <?php if ($Genero == 'O') echo 'selected'; ?>>Outro</option>
                     </select>
 
-                    <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" value="<?php echo date('Y-m-d', strtotime($Dt_Nascimento))?>" class="campomedio" readonly>
+                    <input type="date" placeholder="Data de nascimento" id="nascimento" name="dateData_Nasc" value="<?php echo date('Y-m-d', strtotime($Dt_Nascimento)) ?>" class="campomedio" readonly>
                     <input type="text" placeholder="CEP" id="CEP" name="txtCEP" value="<?php echo $CEP ?>" oninput="this.value = maskCEP(this.value); buscarCEP(this.value);" maxlength="9" class="campomedio" required>
 
                     <input type="text" placeholder="Logradouro" id="logradouro" name="txtLogradouro" value="<?php echo $Logradouro ?>" class="campocheio" maxlength="150" required>
@@ -161,70 +250,51 @@
             }
         }
 
-        function buscarCEP(cep) {
-            // Verifica se o CEP possui o formato correto
-            if (/^\d{5}-\d{3}$/.test(cep)) {
-                // Faz a requisição para a API do ViaCEP
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.erro) {
-                            // Preenche os campos de endereço com os dados retornados pela API
-                            document.getElementById('logradouro').value = data.logradouro;
-                            document.getElementById('bairro').value = data.bairro;
-                            document.getElementById('cidade').value = data.localidade;
-                            document.getElementById('estado').value = data.uf;
-                        } else {
-                            alert('CEP não encontrado');
-                        }
-                    })
-                    .catch(error => console.error('Erro ao buscar CEP:', error));
-            }
-        }
+
 
         function verificar() {
             if (isNomeValido(txtNome.value)) {
-                    if (isCEPValido(txtCEP.value)) {
-                        if (isEmailValido(email.value)) {
-                            if(isNomeValido(txtLogradouro.value)){
-                                if(isNomeValido(txtBairro.value)){
-                                    if(isNomeValido(txtCidade.value)){
-                                        if(isNomeValido(txtestado.value)){
-                                            if (CryptoJS.MD5(txtSenhaAtual.value).toString() === '<?php echo $rowN['Senha'];?>') {
-                                                if (txtSenhaNova.value === txtSenhaConfirmar.value){
-                                                    return true;
-                                                } else {
-                                                    window.alert('As senhas não combinam!')
-                                                    return false
-                                                }
+                if (isCEPValido(txtCEP.value)) {
+                    if (isEmailValido(email.value)) {
+                        if (isNomeValido(txtLogradouro.value)) {
+                            if (isNomeValido(txtBairro.value)) {
+                                if (isNomeValido(txtCidade.value)) {
+                                    if (isNomeValido(txtestado.value)) {
+                                        if (CryptoJS.MD5(txtSenhaAtual.value).toString() === '<?php echo $rowN['Senha']; ?>') {
+                                            if (txtSenhaNova.value === txtSenhaConfirmar.value) {
+                                                return true;
                                             } else {
-                                                window.alert('Senha atual incorreta!')
+                                                window.alert('As senhas não combinam!')
                                                 return false
-                                            }   
+                                            }
                                         } else {
-                                            window.alert('Estado inválido!')
+                                            window.alert('Senha atual incorreta!')
                                             return false
                                         }
                                     } else {
-                                        window.alert('Cidade inválido!')
+                                        window.alert('Estado inválido!')
                                         return false
                                     }
                                 } else {
-                                    window.alert('Bairro inválido!')
+                                    window.alert('Cidade inválido!')
                                     return false
                                 }
                             } else {
-                                window.alert('Logradouro inválido!')
+                                window.alert('Bairro inválido!')
                                 return false
                             }
                         } else {
-                            window.alert('Email inválido!')
+                            window.alert('Logradouro inválido!')
                             return false
                         }
                     } else {
-                        window.alert('CEP inválido!')
+                        window.alert('Email inválido!')
                         return false
                     }
+                } else {
+                    window.alert('CEP inválido!')
+                    return false
+                }
             } else {
                 window.alert('Nome inválido!')
                 return false
@@ -246,9 +316,7 @@
             return reEM.test(email)
         }
 
-        function maskCEP(cep) {
-            return cep.trim().replace(/^(\d{5})(\d{3})$/, '$1-$2')
-        }
+
 
         document.getElementById("excluirsubmit").addEventListener("click", function() {
             document.getElementById("popup").style.display = "block";
