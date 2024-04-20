@@ -346,16 +346,6 @@ select{
     visibility: hidden;
 }
 
-.imagePreview img {
-    width: 270px;
-    height: 270px;
-    border: 1px solid #f33333;
-}
-
-.nome_arquivo {
-    display: none;
-}
-
 .input_textos{
     position: relative;
     display: flex;
