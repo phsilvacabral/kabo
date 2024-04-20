@@ -61,6 +61,86 @@
     }
 
     ?>
+
+    <script>
+        // Máscara para o CEP
+        function maskCEP(cep) {
+            return cep.trim().replace(/^(\d{5})(\d{3})$/, '$1-$2')
+        }
+
+
+        // API correios
+        function buscarCEP(cep) {
+            // Verifica se o CEP possui o formato correto
+            if (/^\d{5}-\d{3}$/.test(cep)) {
+                // Faz a requisição para a API do ViaCEP
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            // Preenche os campos de endereço com os dados retornados pela API
+                            document.getElementById('logradouro').value = data.logradouro;
+                            document.getElementById('bairro').value = data.bairro;
+                            document.getElementById('cidade').value = data.localidade;
+                            document.getElementById('estado').value = data.uf;
+                        } else {
+                            alert('CEP não encontrado');
+                        }
+                    })
+                    .catch(error => console.error('Erro ao buscar CEP:', error));
+            }
+        }
+
+
+
+        // Função para mostrar a imagem selecionada na edição do perfil
+        function validaImagem(input) {
+            var caminho = input.value;
+
+            if (caminho) {
+                var comecoCaminho = (caminho.indexOf('\\') >= 0 ? caminho.lastIndexOf('\\') : caminho.lastIndexOf('/'));
+                var nomeArquivo = caminho.substring(comecoCaminho);
+
+                if (nomeArquivo.indexOf('\\') === 0 || nomeArquivo.indexOf('/') === 0) {
+                    nomeArquivo = nomeArquivo.substring(1);
+                }
+
+                var extensaoArquivo = nomeArquivo.indexOf('.') < 1 ? '' : nomeArquivo.split('.').pop();
+
+                if (extensaoArquivo != 'gif' &&
+                    extensaoArquivo != 'png' &&
+                    extensaoArquivo != 'jpg' &&
+                    extensaoArquivo != 'jpeg') {
+                    input.value = '';
+                    alert("É preciso selecionar um arquivo de imagem (gif, png, jpg ou jpeg)");
+                }
+            } else {
+                input.value = '';
+                alert("Selecione um caminho de arquivo válido");
+            }
+            if (input.files && input.files[0]) {
+                var arquivoTam = input.files[0].size / 1024 / 1024;
+                if (arquivoTam < 16) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+
+                        document.getElementById(`imagemCadastro`).style.visibility = "visible";
+                        document.getElementById(`imagemCadastro`).setAttribute('src', e.target.result);
+
+
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    input.value = '';
+                    alert("O arquivo precisa ser uma imagem com menos de 16 MB");
+                }
+            } else {
+
+                document.getElementById(`imagemCadastro`).setAttribute('src', '#');
+            }
+        }
+    </script>
+
     <main>
         <section class="box">
             <span id="X" onclick="voltarPagina()"><a href="../">&times;</a></span>
@@ -73,90 +153,6 @@
                 <p id="elemento1">Editar perfil</p>
                 <p id="elemento2">Edite seu nome, e-mail, senha, CEP e interesses</p>
             </div>
-
-
-
-            <script>
-                // Máscara para o CEP
-                function maskCEP(cep) {
-                    return cep.trim().replace(/^(\d{5})(\d{3})$/, '$1-$2')
-                }
-
-
-                // API correios
-                function buscarCEP(cep) {
-                    // Verifica se o CEP possui o formato correto
-                    if (/^\d{5}-\d{3}$/.test(cep)) {
-                        // Faz a requisição para a API do ViaCEP
-                        fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                            .then(response => response.json())
-                            .then(data => {
-                                if (!data.erro) {
-                                    // Preenche os campos de endereço com os dados retornados pela API
-                                    document.getElementById('logradouro').value = data.logradouro;
-                                    document.getElementById('bairro').value = data.bairro;
-                                    document.getElementById('cidade').value = data.localidade;
-                                    document.getElementById('estado').value = data.uf;
-                                } else {
-                                    alert('CEP não encontrado');
-                                }
-                            })
-                            .catch(error => console.error('Erro ao buscar CEP:', error));
-                    }
-                }
-
-
-
-                // Função para mostrar a imagem selecionada na edição do perfil
-                function validaImagem(input) {
-                    var caminho = input.value;
-
-                    if (caminho) {
-                        var comecoCaminho = (caminho.indexOf('\\') >= 0 ? caminho.lastIndexOf('\\') : caminho.lastIndexOf('/'));
-                        var nomeArquivo = caminho.substring(comecoCaminho);
-
-                        if (nomeArquivo.indexOf('\\') === 0 || nomeArquivo.indexOf('/') === 0) {
-                            nomeArquivo = nomeArquivo.substring(1);
-                        }
-
-                        var extensaoArquivo = nomeArquivo.indexOf('.') < 1 ? '' : nomeArquivo.split('.').pop();
-
-                        if (extensaoArquivo != 'gif' &&
-                            extensaoArquivo != 'png' &&
-                            extensaoArquivo != 'jpg' &&
-                            extensaoArquivo != 'jpeg') {
-                            input.value = '';
-                            alert("É preciso selecionar um arquivo de imagem (gif, png, jpg ou jpeg)");
-                        }
-                    } else {
-                        input.value = '';
-                        alert("Selecione um caminho de arquivo válido");
-                    }
-                    if (input.files && input.files[0]) {
-                        var arquivoTam = input.files[0].size / 1024 / 1024;
-                        if (arquivoTam < 16) {
-                            var reader = new FileReader();
-                            reader.onload = function(e) {
-
-                                document.getElementById(`imagemCadastro`).style.visibility = "visible";
-                                document.getElementById(`imagemCadastro`).setAttribute('src', e.target.result);
-
-
-                            };
-                            reader.readAsDataURL(input.files[0]);
-                        } else {
-                            input.value = '';
-                            alert("O arquivo precisa ser uma imagem com menos de 16 MB");
-                        }
-                    } else {
-
-                        document.getElementById(`imagemCadastro`).setAttribute('src', '#');
-                    }
-                }
-            </script>
-
-
-
 
             <form id="form1" name="form1" method="post" action="edit_php.php" onsubmit="return verificar()">
                 <div class="espacodentrobox">
