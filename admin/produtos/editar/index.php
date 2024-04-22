@@ -140,7 +140,7 @@
             <form id="formGPU" name="formGPU" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file1" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file1" name="img" class="input_file" onchange="validaImagem(this, 1);" required>
+                    <input type="file" id="input_file1" name="img" class="input_file" onchange="validaImagem(this, 1);">
                     <img src="" id="imagemCadastro1" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -171,7 +171,7 @@
             <form id="formPlacaMae" name="formPlacaMae" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file2" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file2" name="img" class="input_file" onchange="validaImagem(this, 2);" required>
+                    <input type="file" id="input_file2" name="img" class="input_file" onchange="validaImagem(this, 2);">
                     <img src="" id="imagemCadastro2" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -201,7 +201,7 @@
             <form id="formMemRAM" name="formMemRAM" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file3" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file3" name="img" class="input_file" onchange="validaImagem(this, 3);" required>
+                    <input type="file" id="input_file3" name="img" class="input_file" onchange="validaImagem(this, 3);">
                     <img src="" id="imagemCadastro3" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -226,7 +226,7 @@
             <form id="formArma" name="formArma" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file4" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file4" name="img" class="input_file" onchange="validaImagem(this, 4);" required>
+                    <input type="file" id="input_file4" name="img" class="input_file" onchange="validaImagem(this, 4);">
                     <img src="" id="imagemCadastro4" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -252,7 +252,7 @@
             <form id="formFonte" name="formFonte" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file5" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file5" name="img" class="input_file" onchange="validaImagem(this, 5);" required>
+                    <input type="file" id="input_file5" name="img" class="input_file" onchange="validaImagem(this, 5);">
                     <img src="" id="imagemCadastro5" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -283,7 +283,7 @@
             <form id="formGabinete" name="formGabinete" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file6" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file6" name="img" class="input_file" onchange="validaImagem(this, 6);" required>
+                    <input type="file" id="input_file6" name="img" class="input_file" onchange="validaImagem(this, 6);">
                     <img src="" id="imagemCadastro6" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -310,7 +310,7 @@
             <form id="formMonitor" name="formMonitor" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file7" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file7" name="img" class="input_file" onchange="validaImagem(this, 7);" required>
+                    <input type="file" id="input_file7" name="img" class="input_file" onchange="validaImagem(this, 7);">
                     <img src="" id="imagemCadastro7" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -340,7 +340,7 @@
             <form id="formTeclado" name="formTeclado" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file8" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file8" name="img" class="input_file" onchange="validaImagem(this, 8);" required>
+                    <input type="file" id="input_file8" name="img" class="input_file" onchange="validaImagem(this, 8);">
                     <img src="" id="imagemCadastro8" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -371,7 +371,7 @@
             <form id="formMouse" name="formMouse" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file9" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file9" name="img" class="input_file" onchange="validaImagem(this, 9);" required>
+                    <input type="file" id="input_file9" name="img" class="input_file" onchange="validaImagem(this, 9);">
                     <img src="" id="imagemCadastro9" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -400,7 +400,7 @@
             <form id="formHeadset" name="formHeadset" method="post" action="editar_php.php" enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file10" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file10" name="img" class="input_file" onchange="validaImagem(this, 10);" required>
+                    <input type="file" id="input_file10" name="img" class="input_file" onchange="validaImagem(this, 10);">
                     <img src="" id="imagemCadastro10" class="imagePreview" alt="" style="visibility: visible;">
                 </div>
                 <div class="input_textos">
@@ -493,6 +493,8 @@
                     fetch('detalhes.php?pm=' + fkCodPlacaMae)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoPM').focus();
+
                         document.getElementById('tamanhoPM').value = productData.Tamanho;
                         document.getElementById('soquetePM').value = productData.Soquete;
                         document.getElementById('chipsetPM').value = productData.Chipset;
@@ -518,6 +520,8 @@
                     fetch('detalhes.php?gpu=' + fkCodGPU)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoGPU').focus()
+
                         document.getElementById('nucleosGPU').value = productData.Nucleos;
                         document.getElementById('capacidade_memoriaGPU').value = productData.Tam_Memoria;
                         document.getElementById('velocidadeGPU').value = productData.Vel_Mem;
@@ -544,6 +548,8 @@
                     fetch('detalhes.php?fonte=' + fkCodFonte)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoFonte').focus()
+
                         document.getElementById('potenciaFonte').value = productData.Potencia;
                         document.getElementById('voltagemFonte').value = productData.Voltagem;
                         document.getElementById('correnteFonte').value = productData.Corrente;
@@ -566,6 +572,8 @@
                     fetch('detalhes.php?gabinete=' + fkCodGabinete)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoGabinete').focus()
+
                         document.getElementById('tamanhoGabinete').value = productData.Tamanho;
                         document.getElementById('tamanhoPMGabinete').value = productData.Tamanho_PM;
                         document.getElementById('tamanhoGPUGabinete').value = productData.Tamanho_GPU;
@@ -589,6 +597,8 @@
                     fetch('detalhes.php?monitor=' + fkCodMonitor)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoMonitor').focus()
+
                         document.getElementById('tamanhoMonitor').value = productData.Tamanho;
                         document.getElementById('resolucaoMonitor').value = productData.Resolucao;
                         document.getElementById('proporcaoMonitor').value = productData.Proporcao;
@@ -614,6 +624,8 @@
                     fetch('detalhes.php?mouse=' + fkCodMouse)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoMouse').focus()
+
                         document.getElementById('dpiMouse').value = productData.DPI;
                         document.getElementById('pollingMouse').value = productData.Polling_Rate;
                         document.getElementById('botoesMouse').value = productData.Botoes;
@@ -640,6 +652,8 @@
                     fetch('detalhes.php?headset=' + fkCodHeadset)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoHeadset').focus()
+
                         document.getElementById('driverHeadset').value = productData.Driver;
                         document.getElementById('frequencia_audioHeadset').value = productData.Frequencia_Audio;
                         document.getElementById('frequencia_micHeadset').value = productData.Frequencia_Mic;
@@ -666,6 +680,8 @@
                     fetch('detalhes.php?ram=' + fkCodMemRAM)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoRAM').focus()
+
                         document.getElementById('tipo_memRAM').value = productData.Tipo_Mem;
                         document.getElementById('vel_memRAM').value = productData.Vel_Mem;
                         document.getElementById('cap_memRAM').value = productData.Cap_Mem;
@@ -686,6 +702,8 @@
                     fetch('detalhes.php?arma=' + fkCodArmazenamento)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoArma').focus()
+
                         document.getElementById('tipoArma').value = productData.Tipo;
                         document.getElementById('conexaoArma').value = productData.Conexao;
                         document.getElementById('capacidadeArma').value = productData.Capacidade;
@@ -708,6 +726,8 @@
                     fetch('detalhes.php?teclado=' + fkCodTeclado)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoTeclado').focus()
+
                         document.getElementById('tipoTeclado').value = productData.Tipo;
                         document.getElementById('tamanhoTeclado').value = productData.Tamanho;
                         document.getElementById('layoutTeclado').value = productData.Layout;
@@ -735,6 +755,8 @@
                     fetch('detalhes.php?cpu=' + fkCodCPU)
                     .then(response => response.json())
                     .then(productData => {  
+                        document.getElementById('descricaoCPU').focus()
+
                         document.getElementById('soqueteCPU').value = productData.Soquete;
                         document.getElementById('frequenciaCPU').value = productData.Frequencia;
                         document.getElementById('nucleosCPU').value = productData.Nucleos;
