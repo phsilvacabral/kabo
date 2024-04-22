@@ -11,8 +11,17 @@
 
 <body>
     <?php
-    include('../../../connection.php');
-    session_start();
+        include('../../connection.php');
+        session_start();
+        if (!isset($_SESSION["Cod_Usuario"])) {
+            header("Location: /kabo/index.php");
+            exit();
+        }
+
+        if ($_SESSION["Tipo_Usuario"] == 0) {
+            header("Location: ../../erro.php");
+            exit();
+        }
     ?>
     <nav>
         <div id="voltar" onclick="voltarPagina()"><a href="../">Cancelar</a></div>
