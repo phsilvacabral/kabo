@@ -33,15 +33,25 @@
 
         <div id="perfil">
             <?php
-            $sqlP = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-            $resultP = $conn->query($sqlP);
-            $rowP = $resultP->fetch_assoc();
-            $nomeCompleto = $rowP['Nome'];
-            $partesNome = explode(' ', $nomeCompleto);
-            $_clienteLogado = $partesNome[0];
+                $sqlP = "SELECT Nome, Imagem FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+                $resultP = $conn->query($sqlP);
+                $rowP = $resultP->fetch_assoc();
+                $nomeCompleto = $rowP['Nome'];
+                $partesNome = explode(' ', $nomeCompleto);
+                $_clienteLogado = $partesNome[0];
+                $imgPerfil = $rowP['Imagem'];
+                if ($imgPerfil == null) {
             ?>
-            <img src="../img/perfil.png" alt="">
-            <p><?php echo $_clienteLogado ?></p>
+                    <img src="../img/perfil_padrao.png" alt="">
+                    <p><?php echo $_clienteLogado ?></p>
+                <?php 
+                } else {
+                    $imagemBase64 = base64_encode($imgPerfil); ?>
+                    <img src="data:image/jpeg;base64,<?php echo $imagemBase64 ?>"  alt="Perfil">
+                    <p><?php echo $_clienteLogado ?></p>
+                <?php
+                }
+                ?>
         </div>
     </nav>
 
@@ -71,7 +81,7 @@
                 class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file0" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file0" class="input_file" onchange="validaImagem(this, 0);">
+                    <input type="file" id="input_file0" name="img" class="input_file" onchange="validaImagem(this, 0);" required>
                     <img src="" id="imagemCadastro0" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -113,7 +123,7 @@
                 class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file1" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file1" class="input_file" onchange="validaImagem(this, 1);">
+                    <input type="file" id="input_file1" name="img" class="input_file" onchange="validaImagem(this, 1);" required>
                     <img src="" id="imagemCadastro1" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -156,7 +166,7 @@
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file2" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file2" class="input_file" onchange="validaImagem(this, 2);">
+                    <input type="file" id="input_file2" name="img" class="input_file" onchange="validaImagem(this, 2);" required>
                     <img src="" id="imagemCadastro2" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -197,7 +207,7 @@
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file3" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file3" class="input_file" onchange="validaImagem(this, 3);">
+                    <input type="file" id="input_file3" name="img" class="input_file" onchange="validaImagem(this, 3);" required>
                     <img src="" id="imagemCadastro3" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -228,7 +238,7 @@
                 class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file4" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file4" class="input_file" onchange="validaImagem(this, 4);">
+                    <input type="file" id="input_file4" name="img" class="input_file" onchange="validaImagem(this, 4);" required>
                     <img src="" id="imagemCadastro4" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -261,7 +271,7 @@
                 class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file5" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file5" class="input_file" onchange="validaImagem(this, 5);">
+                    <input type="file" id="input_file5" name="img" class="input_file" onchange="validaImagem(this, 5);" required>
                     <img src="" id="imagemCadastro5" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -301,7 +311,7 @@
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file6" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file6" class="input_file" onchange="validaImagem(this, 6);">
+                    <input type="file" id="input_file6" name="img" class="input_file" onchange="validaImagem(this, 6);" required>
                     <img src="" id="imagemCadastro6" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -337,7 +347,7 @@
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file7" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file7" class="input_file" onchange="validaImagem(this, 7);">
+                    <input type="file" id="input_file7" name="img" class="input_file" onchange="validaImagem(this, 7);" required>
                     <img src="" id="imagemCadastro7" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -379,7 +389,7 @@
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file8" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file8" class="input_file" onchange="validaImagem(this, 8);">
+                    <input type="file" id="input_file8" name="img" class="input_file" onchange="validaImagem(this, 8);" required>
                     <img src="" id="imagemCadastro8" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -423,7 +433,7 @@
                 class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file9" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file9" class="input_file" onchange="validaImagem(this, 9);">
+                    <input type="file" id="input_file9" name="img" class="input_file" onchange="validaImagem(this, 9);" required>
                     <img src="" id="imagemCadastro9" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
@@ -462,7 +472,7 @@
                 enctype="multipart/form-data" class="form_cadastro">
                 <div class="div_input_imagem">
                     <label for="input_file10" class="label_input_file">Escolher arquivo</label>
-                    <input type="file" id="input_file10" class="input_file" onchange="validaImagem(this, 10);">
+                    <input type="file" id="input_file10" name="img" class="input_file" onchange="validaImagem(this, 10);" required>
                     <img src="" id="imagemCadastro10" class="imagePreview" alt="">
                 </div>
                 <div class="input_textos">
