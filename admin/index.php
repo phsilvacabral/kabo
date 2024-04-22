@@ -30,15 +30,25 @@
 
         <div id="perfil">
             <?php
-                $sqlP = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+                $sqlP = "SELECT Nome, Imagem FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
                 $resultP = $conn->query($sqlP);
                 $rowP = $resultP->fetch_assoc();
                 $nomeCompleto = $rowP['Nome'];
                 $partesNome = explode(' ', $nomeCompleto);
                 $_clienteLogado = $partesNome[0];
+                $imgPerfil = $rowP['Imagem'];
+                if ($imgPerfil == null) {
             ?>
-            <img src="../img/perfil.png" alt="">
-            <p><?php echo $_clienteLogado ?></p>
+                    <img src="../img/perfil_padrao.png" alt="">
+                    <p><?php echo $_clienteLogado ?></p>
+                <?php 
+                } else {
+                    $imagemBase64 = base64_encode($imgPerfil); ?>
+                    <img src="data:image/jpeg;base64,<?php echo $imagemBase64 ?>"  alt="Perfil">
+                    <p><?php echo $_clienteLogado ?></p>
+                <?php
+                }
+                ?>
         </div>
     </nav>
 
