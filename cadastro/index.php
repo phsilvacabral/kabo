@@ -85,7 +85,7 @@
 
                     <input type="text" placeholder="CPF" id="cpf" name="txtCPF" value="" oninput="this.value = maskCPF(this.value)" maxlength="14" class="campomedio" required>
                     <select name="selectGenero" id="genero" class="campomedio" required>
-                        <option value="genero" disabled selected>Gênero</option>
+                        <option value="" disabled selected>Gênero</option>
                         <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
                         <option value="O">Outro</option>
