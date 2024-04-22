@@ -15,6 +15,17 @@
     $tipo_cat = $_POST['tipo_cat'];
     $Cod_Produto = $_POST['cod_produto'];
     $fk_Cod_Produto = $_POST['fk_cod_produto'];
+    if (isset($_FILES['img']) && $_FILES['img']['tmp_name'] != '') {
+        $image = $_FILES['img']['tmp_name'];
+        $imgContent = file_get_contents($image);
+        if ($imgContent === false) {
+            $imgContent = null;
+        } else {
+            $imgContent = addslashes($imgContent);
+        }
+    } else {
+        $imgContent = null;
+    }
 
     if ($tipo_cat == "CPU"){
         $Descricao = $_POST['descricaoCPU'];
@@ -36,28 +47,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_CPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE CPU SET Soquete = '$Soquete', Frequencia = $Frequencia, Nucleos = $Nucleos, Threads = $Threads, TDP = $TDP, Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, GPUs = '$GPUs' WHERE Cod_CPU = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_CPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null){
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE CPU SET Soquete = '$Soquete', Frequencia = $Frequencia, Nucleos = $Nucleos, Threads = $Threads, TDP = $TDP, Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, GPUs = '$GPUs' WHERE Cod_CPU = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_CPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_CPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -67,8 +61,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE CPU SET Soquete = '$Soquete', Frequencia = $Frequencia, Nucleos = $Nucleos, Threads = $Threads, TDP = $TDP, Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, GPUs = '$GPUs' WHERE Cod_CPU = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_CPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE CPU SET Soquete = '$Soquete', Frequencia = $Frequencia, Nucleos = $Nucleos, Threads = $Threads, TDP = $TDP, Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, GPUs = '$GPUs' WHERE Cod_CPU = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_CPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE CPU SET Soquete = '$Soquete', Frequencia = $Frequencia, Nucleos = $Nucleos, Threads = $Threads, TDP = $TDP, Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, GPUs = '$GPUs' WHERE Cod_CPU = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_CPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
                 }
-            } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -93,28 +140,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_GPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE GPU SET PCIe = $PCIE, Nucleos = $Nucleos, Tam_Memoria = $Capacidade, Vel_Mem = $Velocidade, TDP = $TDP, Slot = $SLOT, Tamanho = '$Tamanho', Tipo_Mem = '$TipoMem', Conector = '$Conector' WHERE Cod_GPU = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_GPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE GPU SET PCIe = $PCIE, Nucleos = $Nucleos, Tam_Memoria = $Capacidade, Vel_Mem = $Velocidade, TDP = $TDP, Slot = $SLOT, Tamanho = '$Tamanho', Tipo_Mem = '$TipoMem', Conector = '$Conector' WHERE Cod_GPU = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_GPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_GPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -124,8 +154,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                }
-            } 
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE GPU SET PCIe = $PCIE, Nucleos = $Nucleos, Tam_Memoria = $Capacidade, Vel_Mem = $Velocidade, TDP = $TDP, Slot = $SLOT, Tamanho = '$Tamanho', Tipo_Mem = '$TipoMem', Conector = '$Conector' WHERE Cod_GPU = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_GPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE GPU SET PCIe = $PCIE, Nucleos = $Nucleos, Tam_Memoria = $Capacidade, Vel_Mem = $Velocidade, TDP = $TDP, Slot = $SLOT, Tamanho = '$Tamanho', Tipo_Mem = '$TipoMem', Conector = '$Conector' WHERE Cod_GPU = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_GPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE GPU SET PCIe = $PCIE, Nucleos = $Nucleos, Tam_Memoria = $Capacidade, Vel_Mem = $Velocidade, TDP = $TDP, Slot = $SLOT, Tamanho = '$Tamanho', Tipo_Mem = '$TipoMem', Conector = '$Conector' WHERE Cod_GPU = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_GPU = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -149,28 +232,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_PlacaMae = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Placa_Mae SET Soquete = '$Soquete', Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, PCIe = $PCIe, M2 = $M2, SATA = $SATA, Tamanho = '$Tamanho', Chipset = '$Chipset' WHERE Cod_PlacaMae = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_PlacaMae = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Placa_Mae SET Soquete = '$Soquete', Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, PCIe = $PCIe, M2 = $M2, SATA = $SATA, Tamanho = '$Tamanho', Chipset = '$Chipset' WHERE Cod_PlacaMae = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_PlacaMae = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_PlacaMae = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -180,8 +246,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                }
-            } 
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Placa_Mae SET Soquete = '$Soquete', Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, PCIe = $PCIe, M2 = $M2, SATA = $SATA, Tamanho = '$Tamanho', Chipset = '$Chipset' WHERE Cod_PlacaMae = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_PlacaMae = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Placa_Mae SET Soquete = '$Soquete', Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, PCIe = $PCIe, M2 = $M2, SATA = $SATA, Tamanho = '$Tamanho', Chipset = '$Chipset' WHERE Cod_PlacaMae = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_PlacaMae = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Placa_Mae SET Soquete = '$Soquete', Tipo_Mem = '$Tipo_mem', Vel_Mem = $Vel_mem, PCIe = $PCIe, M2 = $M2, SATA = $SATA, Tamanho = '$Tamanho', Chipset = '$Chipset' WHERE Cod_PlacaMae = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_PlacaMae = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -200,28 +319,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_MemRAM = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Memoria_Ram SET Tipo_Mem = '$Tipo_Mem', Vel_Mem = $Vel_Mem, Cap_Mem = $Cap_Mem WHERE Cod_MemRAM = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_MemRAM = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Memoria_Ram SET Tipo_Mem = '$Tipo_Mem', Vel_Mem = $Vel_Mem, Cap_Mem = $Cap_Mem WHERE Cod_MemRAM = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_MemRAM = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_MemRAM = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -231,8 +333,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Memoria_Ram SET Tipo_Mem = '$Tipo_Mem', Vel_Mem = $Vel_Mem, Cap_Mem = $Cap_Mem WHERE Cod_MemRAM = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_MemRAM = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
                 }
-            } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Memoria_Ram SET Tipo_Mem = '$Tipo_Mem', Vel_Mem = $Vel_Mem, Cap_Mem = $Cap_Mem WHERE Cod_MemRAM = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_MemRAM = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Memoria_Ram SET Tipo_Mem = '$Tipo_Mem', Vel_Mem = $Vel_Mem, Cap_Mem = $Cap_Mem WHERE Cod_MemRAM = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_MemRAM = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -252,28 +407,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_Armazenamento = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Armazenamento SET Tipo = '$Tipo', Capacidade = '$Capacidade', Velocidade = $Velocidade, Conexao = '$Conexao' WHERE Cod_Armazenamento = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Armazenamento = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Armazenamento SET Tipo = '$Tipo', Capacidade = '$Capacidade', Velocidade = $Velocidade, Conexao = '$Conexao' WHERE Cod_Armazenamento = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Armazenamento = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_Armazenamento = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -283,8 +421,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Armazenamento SET Tipo = '$Tipo', Capacidade = '$Capacidade', Velocidade = $Velocidade, Conexao = '$Conexao' WHERE Cod_Armazenamento = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_Armazenamento = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Armazenamento SET Tipo = '$Tipo', Capacidade = '$Capacidade', Velocidade = $Velocidade, Conexao = '$Conexao' WHERE Cod_Armazenamento = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Armazenamento = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Armazenamento SET Tipo = '$Tipo', Capacidade = '$Capacidade', Velocidade = $Velocidade, Conexao = '$Conexao' WHERE Cod_Armazenamento = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Armazenamento = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
                 }
-            } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -306,28 +497,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_Fonte = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Fonte SET Potencia = $Potencia, Voltagem = $Voltagem, Corrente = $Corrente, Certificacao = '$Certificacao', Tamanho = '$Tamanho', Modular = $Modular WHERE Cod_Fonte = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Fonte = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Fonte SET Potencia = $Potencia, Voltagem = $Voltagem, Corrente = $Corrente, Certificacao = '$Certificacao', Tamanho = '$Tamanho', Modular = $Modular WHERE Cod_Fonte = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Fonte = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_Fonte = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -337,8 +511,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                }
-            } 
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Fonte SET Potencia = $Potencia, Voltagem = $Voltagem, Corrente = $Corrente, Certificacao = '$Certificacao', Tamanho = '$Tamanho', Modular = $Modular WHERE Cod_Fonte = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_Fonte = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Fonte SET Potencia = $Potencia, Voltagem = $Voltagem, Corrente = $Corrente, Certificacao = '$Certificacao', Tamanho = '$Tamanho', Modular = $Modular WHERE Cod_Fonte = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Fonte = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Fonte SET Potencia = $Potencia, Voltagem = $Voltagem, Corrente = $Corrente, Certificacao = '$Certificacao', Tamanho = '$Tamanho', Modular = $Modular WHERE Cod_Fonte = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Fonte = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -359,28 +586,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_Gabinete = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Gabinete SET Tamanho = '$Tamanho', Tamanho_PM = '$Tamanho_PM', Tamanho_FT = '$Tamanho_FT', Tamanho_GPU = '$Tamanho_GPU', Slot_GPU = $Slot_GPU WHERE Cod_Gabinete = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Gabinete = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Gabinete SET Tamanho = '$Tamanho', Tamanho_PM = '$Tamanho_PM', Tamanho_FT = '$Tamanho_FT', Tamanho_GPU = '$Tamanho_GPU', Slot_GPU = $Slot_GPU WHERE Cod_Gabinete = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Gabinete = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_Gabinete = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -390,8 +600,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Gabinete SET Tamanho = '$Tamanho', Tamanho_PM = '$Tamanho_PM', Tamanho_FT = '$Tamanho_FT', Tamanho_GPU = '$Tamanho_GPU', Slot_GPU = $Slot_GPU WHERE Cod_Gabinete = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_Gabinete = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
                 }
-            } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Gabinete SET Tamanho = '$Tamanho', Tamanho_PM = '$Tamanho_PM', Tamanho_FT = '$Tamanho_FT', Tamanho_GPU = '$Tamanho_GPU', Slot_GPU = $Slot_GPU WHERE Cod_Gabinete = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Gabinete = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Gabinete SET Tamanho = '$Tamanho', Tamanho_PM = '$Tamanho_PM', Tamanho_FT = '$Tamanho_FT', Tamanho_GPU = '$Tamanho_GPU', Slot_GPU = $Slot_GPU WHERE Cod_Gabinete = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Gabinete = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }   
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -415,28 +678,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_Monitor = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Monitor SET Tamanho = '$Tamanho', Resolucao = '$Resolucao', Proporcao = '$Proporcao', Tipo_Painel = '$Tipo_Painel', Taxa_Att = $Taxa_Att, Tempo_Resposta = $Tempo_Resposta, HDMI = $HDMI, DP = $DP WHERE Cod_Monitor = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Monitor = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Monitor SET Tamanho = '$Tamanho', Resolucao = '$Resolucao', Proporcao = '$Proporcao', Tipo_Painel = '$Tipo_Painel', Taxa_Att = $Taxa_Att, Tempo_Resposta = $Tempo_Resposta, HDMI = $HDMI, DP = $DP WHERE Cod_Monitor = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Monitor = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_Monitor = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -446,8 +692,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                }
-            } 
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Monitor SET Tamanho = '$Tamanho', Resolucao = '$Resolucao', Proporcao = '$Proporcao', Tipo_Painel = '$Tipo_Painel', Taxa_Att = $Taxa_Att, Tempo_Resposta = $Tempo_Resposta, HDMI = $HDMI, DP = $DP WHERE Cod_Monitor = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_Monitor = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Monitor SET Tamanho = '$Tamanho', Resolucao = '$Resolucao', Proporcao = '$Proporcao', Tipo_Painel = '$Tipo_Painel', Taxa_Att = $Taxa_Att, Tempo_Resposta = $Tempo_Resposta, HDMI = $HDMI, DP = $DP WHERE Cod_Monitor = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Monitor = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Monitor SET Tamanho = '$Tamanho', Resolucao = '$Resolucao', Proporcao = '$Proporcao', Tipo_Painel = '$Tipo_Painel', Taxa_Att = $Taxa_Att, Tempo_Resposta = $Tempo_Resposta, HDMI = $HDMI, DP = $DP WHERE Cod_Monitor = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Monitor = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -472,28 +771,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_Teclado = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Teclado SET Tipo = '$Tipo', Tamanho = '$Tamanho', Layout = '$Layout', Formato = '$Formato', Switch = '$Switch', Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Teclado = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Teclado = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Teclado SET Tipo = '$Tipo', Tamanho = '$Tamanho', Layout = '$Layout', Formato = '$Formato', Switch = '$Switch', Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Teclado = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Teclado = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_Teclado = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -503,8 +785,62 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                }
-            } 
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Teclado SET Tipo = '$Tipo', Tamanho = '$Tamanho', Layout = '$Layout', Formato = '$Formato', Switch = '$Switch', Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Teclado = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_Teclado = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Teclado SET Tipo = '$Tipo', Tamanho = '$Tamanho', Layout = '$Layout', Formato = '$Formato', Switch = '$Switch', Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Teclado = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Teclado = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Teclado SET Tipo = '$Tipo', Tamanho = '$Tamanho', Layout = '$Layout', Formato = '$Formato', Switch = '$Switch', Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Teclado = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Teclado = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
+            
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -527,28 +863,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_Mouse = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Mouse SET DPI = $DPI, Polling_Rate = $Polling_Rate, Botoes = $Botoes, Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Mouse = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Mouse = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Mouse SET DPI = $DPI, Polling_Rate = $Polling_Rate, Botoes = $Botoes, Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Mouse = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Mouse = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_Mouse = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -558,8 +877,61 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                }
-            } 
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Mouse SET DPI = $DPI, Polling_Rate = $Polling_Rate, Botoes = $Botoes, Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Mouse = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_Mouse = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Mouse SET DPI = $DPI, Polling_Rate = $Polling_Rate, Botoes = $Botoes, Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Mouse = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Mouse = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Mouse SET DPI = $DPI, Polling_Rate = $Polling_Rate, Botoes = $Botoes, Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Mouse = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Mouse = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
@@ -583,28 +955,11 @@
             $checkQuery0 = "SELECT Modelo FROM Produto_Tipo WHERE fk_Cod_Headset = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
             $checkResult0 = $conn->query($checkQuery0);
             $row = $checkResult0->fetch_assoc();
-            if ($row['Modelo'] === $Modelo) {
-                $sql = "UPDATE Headset SET Driver = $Driver, Frequencia_Audio = $Frequencia_Audio, Frequencia_Mic = $Frequencia_Mic, Padrao_Polar = $Padrao_Polar,  Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Headset = $fk_Cod_Produto";
-                if ($conn->query($sql) === TRUE) {
-                    $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Headset = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
-                    if ($conn->query($sqlP) === TRUE) {
-                        header("Location: /kabo/admin/produtos");
-                        exit;
-                    } else {
-                        throw new Exception('Ocorreu um erro ao executar a operação.');
-                    }
-                } else {
-                    throw new Exception('Ocorreu um erro ao executar a operação.');
-                }
-            } else {
-                $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
-                $checkResult = $conn->query($checkQuery);
-                if ($checkResult && $checkResult->num_rows > 0) {
-                    throw new Exception('Modelo de produto já existente!');
-                } else {
+            if ($imgContent !== null) {
+                if ($row['Modelo'] === $Modelo) {
                     $sql = "UPDATE Headset SET Driver = $Driver, Frequencia_Audio = $Frequencia_Audio, Frequencia_Mic = $Frequencia_Mic, Padrao_Polar = $Padrao_Polar,  Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Headset = $fk_Cod_Produto";
                     if ($conn->query($sql) === TRUE) {
-                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Headset = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Imagem = '$imgContent' WHERE fk_Cod_Headset = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
                         if ($conn->query($sqlP) === TRUE) {
                             header("Location: /kabo/admin/produtos");
                             exit;
@@ -614,8 +969,62 @@
                     } else {
                         throw new Exception('Ocorreu um erro ao executar a operação.');
                     }
-                }
-            } 
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Headset SET Driver = $Driver, Frequencia_Audio = $Frequencia_Audio, Frequencia_Mic = $Frequencia_Mic, Padrao_Polar = $Padrao_Polar,  Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Headset = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo', Imagem = '$imgContent' WHERE fk_Cod_Headset = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            } else {
+                if ($row['Modelo'] === $Modelo) {
+                    $sql = "UPDATE Headset SET Driver = $Driver, Frequencia_Audio = $Frequencia_Audio, Frequencia_Mic = $Frequencia_Mic, Padrao_Polar = $Padrao_Polar,  Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Headset = $fk_Cod_Produto";
+                    if ($conn->query($sql) === TRUE) {
+                        $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade WHERE fk_Cod_Headset = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                        if ($conn->query($sqlP) === TRUE) {
+                            header("Location: /kabo/admin/produtos");
+                            exit;
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    } else {
+                        throw new Exception('Ocorreu um erro ao executar a operação.');
+                    }
+                } else {
+                    $checkQuery = "SELECT * FROM Produto_Tipo WHERE Modelo = '$Modelo'";
+                    $checkResult = $conn->query($checkQuery);
+                    if ($checkResult && $checkResult->num_rows > 0) {
+                        throw new Exception('Modelo de produto já existente!');
+                    } else {
+                        $sql = "UPDATE Headset SET Driver = $Driver, Frequencia_Audio = $Frequencia_Audio, Frequencia_Mic = $Frequencia_Mic, Padrao_Polar = $Padrao_Polar,  Cor = '$Cor', Iluminacao = '$Iluminacao', Conexao = '$Conexao', Tipo_Conexao = '$Tipo_Conexao' WHERE Cod_Headset = $fk_Cod_Produto";
+                        if ($conn->query($sql) === TRUE) {
+                            $sqlP = "UPDATE Produto_Tipo SET Descricao = '$Descricao', Preco = $Preco, Marca = '$Marca', Qtd_estoque = $Quantidade, Modelo = '$Modelo' WHERE fk_Cod_Headset = $fk_Cod_Produto AND Cod_Produto = $Cod_Produto";
+                            if ($conn->query($sqlP) === TRUE) {
+                                header("Location: /kabo/admin/produtos");
+                                exit;
+                            } else {
+                                throw new Exception('Ocorreu um erro ao executar a operação.');
+                            }
+                        } else {
+                            throw new Exception('Ocorreu um erro ao executar a operação.');
+                        }
+                    }
+                } 
+            }
+
         } catch (Exception $e) {
             echo '<script>alert("'.$e->getMessage().'"); history.go(-1);</script>';
             exit;
