@@ -200,6 +200,18 @@ main{
 
 }
 
+.avisoPerigoso {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#avisoPesquisa {
+    font-family: 'poppins_medio';
+    font-size: 20px;
+    color: white;
+}
+
 .caixa_produto{
     position: relative;
     width: 270px;
@@ -656,3 +668,4 @@ input[type="number"]::-webkit-outer-spin-button {
         width: 100%;
     }
 }
+
