@@ -21,7 +21,7 @@
 
     $ERROR = '';
 
-    $sql = "SELECT u.Nome, u.Email, u.Senha, u.CPF, u.Dt_Nascimento, u.Genero, e.CEP, e.Logradouro, e.Numero, e.Bairro, e.Estado, e.Cidade 
+    $sql = "SELECT u.Nome, u.Email, u.Senha, u.CPF, u.Dt_Nascimento, u.Genero, u.Imagem, e.CEP, e.Logradouro, e.Numero, e.Bairro, e.Estado, e.Cidade 
         FROM Usuario u
         INNER JOIN Endereco e ON u.fk_Cod_Endereco = e.Cod_Endereco
         WHERE u.Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
@@ -40,6 +40,7 @@
     $Bairro = $row['Bairro'];
     $Estado = $row['Estado'];
     $Cidade = $row['Cidade'];
+    $imgPerfil = $row['Imagem'];
 
     if (isset($_GET['senha_excluir'])) {
         $sqlS = "SELECT Senha FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
@@ -123,11 +124,8 @@
                 if (arquivoTam < 16) {
                     var reader = new FileReader();
                     reader.onload = function(e) {
-
                         document.getElementById(`imagemCadastro`).style.visibility = "visible";
                         document.getElementById(`imagemCadastro`).setAttribute('src', e.target.result);
-
-
                     };
                     reader.readAsDataURL(input.files[0]);
                 } else {
@@ -154,13 +152,19 @@
                 <p id="elemento2">Edite seu nome, e-mail, senha, CEP e interesses</p>
             </div>
 
-            <form id="form1" name="form1" method="post" action="edit_php.php" onsubmit="return verificar()">
+            <form id="form1" name="form1" method="post" action="edit_php.php" onsubmit="return verificar()" enctype="multipart/form-data">
                 <div class="espacodentrobox">
 
                     <div class="div_input_imagem">
                         <label for="input_file" class="label_input_file">Foto perfil</label>
-                        <input type="file" id="input_file" class="input_file" onchange="validaImagem(this);">
-                        <img src="" id="imagemCadastro" class="imagePreview" alt="Foto perfil">
+                        <input type="file" id="input_file" class="input_file" name="imgPerfil" onchange="validaImagem(this);">
+                        <?php
+                        if ($imgPerfil != null) {
+                            $imagemBase64 = base64_encode($imgPerfil); ?>
+                            <img src="data:image/jpeg;base64,<?php echo $imagemBase64 ?>" id="imagemCadastro" class="imagePreview" alt="Foto perfil">
+                        <?php ;} else {?>
+                            <img src="" id="imagemCadastro" class="imagePreview" alt="Foto perfil" style="visibility: hidden;">
+                        <?php ;} ?>
                     </div>
 
                     <input type="text" name="txtNome" value="<?php echo $Nome ?>" maxlength="100" id="primeiroinput" placeholder="Nome" class="campocheio" required>

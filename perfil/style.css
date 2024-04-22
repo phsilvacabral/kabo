@@ -73,7 +73,7 @@ body {
 
 #user_name{
     display: flex;
-    margin: 30px 0 40px 0;
+    margin: 20px 0 40px 0;
 }
 
 #foto_perfil{
@@ -213,7 +213,7 @@ body {
     width: 130px;
     height: 40px;
     border-radius: 2px;
-    margin: 80px 0 0 0;
+    margin: 40px 0 0 0;
     transition: box-shadow 0.15s, border-style 0.15s, border-color 0.15s, border-width 0.15s;
     user-select: none;
 }
@@ -240,7 +240,7 @@ body {
 
 #text123 {
     font-family: 'poppins_medio';
-    margin: 35px 0 0 0;
+    margin: 20px 0 0 0;
 }
 #text123 a{
     text-decoration: none;

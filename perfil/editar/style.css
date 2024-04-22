@@ -192,7 +192,6 @@ main{
 .imagePreview {
     width: 200px;
     height: 200px;
-    visibility: hidden;
     border: 1px solid #f33333;
 }
 
