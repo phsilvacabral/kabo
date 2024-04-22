@@ -11,7 +11,7 @@
 
 <body>
     <?php
-       include('../../connection.php');
+        include('../../connection.php');
         session_start();
         if (!isset($_SESSION["Cod_Usuario"])) {
             header("Location: /kabo/index.php");
@@ -22,6 +22,11 @@
             header("Location: ../../erro.php");
             exit();
         }
+
+        $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_PlacaMae, fk_Cod_GPU, 
+        fk_Cod_Fonte, fk_Cod_Gabinete, fk_Cod_KitProduto, fk_Cod_Monitor, fk_Cod_Mouse, fk_Cod_Headset, fk_Cod_MemRAM, 
+        fk_Cod_Armazenamento, fk_Cod_Teclado, fk_Cod_CPU, Imagem FROM Produto_Tipo";
+        $result = $conn->query($sql);
     ?>
     <nav>
         <div id="voltar" onclick="voltarPagina()"><a href="../">Cancelar</a></div>
@@ -54,47 +59,20 @@
         <p id="caminho">administrar recursos &nbsp; > &nbsp; produtos &nbsp; > &nbsp; exibir</p>
 
         <div id="div_exibicao" style="visibility: visible; margin: 0 0 40px 0;">
-            <div class="caixa_produto">
-                <div class="imagem_produto"><img src="../../img/logo_neon.png" alt=""></div>
-                <div class="nome_produto">
-                    <p>PC Gamer AMD Ryzen 5 5600G 6 Núcleos 4.40Ghz, Gráficos
-                </div>
-                <div class="preco_produto">
-                    <p>R$1.900,00</p>
-                </div>
-                <div class="qtd_produto">
-                    <p>25 unidades</p>
-                </div>
-            </div>
-
-
-            <div class="caixa_produto">
-                <div class="imagem_produto"><img src="../../img/logo_neon.png" alt=""></div>
-                <div class="nome_produto">
-                    <p>PC Gamer AMD Ryzen 5 5600G 6 Núcleos 4.40Ghz, Gráficos
-                </div>
-                <div class="preco_produto">
-                    <p>R$1.900,00</p>
-                </div>
-                <div class="qtd_produto">
-                    <p>25 unidades</p>
-                </div>
-            </div>
-
-
-            <div class="caixa_produto">
-                <div class="imagem_produto"><img src="../../img/logo_neon.png" alt=""></div>
-                <div class="nome_produto">
-                    <p>PC Gamer AMD Ryzen 5 5600G 6 Núcleos 4.40Ghz, Gráficos
-                </div>
-                <div class="preco_produto">
-                    <p>R$1.900,00</p>
-                </div>
-                <div class="qtd_produto">
-                    <p>25 unidades</p>
-                </div>
-            </div>
-
+            <?php
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<div class="caixa_produto">';
+                        echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                        echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                        echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                        echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                }
+                ?>
         </div>
 
     </main>
