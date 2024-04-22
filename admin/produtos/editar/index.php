@@ -434,7 +434,11 @@
             history.back();
         });
 
-
+        document.querySelector('#pesquisa form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede que o formulário seja submetido normalmente
+            // Mostra a div "resultado_pesquisa"
+            document.getElementById('resultado_pesquisa').style.visibility = 'visible';
+        });
 
         // Função para mostrar a div "resultado_pesquisa" ao submeter o formulário
         document.querySelector('#pesquisa form').addEventListener('submit', function(e) {
