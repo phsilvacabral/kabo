@@ -97,7 +97,9 @@
                         echo '</div>';
                     }
                 } else {
+                    echo '<div class="avisoPerigoso">';
                     echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                    echo '</div>';
                 }
                 ?>
             </div>
