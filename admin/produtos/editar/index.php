@@ -19,7 +19,7 @@
     }
 
     if ($_SESSION["Tipo_Usuario"] == 0) {
-        header("Location: ../db0/erro.php");
+        header("Location: ../../erro.php");
         exit();
     }
     if (isset($_GET['busca'])) {
@@ -48,15 +48,21 @@
 
         <div id="perfil">
             <?php
-            $sqlP = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+            $sqlP = "SELECT Nome, Imagem FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
             $resultP = $conn->query($sqlP);
             $rowP = $resultP->fetch_assoc();
             $nomeCompleto = $rowP['Nome'];
             $partesNome = explode(' ', $nomeCompleto);
             $_clienteLogado = $partesNome[0];
-            ?>
-        <img src="../img/perfil.png" alt="">
-        <p><?php echo $_clienteLogado ?></p>
+            $imgPerfil = $rowP['Imagem'];
+            if ($imgPerfil == null) { ?>
+                <img src="../../../img/perfil_padrao.png" alt="perfil">
+                <p><?php echo $_clienteLogado ?></p>
+            <?php } else {
+                $imagemBase64 = base64_encode($imgPerfil); ?>
+                <img src="data:image/jpeg;base64,<?php echo $imagemBase64 ?>" alt="Perfil">
+                <p><?php echo $_clienteLogado ?></p>
+            <?php } ?>
         </div>
     </nav>
 
