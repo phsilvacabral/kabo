@@ -102,8 +102,8 @@
 
                     <input type="email" name="email" id="email" value="" placeholder="E-mail" maxlength="100" class="campocheio" required>
 
-                    <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a nova senha" class="campocheio" maxlength="20" required>
-                    <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a nova senha" class="campocheio" maxlength="20" required>
+                    <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a senha" class="campocheio" maxlength="20" required>
+                    <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a senha" class="campocheio" maxlength="20" required>
 
                 </div>
                 <input type="submit" value="Criar conta" id="enviarsubmit">
