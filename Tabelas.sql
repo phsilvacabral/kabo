@@ -1,4 +1,3 @@
-DROP DATABASE kabo;
 CREATE DATABASE kabo;
 USE kabo;
 
@@ -11,7 +10,7 @@ CREATE TABLE Usuario (
     Senha CHAR(32) NOT NULL,
     Genero CHAR(1),
     Tipo_Usuario CHAR(1) NOT NULL,
-	Imagem BLOB,
+	Imagem LONGBLOB,
     fk_Cod_Endereco INT,
     UNIQUE (Email, CPF)
 );
@@ -109,7 +108,7 @@ CREATE TABLE Armazenamento (
 
 CREATE TABLE Gabinete (
     Cod_Gabinete INT PRIMARY KEY AUTO_INCREMENT,
-    Tamanho VARCHAR(20),
+    Tamanho VARCHAR(30),
     Tamanho_PM VARCHAR(10),
     Tamanho_FT VARCHAR(10),
     Tamanho_GPU VARCHAR(30),
@@ -182,7 +181,7 @@ CREATE TABLE Produto_Tipo (
     Modelo VARCHAR(100) NOT NULL,
     Marca VARCHAR(100) NOT NULL,
     Qtd_estoque INT NOT NULL,
-    Imagem BLOB NOT NULL,
+    Imagem LONGBLOB NOT NULL,
     fk_Cod_PlacaMae INT,
     fk_Cod_GPU INT,
     fk_Cod_Fonte INT,
