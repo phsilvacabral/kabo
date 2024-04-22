@@ -260,7 +260,7 @@
                             if (isNomeValido(txtBairro.value)) {
                                 if (isNomeValido(txtCidade.value)) {
                                     if (isNomeValido(txtestado.value)) {
-                                        if (CryptoJS.MD5(txtSenhaAtual.value).toString() === '<?php echo $rowN['Senha']; ?>') {
+                                        if (CryptoJS.MD5(txtSenhaAtual.value).toString() === '<?php echo $row['Senha']; ?>') {
                                             if (txtSenhaNova.value === txtSenhaConfirmar.value) {
                                                 return true;
                                             } else {
