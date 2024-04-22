@@ -37,7 +37,7 @@
     ?>
     <div id="div_perfil">
 
-        <span id="voltar_home" onclick="voltarPagina()"><a>&times;</a></span>
+        <span id="voltar_home"><a href="../">&times;</a></span>
 
         <a title="Voltar à Home" href="../"><img src="../img/logo_neon.png" alt="Logo Kabo" id="logo"></a>
 
@@ -93,9 +93,7 @@
     </div>
 
     <script>
-        function voltarPagina() {
-            window.history.back();
-        }
+
     </script>
 </body>
 
