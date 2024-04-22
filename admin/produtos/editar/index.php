@@ -69,7 +69,7 @@
                 <input type="submit" value="Buscar" style="display: none;">
             </form>
 
-            <div id="resultado_pesquisa" style="display: none;">
+            <div id="resultado_pesquisa">
                 <?php
                 if ($result && $result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -455,7 +455,7 @@
             var searchTerm = new URLSearchParams(window.location.search).get('busca');
             if (searchTerm) {
                 // Se houver um termo de busca na URL, exibe a div "resultado_pesquisa"
-                document.getElementById('resultado_pesquisa').style.display = 'block';
+                document.getElementById('resultado_pesquisa').style.visibility = 'visible';
             }
         });
 
