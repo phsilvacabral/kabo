@@ -72,12 +72,12 @@
                 <p id="elemento2">Digite seus dados e crie uma senha</p>
             </div>
 
-            <form id="form1" name="form1" method="post" action="cadastro_php.php" onsubmit="return verificar()">
+            <form id="form1" name="form1" method="post" action="cadastro_php.php" onsubmit="return verificar()" enctype="multipart/form-data">
                 <div class="espacodentrobox">
 
                     <div class="div_input_imagem">
                         <label for="input_file" class="label_input_file">Foto perfil</label>
-                        <input type="file" id="input_file" class="input_file" onchange="validaImagem(this);">
+                        <input type="file" id="input_file" class="input_file" name="imgPerfil" onchange="validaImagem(this);">
                         <img src="" id="imagemCadastro" class="imagePreview" alt="Foto perfil">
                     </div>
 

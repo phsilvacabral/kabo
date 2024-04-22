@@ -1,57 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>pgnav</title>
-
+    <title></title>
 </head>
 
 <body>
     <?php
-    include ('connection.php');
+    include('connection.php');
     session_start();
     ?>
     <header class="navegar">
         <nav>
             <div class="barranav">
-                <button src="img/Component 2.png" alt="" class="menu"></button>
-                <a href=""><img src="img/Component 1.png" alt="logo 123 folhas" class="logo"></a>
+                <div src="img/menu.png" alt="" class="menu" onclick="notifyParent()"></div>
+                <script>
+                    function notifyParent() {
+                        window.parent.postMessage("openPopup", "*");
+                    }
+                </script>
+
+                <a><img src="img/logo_branco.png" alt="logo_kabo" class="logo"></a>
 
                 <div class="divbusca"><span>Busque aqui</span><img src="img/lupa.png" alt="Buscar" id="lupa_busca">
                 </div>
 
                 <div class="spaceperfil">
-                    <a href=""><img src="img/Imagem1 1.png" alt="" class="carrinho"></a>
-                    <?php if (!isset($_SESSION['Cod_Usuario'])): ?>
+                    <a href=""><img src="img/carrinho.png" alt="carrinho" class="carrinho"></a>
+                    <?php if (!isset($_SESSION['Cod_Usuario'])) : ?>
                         <a href="login/" target="_parent">
                             <figure>
-                                <img src="img/Ellipse 1.png" alt="logo 123 folhas" class="perfil">
+                                <img src="img/perfil_padrao.png" alt="Perfil" class="perfil">
                                 <figcaption>Login</figcaption>
                             </figure>
                         </a>
-                    <?php else: ?>
+                    <?php else : ?>
                         <?php
-                        $sqlP = "SELECT Nome FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+                        $sqlP = "SELECT Nome, Imagem FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
                         $resultP = $conn->query($sqlP);
                         $rowP = $resultP->fetch_assoc();
                         $nomeCompleto = $rowP['Nome'];
                         $partesNome = explode(' ', $nomeCompleto);
                         $_clienteLogado = $partesNome[0];
-                        ?>
-                        <a href="perfil/" target="_parent">
-                            <figure>
-                                <img src="img/perfil_padrao.jpg" alt="Foto do Usuário" class="perfil">
-                                <figcaption><?php echo $_clienteLogado ?></figcaption>
-                            </figure>
-                        </a>
-                    <?php endif; ?>
+                        $imgPerfil = $rowP['Imagem'];
+                        if ($imgPerfil == null) { ?>
+                            <a href="perfil/" target="_parent">
+                                <figure>
+                                    <img src="img/perfil_padrao.png" alt="Perfil" class="perfil">
+                                    <figcaption><?php echo $_clienteLogado ?></figcaption>
+                                </figure>
+                            </a>
+                        <?php } else {
+                            $imagemBase64 = base64_encode($imgPerfil); ?>
+                            <a href="perfil/" target="_parent">
+                                <figure>
+                                    <img src="data:image/jpeg;base64,<?php echo $imagemBase64 ?>" alt="Perfil" class="perfil">
+                                    <figcaption><?php echo $_clienteLogado ?></figcaption>
+                                </figure>
+                            </a>
+                        <?php }
+                    endif; ?>
                 </div>
             </div>
-            <div class="divbusca"><span>Busque aqui</span><img src="img/lupa.png" alt="Buscar"
-                    id="lupa_busca"></div>
+            <div class="divbusca"><span>Busque aqui</span><img src="img/lupa.png" alt="Buscar" id="lupa_busca"></div>
         </nav>
 
         <section class="secondnavbar">
