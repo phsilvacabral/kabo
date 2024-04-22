@@ -66,10 +66,6 @@
     </main>
     
     <script>
-        document.getElementById('voltar').addEventListener('click', function(e) {
-    e.preventDefault();
-    history.back();
-});
     </script>
 </body>
 </html>
