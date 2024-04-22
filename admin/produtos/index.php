@@ -94,9 +94,7 @@
                         echo '</div>';
                     }
                 } else {
-                    echo '<div class="caixa_produto">';
-                    echo '<p>Nenhum resultado encontrado.</p>';
-                    echo '</div>';
+                    echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
                 }
                 ?>
             </div>
