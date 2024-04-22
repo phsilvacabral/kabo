@@ -13,6 +13,17 @@
     }
 
     $tipo_cat = $_POST['tipo_cat'];
+    if (isset($_FILES['img']) && $_FILES['img']['tmp_name'] != '') {
+        $image = $_FILES['img']['tmp_name'];
+        $imgContent = file_get_contents($image);
+        if ($imgContent === false) {
+            $imgContent = null;
+        } else {
+            $imgContent = addslashes($imgContent);
+        }
+    } else {
+        $imgContent = null;
+    }
 
     if ($tipo_cat == "CPU"){
         $Descricao = $_POST['descricaoCPU'];
@@ -40,7 +51,7 @@
                     $sqlCod = "SELECT Cod_CPU FROM CPU WHERE Soquete = '$Soquete' AND Frequencia >= $Frequencia AND Nucleos = $Nucleos AND Threads = $Threads AND TDP = $TDP AND Tipo_Mem = '$Tipo_mem' AND Vel_Mem = $Vel_mem AND GPUs = '$GPUs'";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_CPU) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_CPU']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_CPU, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_CPU']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -83,7 +94,7 @@
                     $sqlCod = "SELECT Cod_GPU FROM GPU WHERE PCIe >= $PCIE AND Nucleos = $Nucleos AND Tam_Memoria = $Capacidade AND Vel_Mem = $Velocidade AND TDP = $TDP AND Slot >= $SLOT AND Tamanho = '$Tamanho' AND Tipo_Mem = '$TipoMem' AND Conector = '$Conector'";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_GPU) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_GPU']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_GPU, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_GPU']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -125,7 +136,7 @@
                     $sqlCod = "SELECT Cod_PlacaMae FROM Placa_Mae WHERE Soquete = '$Soquete' AND PCIe >= $PCIe AND Tipo_Mem = '$Tipo_mem' AND Vel_Mem = $Vel_mem AND M2 = $M2 AND SATA = $SATA AND Tamanho = '$Tamanho' AND Chipset = '$Chipset'";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_PlacaMae) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_PlacaMae']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_PlacaMae, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_PlacaMae']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -161,7 +172,7 @@
                     $sqlCod = "SELECT Cod_MemRAM FROM Memoria_Ram WHERE Tipo_Mem = '$Tipo_Mem' AND Vel_Mem = $Vel_Mem AND Cap_Mem = $Cap_Mem";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_MemRAM) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_MemRAM']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_MemRAM, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_MemRAM']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -198,7 +209,7 @@
                     $sqlCod = "SELECT Cod_Armazenamento FROM Armazenamento WHERE Tipo = '$Tipo' AND Capacidade = '$Capacidade' AND Velocidade = $Velocidade AND Conexao = '$Conexao'";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Armazenamento) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Armazenamento']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Armazenamento, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Armazenamento']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -237,7 +248,7 @@
                     $sqlCod = "SELECT Cod_Fonte FROM Fonte WHERE Potencia = $Potencia AND Voltagem = $Voltagem AND Corrente = $Corrente AND Certificacao = '$Certificacao' AND Tamanho = '$Tamanho' AND Modular = $Modular";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Fonte) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Fonte']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Fonte, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Fonte']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -276,7 +287,7 @@
                     $sqlCod = "SELECT Cod_Gabinete FROM Gabinete WHERE Tamanho = '$Tamanho' AND Tamanho_PM = '$Tamanho_PM' AND Tamanho_FT = '$Tamanho_FT' AND Tamanho_GPU = '$Tamanho_GPU' AND Slot_GPU >= $Slot_GPU";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Gabinete) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Gabinete']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Gabinete, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Gabinete']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -317,7 +328,7 @@
                     $sqlCod = "SELECT Cod_Monitor FROM Monitor WHERE Tamanho = '$Tamanho' AND Resolucao = '$Resolucao' AND Proporcao = '$Proporcao' AND Tipo_Painel = '$Tipo_Painel' AND Taxa_Att = $Taxa_Att AND Tempo_Resposta >= $Tempo_Resposta AND HDMI = $HDMI AND DP = $DP";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Monitor) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Monitor']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Monitor, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Monitor']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -359,7 +370,7 @@
                     $sqlCod = "SELECT Cod_Teclado FROM Teclado WHERE Tipo = '$Tipo' AND Tamanho = '$Tamanho' AND Layout = '$Layout' AND Formato = '$Formato' AND Switch = '$Switch' AND Cor = '$Cor' AND Iluminacao = '$Iluminacao' AND Conexao = '$Conexao' AND Tipo_Conexao = '$Tipo_Conexao'";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Teclado) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Teclado']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Teclado, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Teclado']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -399,7 +410,7 @@
                     $sqlCod = "SELECT Cod_Mouse FROM Mouse WHERE DPI = $DPI AND Polling_Rate = $Polling_Rate AND Botoes = $Botoes AND Cor = '$Cor' AND Iluminacao = '$Iluminacao' AND Conexao = '$Conexao' AND Tipo_Conexao = '$Tipo_Conexao'";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Mouse) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Mouse']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Mouse, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Mouse']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
@@ -441,7 +452,7 @@
                     $sqlCod = "SELECT Cod_Headset FROM Headset WHERE Driver = $Driver AND Frequencia_Audio = $Frequencia_Audio AND Frequencia_Mic = $Frequencia_Mic AND Padrao_Polar = $Padrao_Polar AND Cor = '$Cor' AND Iluminacao = '$Iluminacao' AND Conexao = '$Conexao' AND Tipo_Conexao = '$Tipo_Conexao'";
                     $resultCod = $conn->query($sqlCod);
                     $row = $resultCod->fetch_assoc();
-                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Headset) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Headset']})";
+                    $sqlP = "INSERT INTO Produto_Tipo (Descricao, Preco, Modelo, Marca, Qtd_estoque, fk_Cod_Headset, Imagem) VALUES ('$Descricao', $Preco, '$Modelo', '$Marca', $Quantidade, {$row['Cod_Headset']}, '$imgContent')";
                     if ($conn->query($sqlP) === TRUE) {
                         header("Location: /kabo/admin/produtos");
                         exit;
