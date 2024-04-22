@@ -90,8 +90,7 @@ nav {
 .menu {
     min-width: 26px;
     min-height: 20px;
-    background-color: rgba(107, 51, 53, 0.75);
-    background-image: url(img/Component\ 2.png);
+    background-image: url(img/menu.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
