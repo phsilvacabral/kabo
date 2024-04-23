@@ -132,7 +132,7 @@
                         required>
                     <input class="input_medio" type="text" name="modeloGPU" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaGPU" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="marcaGPU" placeholder="Marca" maxlength="100" required>
                     <input class="input_pequeno" type="number" name="nucleosGPU" placeholder="Núcleos CUDA"
                         max="2147483647" required>
                     <input class="input_pequeno" type="number" name="capacidade_memoriaGPU"
@@ -175,7 +175,7 @@
                         required>
                     <input class="input_medio" type="text" name="modeloPM" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaPM" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="marcaPM" placeholder="Marca" maxlength="100" required>
                     <input class="input_pequeno" type="text" name="tamanhoPM" placeholder="Tamanho" maxlength="10"
                         required>
                     <input class="input_pequeno" type="text" name="soquetePM" placeholder="Soquete" maxlength="10"
@@ -216,7 +216,7 @@
                         required>
                     <input class="input_medio" type="text" name="modeloRAM" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaRAM" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="marcaRAM" placeholder="Marca" maxlength="100" required>
                     <input class="input_pequeno" type="text" name="tipo_memRAM" placeholder="Tipo da memória"
                         maxlength="4" required>
                     <input class="input_pequeno" type="number" name="vel_memRAM" placeholder="Velocidade da memória"
@@ -247,7 +247,7 @@
                         required>
                     <input class="input_medio" type="text" name="modeloArma" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaArma" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="marcaArma" placeholder="Marca" maxlength="100" required>
                     <input class="input_pequeno" type="text" name="tipoArma" placeholder="Tipo de armazenamento"
                         maxlength="10" required>
                     <input class="input_pequeno" type="text" name="conexaoArma" placeholder="Tipo de conexão"
@@ -280,7 +280,7 @@
                         maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloFonte" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaFonte" placeholder="Marca" maxlength="25"
+                    <input class="input_medio" type="text" name="marcaFonte" placeholder="Marca" maxlength="100"
                         required>
                     <input class="input_pequeno" type="number" name="potenciaFonte" placeholder="Potência"
                         max="2147483647" required>
@@ -320,7 +320,7 @@
                         maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloGabinete" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaGabinete" placeholder="Marca" maxlength="25"
+                    <input class="input_medio" type="text" name="marcaGabinete" placeholder="Marca" maxlength="100"
                         required>
                     <input class="input_pequeno" type="text" name="tamanhoGabinete" placeholder="Tamanho do gabinete"
                         maxlength="30" required>
@@ -356,7 +356,7 @@
                         maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloMonitor" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaMonitor" placeholder="Marca" maxlength="25"
+                    <input class="input_medio" type="text" name="marcaMonitor" placeholder="Marca" maxlength="100"
                         required>
                     <input class="input_pequeno" type="text" name="tamanhoMonitor" placeholder="Tamanho" maxlength="20"
                         required>
@@ -398,7 +398,7 @@
                         maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloTeclado" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaTeclado" placeholder="Marca" maxlength="25"
+                    <input class="input_medio" type="text" name="marcaTeclado" placeholder="Marca" maxlength="100"
                         required>
                     <input class="input_pequeno" type="text" name="tipoTeclado" placeholder="Tipo" maxlength="50"
                         required>
@@ -442,7 +442,7 @@
                         maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloMouse" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaMouse" placeholder="Marca" maxlength="25"
+                    <input class="input_medio" type="text" name="marcaMouse" placeholder="Marca" maxlength="100"
                         required>
                     <input class="input_pequeno" type="number" name="dpiMouse" placeholder="DPI" max="2147483647"
                         required>
@@ -481,7 +481,7 @@
                         maxlength="300" required>
                     <input class="input_medio" type="text" name="modeloHeadset" placeholder="Modelo" maxlength="100"
                         required>
-                    <input class="input_medio" type="text" name="marcaHeadset" placeholder="Marca" maxlength="25"
+                    <input class="input_medio" type="text" name="marcaHeadset" placeholder="Marca" maxlength="100"
                         required>
                     <input class="input_pequeno" type="number" name="driverHeadset" placeholder="Driver"
                         max="2147483647" required>
