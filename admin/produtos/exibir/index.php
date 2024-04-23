@@ -29,7 +29,7 @@
         $result = $conn->query($sql);
     ?>
     <nav>
-        <div id="voltar" onclick="voltarPagina()"><a href="../">Cancelar</a></div>
+        <div id="voltar"><a href="../">Cancelar</a></div>
 
         <div id="area_atual">
             <p>Exibir produtos</p>
@@ -58,7 +58,7 @@
     <main>
         <p id="caminho">administrar recursos &nbsp; > &nbsp; produtos &nbsp; > &nbsp; exibir</p>
 
-        <div id="div_exibicao" style="visibility: visible; margin: 0 0 40px 0;">
+        <div id="div_exibicao" style="display: flex;">
             <?php
                 if ($result && $result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -74,7 +74,7 @@
                     echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
                     echo '</div>';
                 }
-                ?>
+            ?>
         </div>
 
     </main>
