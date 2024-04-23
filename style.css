@@ -96,15 +96,6 @@ nav {
     background-size: contain;
 }
 
-/* .logodentro {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    align-items: center;
-} */
-
-
-
 .divbusca {
     background-color: rgba(107, 51, 53, 0.75);
     margin: 12px;
@@ -428,7 +419,7 @@ a:link {
     width: 1455px;
     border-radius: 2px;
     border: 1px solid #F03333;
-    margin-bottom: 100px;
+    margin-bottom: 0;
 }
 
 .linkmovecaixasrecomendadas {
@@ -624,6 +615,7 @@ a:link {
 
 .fotodentro {
     width: 100%;
+    padding: 20px;
     height: 270px;
     border-radius: 9px 9px 0 0;
     border-bottom: 1px solid rgba(204, 204, 204, 0.8);
@@ -654,7 +646,7 @@ a:link {
     font-family: 'poppins_semibold';
     color: #666666;
     text-align: left;
-    margin: 15px 10px 0 10px;
+    margin: 0px 10px 0 10px;
 
 
 }
@@ -671,7 +663,7 @@ a:link {
     font-family: 'poppins_medio';
     font-size: 10px;
     text-align: left;
-    margin-left: 10px;
+    margin: 0px 0 10px 10px;
     color: #666666;
 }
 
@@ -692,8 +684,9 @@ footer {
     flex-wrap: wrap;
     padding: 0 60px;
     justify-content: space-between;
-    position: absolute;
-
+    position: fixed;
+    height: 70vh;
+    overflow-y: auto;
 }
 
 .dados_footer {

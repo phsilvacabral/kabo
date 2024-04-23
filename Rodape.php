@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -10,33 +10,17 @@
 
 <body>
     <?php
-        include('connection.php');
-        session_start();
+    include('connection.php');
+    session_start();
     ?>
     <footer>
         <div id="dados_div">
             <div class="dados_footer">
                 <p>Desenvolvedores</p>
                 <ul>
-                    <li>Daniel Musse <a href="linkedin.com" target="_blank"><img
-                                src="img_principais\Linkedin_logo.png" alt="linkedin"></a><a href="github.com"
-                            target="_blank"><img src="img_principais\Github_logo.png" alt="github"></a></li>
-                    <li>Fábio Gortz <a href="linkedin.com"
-                            target="_blank"><img src="img_principais\Linkedin_logo.png" alt="linkedin"></a><a
-                            href="github.com" target="_blank"><img src="img_principais\Github_logo.png" alt="github"></a>
-                    </li>
-                    <li>João Hernandes <a href="linkedin.com" target="_blank"><img
-                                src="img_principais\Linkedin_logo.png" alt="linkedin"></a><a href="github.com"
-                            target="_blank"><img src="img_principais\Github_logo.png" alt="github"></a></li>
-                    <li>Lucas Kempa <a
-                            href="https://www.linkedin.com/in/lucas-kempa-90a265286/" target="_blank"><img
-                                src="img_principais\Linkedin_logo.png" alt="linkedin"></a><a href="github.com"
-                            target="_blank"><img src="img_principais\Github_logo.png" alt="github"></a></li>
-                    <li>Pedro Cabral <a
-                            href="https://www.linkedin.com/in/pedro-henrique-silva-cabral-2b820420b/"
-                            target="_blank"><img src="img_principais\Linkedin_logo.png" alt="linkedin"></a><a
-                            href="https://github.com/phsilvacabral" target="_blank"><img src="img_principais\Github_logo.png"
-                                alt="github"></a></li>
+                    <li>Pedro Cabral <a href="https://www.linkedin.com/in/pedro-henrique-silva-cabral-2b820420b/" target="_blank"><img src="img/linkedin.png" alt="linkedin"></a><a href="https://github.com/phsilvacabral" target="_blank"><img src="img/github.png" alt="github"></a></li>
+                    <li>Daniel Musse <a href="linkedin.com" target="_blank"><img src="img/linkedin.png" alt="linkedin"></a><a href="github.com" target="_blank"><img src="img/github.png" alt="github"></a></li>
+                    <li>João Hernandes <a href="linkedin.com" target="_blank"><img src="img/linkedin.png" alt="linkedin"></a><a href="github.com" target="_blank"><img src="img/github.png" alt="github"></a></li>
                 </ul>
             </div>
 
