@@ -61,6 +61,11 @@
                     fk_Cod_Armazenamento, fk_Cod_Teclado, fk_Cod_CPU, Imagem FROM Produto_Tipo WHERE Modelo LIKE '%$busca%' OR Marca LIKE '%$busca%' OR Cod_Produto = '$busca'";
                 }
                 $result = $conn->query($sql);
+            } else {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_PlacaMae, fk_Cod_GPU, 
+                fk_Cod_Fonte, fk_Cod_Gabinete, fk_Cod_KitProduto, fk_Cod_Monitor, fk_Cod_Mouse, fk_Cod_Headset, fk_Cod_MemRAM, 
+                fk_Cod_Armazenamento, fk_Cod_Teclado, fk_Cod_CPU, Imagem FROM Produto_Tipo";
+                $result = $conn->query($sql); 
             }
         } else {
             $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_PlacaMae, fk_Cod_GPU, 
@@ -70,7 +75,7 @@
         }
     ?>
     <nav>
-        <div id="voltar" onclick="voltarPagina()"><a href="../">Cancelar</a></div>
+        <div id="voltar"><a href="../">Cancelar</a></div>
 
         <div id="area_atual">
             <p>Excluir produto</p>
@@ -477,16 +482,11 @@
         document.getElementById("botao_excluir_popup").addEventListener("click", function() {
             document.getElementById("popup").style.display = "none";
         });
-        // Função para voltar à página anterior
-        function voltarPagina() {
-            window.history.back();
-        }
-
 
         document.querySelector('#pesquisa form').addEventListener('submit', function(e) {
             e.preventDefault(); // Impede que o formulário seja submetido normalmente
             // Mostra a div "resultado_pesquisa"
-            document.getElementById('resultado_pesquisa').style.visibility = 'visible';
+            document.getElementById('resultado_pesquisa').style.display = 'flex';
         });
 
         // Função para mostrar a div "resultado_pesquisa" ao submeter o formulário
@@ -504,7 +504,7 @@
             var searchTerm = new URLSearchParams(window.location.search).get('busca');
             if (searchTerm) {
                 // Se houver um termo de busca na URL, exibe a div "resultado_pesquisa"
-                document.getElementById('resultado_pesquisa').style.visibility = 'visible';
+                document.getElementById('resultado_pesquisa').style.display = 'flex';
             }
         });
     </script>
