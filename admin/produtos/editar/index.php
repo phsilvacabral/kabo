@@ -373,8 +373,8 @@
                     <input type="hidden" id="cod_produtoCPU" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoCPU" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoCPU" id="descricaoCPU" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloCPU" id="modeloCPU" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaCPU" id="marcaCPU" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloCPU" id="modeloCPU" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaCPU" id="marcaCPU" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="text" name="soqueteCPU" id="soqueteCPU" placeholder="Soquete" maxlength="10" required>
                     <input class="input_pequeno" type="number" name="nucleosCPU" id="nucleosCPU" placeholder="Núcleos" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="threadsCPU" id="threadsCPU" placeholder="Threads" max="2147483647" required>
@@ -403,8 +403,8 @@
                     <input type="hidden" id="cod_produtoGPU" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoGPU" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoGPU" id="descricaoGPU" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloGPU" id="modeloGPU" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaGPU" id="marcaGPU" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloGPU" id="modeloGPU" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaGPU" id="marcaGPU" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="number" name="nucleosGPU" id="nucleosGPU" placeholder="Núcleos CUDA" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="capacidade_memoriaGPU" id="capacidade_memoriaGPU" placeholder="Capacidade da Memória" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="velocidadeGPU" id="velocidadeGPU" placeholder="Velocidade da Memória" max="2147483647" required>
@@ -434,8 +434,8 @@
                     <input type="hidden" id="cod_produtoPM" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoPM" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoPM" id="descricaoPM" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloPM" id="modeloPM" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaPM" id="marcaPM" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloPM" id="modeloPM" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaPM" id="marcaPM" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="text" name="tamanhoPM" id="tamanhoPM" placeholder="Tamanho" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="soquetePM" id="soquetePM" placeholder="Soquete" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="chipsetPM" id="chipsetPM" placeholder="Chipset" maxlength="15" required>
@@ -464,8 +464,8 @@
                     <input type="hidden" id="cod_produtoRAM" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoRAM" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoRAM" id="descricaoRAM" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloRAM" id="modeloRAM" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaRAM" id="marcaRAM" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloRAM" id="modeloRAM" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaRAM" id="marcaRAM" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="text" name="tipo_memRAM" id="tipo_memRAM" placeholder="Tipo da memória" maxlength="4" required>
                     <input class="input_pequeno" type="number" name="vel_memRAM" id="vel_memRAM" placeholder="Velocidade da memória" oninput="limitarNumero(this)" required>
                     <input class="input_pequeno" type="number" name="cap_memRAM" id="cap_memRAM" placeholder="Capacidade da memória" oninput="limitarNumero(this)" required>
@@ -489,8 +489,8 @@
                     <input type="hidden" id="cod_produtoArma" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoArma" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoArma" id="descricaoArma" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloArma" id="modeloArma" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaArma" id="marcaArma" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloArma" id="modeloArma" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaArma" id="marcaArma" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="text" name="tipoArma" id="tipoArma" placeholder="Tipo de armazenamento" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="conexaoArma" id="conexaoArma" placeholder="Tipo de conexão" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="capacidadeArma" id="capacidadeArma" placeholder="Capacidade" maxlength="10" required>
@@ -515,8 +515,8 @@
                     <input type="hidden" id="cod_produtoFonte" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoFonte" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoFonte" id="descricaoFonte" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloFonte" id="modeloFonte" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaFonte" id="marcaFonte" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloFonte" id="modeloFonte" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaFonte" id="marcaFonte" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="number" name="potenciaFonte" id="potenciaFonte" placeholder="Potência" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="voltagemFonte" id="voltagemFonte" placeholder="Voltagem" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="correnteFonte" id="correnteFonte" placeholder="Corrente" max="2147483647" required>
@@ -546,8 +546,8 @@
                     <input type="hidden" id="cod_produtoGabinete" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoGabinete" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoGabinete" id="descricaoGabinete" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloGabinete" id="modeloGabinete" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaGabinete" id="marcaGabinete" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloGabinete" id="modeloGabinete" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaGabinete" id="marcaGabinete" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="text" name="tamanhoGabinete" id="tamanhoGabinete" placeholder="Tamanho do gabinete" maxlength="30" required>
                     <input class="input_pequeno" type="text" name="tamanhoPMGabinete" id="tamanhoPMGabinete" placeholder="Tamanho da placa mãe compatível" maxlength="10" required>
                     <input class="input_pequeno" type="text" name="tamanhoGPUGabinete" id="tamanhoGPUGabinete" placeholder="Tamanho da gpu compatível" maxlength="30" required>
@@ -573,8 +573,8 @@
                     <input type="hidden" id="cod_produtoMonitor" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoMonitor" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoMonitor" id="descricaoMonitor" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloMonitor" id="modeloMonitor" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaMonitor" id="marcaMonitor" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloMonitor" id="modeloMonitor" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaMonitor" id="marcaMonitor" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="text" name="tamanhoMonitor" id="tamanhoMonitor" placeholder="Tamanho" maxlength="20" required>
                     <input class="input_pequeno" type="text" name="resolucaoMonitor" id="resolucaoMonitor" placeholder="Resolução" maxlength="20" required>
                     <input class="input_pequeno" type="text" name="proporcaoMonitor" id="proporcaoMonitor" placeholder="Proporção" maxlength="5" required>
@@ -603,8 +603,8 @@
                     <input type="hidden" id="cod_produtoTeclado" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoTeclado" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoTeclado" id="descricaoTeclado" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloTeclado" id="modeloTeclado" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaTeclado" id="marcaTeclado" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloTeclado" id="modeloTeclado" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaTeclado" id="marcaTeclado" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="text" name="tipoTeclado" id="tipoTeclado" placeholder="Tipo" maxlength="50" required>
                     <input class="input_pequeno" type="text" name="tamanhoTeclado" id="tamanhoTeclado" placeholder="Tamanho" maxlength="30" required>
                     <input class="input_pequeno" type="text" name="layoutTeclado" id="layoutTeclado" placeholder="Layout" maxlength="10" required>
@@ -634,8 +634,8 @@
                     <input type="hidden" id="cod_produtoMouse" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoMouse" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoMouse" id="descricaoMouse" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloMouse" id="modeloMouse" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaMouse" id="marcaMouse" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloMouse" id="modeloMouse" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaMouse" id="marcaMouse" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="number" name="dpiMouse" id="dpiMouse" placeholder="DPI" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="pollingMouse" id="pollingMouse" placeholder="Polling Rate" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="botoesMouse" id="botoesMouse" placeholder="Quantidade de botões" max="2147483647" required>
@@ -663,8 +663,8 @@
                     <input type="hidden" id="cod_produtoHeadset" name="cod_produto" value="">
                     <input type="hidden" id="fk_cod_produtoHeadset" name="fk_cod_produto" value="">
                     <input class="input_grande" type="text" name="descricaoHeadset" id="descricaoHeadset" placeholder="Descrição" maxlength="300" required>
-                    <input class="input_medio" type="text" name="modeloHeadset" id="modeloHeadset" placeholder="Modelo" maxlength="100" required>
-                    <input class="input_medio" type="text" name="marcaHeadset" id="marcaHeadset" placeholder="Marca" maxlength="25" required>
+                    <input class="input_medio" type="text" name="modeloHeadset" id="modeloHeadset" placeholder="Modelo" maxlength="100" readonly>
+                    <input class="input_medio" type="text" name="marcaHeadset" id="marcaHeadset" placeholder="Marca" maxlength="100" readonly>
                     <input class="input_pequeno" type="number" name="driverHeadset" id="driverHeadset" placeholder="Driver" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="frequencia_audioHeadset" id="frequencia_audioHeadset" placeholder="Frequência de áudio" max="2147483647" required>
                     <input class="input_pequeno" type="number" name="frequencia_micHeadset" id="frequencia_micHeadset" placeholder="Frequência de microfone" max="2147483647" required>
