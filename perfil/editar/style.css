@@ -224,6 +224,11 @@ main{
 #cpf, #nascimento, #bairro, #cidade{
     margin: 0 20px 20px 0;
 }
+
+#cpf, #email, #nascimento {
+    color: rgb(190, 185, 185);
+}
+
 #numero::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
