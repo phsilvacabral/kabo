@@ -67,7 +67,7 @@
         fk_Cod_Fonte, fk_Cod_Gabinete, fk_Cod_KitProduto, fk_Cod_Monitor, fk_Cod_Mouse, fk_Cod_Headset, fk_Cod_MemRAM, 
         fk_Cod_Armazenamento, fk_Cod_Teclado, fk_Cod_CPU, Imagem FROM Produto_Tipo";
         $result = $conn->query($sql);
-     }
+    }
 ?>
 
 <body>
@@ -687,7 +687,7 @@
         document.querySelector('#pesquisa form').addEventListener('submit', function(e) {
             e.preventDefault(); // Impede que o formulário seja submetido normalmente
             // Mostra a div "resultado_pesquisa"
-            document.getElementById('resultado_pesquisa').style.visibility = 'visible';
+            document.getElementById('resultado_pesquisa').style.display = 'flex';
         });
 
         // Função para mostrar a div "resultado_pesquisa" ao submeter o formulário
@@ -705,7 +705,7 @@
             var searchTerm = new URLSearchParams(window.location.search).get('busca');
             if (searchTerm) {
                 // Se houver um termo de busca na URL, exibe a div "resultado_pesquisa"
-                document.getElementById('resultado_pesquisa').style.visibility = 'visible';
+                document.getElementById('resultado_pesquisa').style.display = 'flex';
             }
         });
 
