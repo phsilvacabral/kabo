@@ -22,12 +22,44 @@
         header("Location: ../../erro.php");
         exit();
     }
+
+    function similaridade($string1, $string2, $limiar = 70) {
+        similar_text($string1, $string2, $percent);
+        return $percent >= $limiar;
+    }
+
     if (isset($_GET['busca'])) {
         $busca = $_GET['busca'];
+        $busca = strtolower($busca);        
         if (!empty($busca)) {
-            $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_PlacaMae, fk_Cod_GPU, 
-            fk_Cod_Fonte, fk_Cod_Gabinete, fk_Cod_KitProduto, fk_Cod_Monitor, fk_Cod_Mouse, fk_Cod_Headset, fk_Cod_MemRAM, 
-            fk_Cod_Armazenamento, fk_Cod_Teclado, fk_Cod_CPU, Imagem FROM Produto_Tipo WHERE Modelo LIKE '%$busca%' OR Marca LIKE'%$busca%'";
+            if (similaridade($busca, "cpu")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_CPU, Imagem FROM Produto_Tipo WHERE fk_Cod_CPU > 0";
+            } else if (similaridade($busca, "gpu")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_GPU, Imagem FROM Produto_Tipo WHERE fk_Cod_GPU > 0";
+            } else if (similaridade($busca, "placa mae") || similaridade($busca, "mae")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_PlacaMae, Imagem FROM Produto_Tipo WHERE fk_Cod_PlacaMae > 0";
+            } else if (similaridade($busca, "memoria ram") || similaridade($busca, "ram")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_MemRAM , Imagem FROM Produto_Tipo WHERE fk_Cod_MemRAM  > 0";
+            } else if (similaridade($busca, "fonte")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_Fonte , Imagem FROM Produto_Tipo WHERE fk_Cod_Fonte  > 0";
+            } else if (similaridade($busca, "armazenamento")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_Armazenamento , Imagem FROM Produto_Tipo WHERE fk_Cod_Armazenamento > 0";
+            } else if (similaridade($busca, "gabinete")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_Gabinete , Imagem FROM Produto_Tipo WHERE fk_Cod_Gabinete > 0";
+            } else if (similaridade($busca, "monitor")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_Monitor , Imagem FROM Produto_Tipo WHERE fk_Cod_Monitor > 0";
+            } else if (similaridade($busca, "teclado")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_Teclado , Imagem FROM Produto_Tipo WHERE fk_Cod_Teclado > 0";
+            } else if (similaridade($busca, "mouse")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_Mouse , Imagem FROM Produto_Tipo WHERE fk_Cod_Mouse > 0";
+            } else if (similaridade($busca, "headset")) {
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_Headset , Imagem FROM Produto_Tipo WHERE fk_Cod_Headset > 0";
+            } else {
+                $busca = mysqli_real_escape_string($conn, $busca);
+                $sql = "SELECT Cod_Produto, Descricao, Preco, Modelo, Marca, Qtd_Estoque, fk_Cod_PlacaMae, fk_Cod_GPU, 
+                fk_Cod_Fonte, fk_Cod_Gabinete, fk_Cod_KitProduto, fk_Cod_Monitor, fk_Cod_Mouse, fk_Cod_Headset, fk_Cod_MemRAM, 
+                fk_Cod_Armazenamento, fk_Cod_Teclado, fk_Cod_CPU, Imagem FROM Produto_Tipo WHERE Modelo LIKE '%$busca%' OR Marca LIKE '%$busca%' OR Cod_Produto = '$busca'";
+            }
             $result = $conn->query($sql);
         }
     } else {
@@ -77,30 +109,253 @@
 
             <div id="resultado_pesquisa">
                 <?php
-                if ($result && $result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<div class="caixa_produto">';
-                        echo '<div class="botao_editar_produto" data-fk-cod-placa-mae="' . $row['fk_Cod_PlacaMae'] . '" data-fk-cod-gpu="' 
-                        . $row['fk_Cod_GPU'] . '" data-fk-cod-fonte="' . $row['fk_Cod_Fonte'] . '" data-fk-cod-gabinete="' . $row['fk_Cod_Gabinete'] 
-                        . '" data-fk-cod-kitproduto="' . $row['fk_Cod_KitProduto'] . '" data-fk-cod-monitor="' . $row['fk_Cod_Monitor'] 
-                        . '" data-fk-cod-mouse="' . $row['fk_Cod_Mouse'] . '" data-fk-cod-headset="' . $row['fk_Cod_Headset'] 
-                        . '" data-fk-cod-memram="' . $row['fk_Cod_MemRAM'] . '" data-fk-cod-armazenamento="' . $row['fk_Cod_Armazenamento'] 
-                        . '" data-fk-cod-teclado="' . $row['fk_Cod_Teclado'] . '" data-fk-cod-cpu="' . $row['fk_Cod_CPU'] 
-                        . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
-                        . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
-                        . '" data-imagem="' . base64_encode($row['Imagem']) . '"
-                        id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
-                        echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
-                        echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
-                        echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
-                        echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
-                        echo '</div>';
+                    if (!empty($busca) && similaridade($busca, "cpu")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-cpu="' . $row['fk_Cod_CPU'] 
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "gpu")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-gpu="' . $row['fk_Cod_GPU'] 
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "placa mae") || !empty($busca) && similaridade($busca, "mae")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-placa-mae="' . $row['fk_Cod_PlacaMae'] 
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "memoria ram") || !empty($busca) && similaridade($busca, "ram")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-memram="' . $row['fk_Cod_MemRAM']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "fonte")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-fonte="' . $row['fk_Cod_Fonte']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "armazenamento")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-armazenamento="' . $row['fk_Cod_Armazenamento']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "gabinete")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-gabinete="' . $row['fk_Cod_Gabinete']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "monitor")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-monitor="' . $row['fk_Cod_Monitor']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "teclado")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-teclado="' . $row['fk_Cod_Teclado']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "mouse")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-mouse="' . $row['fk_Cod_Mouse']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else if (!empty($busca) && similaridade($busca, "headset")) {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-headset="' . $row['fk_Cod_Headset']
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
+                    } else {
+                        if ($result && $result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="caixa_produto">';
+                                echo '<div class="botao_editar_produto" data-fk-cod-placa-mae="' . $row['fk_Cod_PlacaMae'] . '" data-fk-cod-gpu="' 
+                                . $row['fk_Cod_GPU'] . '" data-fk-cod-fonte="' . $row['fk_Cod_Fonte'] . '" data-fk-cod-gabinete="' . $row['fk_Cod_Gabinete'] 
+                                . '" data-fk-cod-kitproduto="' . $row['fk_Cod_KitProduto'] . '" data-fk-cod-monitor="' . $row['fk_Cod_Monitor'] 
+                                . '" data-fk-cod-mouse="' . $row['fk_Cod_Mouse'] . '" data-fk-cod-headset="' . $row['fk_Cod_Headset'] 
+                                . '" data-fk-cod-memram="' . $row['fk_Cod_MemRAM'] . '" data-fk-cod-armazenamento="' . $row['fk_Cod_Armazenamento'] 
+                                . '" data-fk-cod-teclado="' . $row['fk_Cod_Teclado'] . '" data-fk-cod-cpu="' . $row['fk_Cod_CPU'] 
+                                . '" data-marca="' . $row['Marca'] . '" data-preco="' . $row['Preco'] . '" data-qtd_estoque="' . $row['Qtd_Estoque'] 
+                                . '" data-modelo="' . $row['Modelo'] . '" data-descricao="' . $row['Descricao'] . '" data-cod_produto="' . $row['Cod_Produto'] 
+                                . '" data-imagem="' . base64_encode($row['Imagem']) . '"
+                                id="editar_produto_' . $row['Cod_Produto'] . '">Editar</div>';
+                                echo '<div class="imagem_produto"><img src="data:image/jpeg;base64, ' . base64_encode($row['Imagem']) . ' " alt=""></div>';
+                                echo '<div class="nome_produto"><p>' . $row['Marca'] . " " . $row['Modelo'] . '</p></div>';
+                                echo '<div class="preco_produto"><p>R$' . $row['Preco'] . '</p></div>';
+                                echo '<div class="qtd_produto"><p>' . $row['Qtd_Estoque'] . ' unidades</p></div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<div class="avisoPerigoso">';
+                            echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
+                            echo '</div>';
+                        }
                     }
-                } else {
-                    echo '<div class="avisoPerigoso">';
-                    echo '<p id="avisoPesquisa">Nenhum resultado encontrado.</p>';
-                    echo '</div>';
-                }
+                
                 ?>
             </div>
         </section>
@@ -428,11 +683,6 @@
     </main>
 
     <script>
-        // Função para voltar à página anterior
-        document.getElementById('voltar').addEventListener('click', function(e) {
-            e.preventDefault();
-            history.back();
-        });
 
         document.querySelector('#pesquisa form').addEventListener('submit', function(e) {
             e.preventDefault(); // Impede que o formulário seja submetido normalmente
