@@ -1,0 +1,500 @@
+@font-face {
+    font-family: 'poppins';
+    src: url('../../fonts/poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'poppins_medio';
+    src: url('../../fonts/poppins/Poppins-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'poppins_semibold';
+    src: url('../../fonts/poppins/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'poppins_bold';
+    src: url('../../fonts/poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(30, 30, 30, 1);
+}
+
+.iframefooter {
+    height: 100vh;
+    width: 100%;
+    border: none;
+}
+
+.iframefooter::-webkit-scrollbar,
+.iframenav::-webkit-scrollbar {
+    display: none;
+}
+
+.iframenav {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.navegar {
+    background-color: rgba(107, 51, 53, 0.75);
+    height: 120px;
+    width: 100%;
+    border: 1px solid rgba(240, 51, 51, 1);
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+nav {
+    height: 100vh;
+}
+
+.barranav {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    font-family: 'poppins_medio';
+}
+
+.logo {
+    height: 35px;
+    min-width: 100px;
+}
+
+.menu {
+    min-width: 26px;
+    min-height: 20px;
+    background-image: url(img/menu.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.divbusca {
+    background-color: rgba(107, 51, 53, 0.75);
+    margin: 12px;
+    height: 30px;
+    width: 670px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+    font-size: 12px;
+    display: flex;
+    padding: 0 30px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-family: 'poppins_medio';
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid rgba(240, 51, 51, 1);
+}
+
+#lupa_busca {
+    width: 20px;
+}
+
+.letra {
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0px 10px 0px 10px;
+}
+
+.letra:hover {
+    transition: 0.3s;
+    background-color: rgba(107, 51, 53, 0.75);
+    border-radius: 20px;
+    color: black;
+}
+
+.letra:active {
+    background-color: rgba(107, 51, 53, 0.75);
+}
+
+.alinharletra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 700px;
+    margin: 0 30px 0 30px;
+}
+
+figcaption {
+    font-size: 10px;
+    color: white;
+    font-family: 'poppins_medio';
+}
+
+.perfil {
+    height: 33px;
+    width: 33px;
+    border-radius: 20px;
+}
+
+.carrinho {
+    width: 50px;
+    height: 50px;
+}
+
+
+.spaceperfil {
+    min-width: 160px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+a:link {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+.secondnavbar {
+    height: 30px;
+    width: 100vw;
+    border: 1px solid rgba(240, 51, 51, 1);
+    background-color: rgba(107, 51, 53, 0.75);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.boxsecondnavbar {
+    width: 160px;
+    height: 30px;
+    color: white;
+    background-color: rgba(107, 51, 53, 0.75);
+    border: 1px solid rgba(240, 51, 51, 1);
+    font-size: 12px;
+    font-family: 'poppins_medio';
+}
+
+.boxsecondnavbar:hover {
+    background-color: rgba(240, 51, 51, 1);
+}
+
+.slideshow-container {
+    max-width: 1500px;
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.mySlides {
+    display: flex;
+    justify-content: center;
+    width: 97%;
+}
+
+.propaganda {
+    width: 100%;
+    max-height: 400px;
+}
+
+.input_textos{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px 2%;
+    padding: 0 0 100px 0;
+}
+
+/* Daniel Gambiarras */
+
+
+#info {
+    margin: 15px 30px 30px 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Adicionado para alinhar verticalmente os itens */
+}
+
+#pneuMurcho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#info img {
+    width: 30px;
+    height: 30px;
+    margin: 0 20px;
+}
+
+#infoP2 {
+    font-family: 'poppins_medio';
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+#infoP1{
+    font-family: 'poppins_bold';
+    font-size: 20px;
+    color: white;
+    margin-right: 10px;/* Para alinhar à esquerda e empurrar o outro conteúdo para a direita */
+}
+
+#busca {
+    display: flex; /* Adicionado para alinhar o ícone à direita */
+    justify-content: space-between; /* Adicionado para posicionar o texto e o ícone nos extremos */
+    align-items: center; /* Adicionado para alinhar verticalmente os itens */
+    background-image: url('../../img/lupa.png');
+    background-repeat: no-repeat;
+    background-position: 3% 50%; /* Posição do ícone */
+    background-size: 20px;
+    width: 340px;
+    height: 35px;
+    background-color: #1e1e1e;
+    border: 1px solid #f33333;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'poppins_medio';
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 0 40px;
+    transition: box-shadow 0.15s, background-color 0.15s;
+}
+
+#busca:hover {
+    user-select: none;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+#busca:active {
+    box-shadow: inset 0 0 20px #663234;
+}
+#busca:focus{
+    outline: none;
+    box-shadow: inset 0 0 20px #663234;
+}
+
+
+
+#pedidos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#caixa_pedidos {
+    background: rgba(51, 51, 51, 0.5);
+    width: 100%; /* removido o width fixo */
+    min-width: 200px; /* adicione uma largura mínima para evitar que o contêiner fique muito estreito */
+    height: auto;
+    font-family: 'poppins';
+    margin-bottom: 20px;
+    border: 1px solid #F03333;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+#textoInfo1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#textoInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 99%;
+}
+
+#textoInfo p {
+    display: inline-flex;
+    font-size: 15px;
+}
+
+#pedidoP1, #pedidoP2, #pedidoP3, #pedidoP4 {
+    margin-top: 10px;
+    color: white;
+}
+
+.alignStatusPedido{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+}
+
+.alignPedido{
+    display: flex;
+    flex-direction: column;
+}
+
+#pedidoP1  {
+    margin-left: 20px;
+}
+
+#statusP1, #statusP2, #statusP3 {
+    margin-top: 5px;
+    margin-bottom: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#statusP1 {   
+    margin-left: 20px;
+}
+
+#produto_caixa {
+    background-color: white;
+    flex-grow: 1; /* para ocupar o espaço restante */
+    height: 80px;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #F03333;
+}
+
+#caixaP1, #caixaP2 {
+    margin-left: 20px;
+}
+
+#caixaP1 {
+    font-size: 16px;
+    font-family: 'poppins_bold';
+    margin-top: 10px;
+}
+
+#caixaP2 {
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+#quantidade {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#produto_caixa img {
+    width: 60px;
+    height: 60px;
+    border-right: 1px solid rgba(102, 102, 102, 0.5);
+}
+
+@media (max-width: 840px) {
+    #info {
+        display: flex;
+        flex-direction: column;
+    }
+    #busca {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 630px){
+    .alignStatusPedido {
+        max-width: 80%;
+    }
+}
+
+/* fim da gambiarra */
+
+@media (max-width:600px) {
+
+    .secondnavbar {
+        display: none;
+    }
+
+    .divbusca {
+        display: none;
+    }
+
+    .carrinho {
+        display: none;
+    }
+
+    .logodentro {
+        display: contents;
+    }
+
+    .spaceperfil {
+        display: contents;
+    }
+
+    .barranav {
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+    }
+
+    .logodentro .logo {
+        display: contents;
+    }
+
+    .logodentro .menu {
+        display: none;
+    }
+
+    #dados_div {
+        min-height: 100vh;
+    }
+
+    nav .divbusca:nth-child(2) {
+        display: inherit;
+        width: 90%;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (min-width:601px) {
+    .logodentro {
+        display: none;
+    }
+
+    nav .divbusca:nth-child(2) {
+        display: none;
+    }
+
+    #dados_div {
+        bottom: 0;
+        width: 100vw;
+    }
+}
+
+
+
+
+
