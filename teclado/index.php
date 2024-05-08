@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../produtos.css">
-    <title>Monitor</title>
+    <title>Teclados</title>
 </head>
 
 <body>
@@ -18,22 +18,22 @@
 
     <main>
 
-    <h1 id = "titulo_produto">Monitores</h1>
-    <p id = "descricao_tipo">Monitores são telas que exibem informações do computador. Vêm em diferentes tamanhos e tecnologias, como LCD e LED. Essenciais para visualização e interação com o conteúdo digital.</p>
+    <h1 id = "titulo_produto">Teclados</h1>
+    <p id = "descricao_tipo">Teclados são dispositivos de entrada essenciais para inserir dados em computadores. Vêm em diferentes layouts e designs, incluindo teclados padrão e ergonômicos. Amplamente utilizados em uma variedade de aplicativos, desde digitação até jogos e programação.</p>
 
     <div class="caixas">
                     <?php
-                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Monitor.* FROM Produto_Tipo p 
-                    JOIN Monitor ON p.fk_Cod_Monitor = Monitor.Cod_Monitor
-                    WHERE p.fk_Cod_Monitor IS NOT NULL LIMIT 10;";
+                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Teclado.* FROM Produto_Tipo p 
+                    JOIN Teclado ON p.fk_Cod_Teclado = Teclado.Cod_Teclado
+                    WHERE p.fk_Cod_Teclado IS NOT NULL LIMIT 10;";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="monitor/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="teclado/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
-                                        <div class="escritacaixa"><?php echo 'Monitor ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Taxa_Att'] . 'Hz  ' . ' ' . $row['Tempo_Resposta'] . 'ms ' . $row['Tamanho'] . ' ' . $row['Tipo_Painel'] . ' ' . $row['Resolucao'] ?></div>
+                                        <div class="escritacaixa"><?php echo $row['Tipo'].' '.$row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Cor'] . ' ' . $row['Iluminacao'] ?></div>
                                     </div>
                                     <p class="precocaixa">R$ <?php echo number_format($row['Preco'], 2, ',', '.'); ?></p>
                                     <p class="parcelamentopreco">10 x R$<?php echo number_format($row['Preco'] / 10, 2, ',', '.'); ?> sem juros no cartão de crédito</p>
