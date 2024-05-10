@@ -30,6 +30,11 @@
     $rowI = $resultI->fetch_assoc();
     $imgPerfil = $rowI['Imagem'];
 
+    $sqlP = "SELECT COUNT(*) AS Total_Pedido FROM Pedido WHERE fk_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+    $resultP = $conn->query($sqlP);
+    $rowP = $resultP->fetch_assoc();
+    $PedidoCompleto = $rowP['Total_Pedido'];
+
     if (!isset($_SESSION["Cod_Usuario"])) {
         header("Location: /kabo/");
         exit();
@@ -68,9 +73,9 @@
         <div id="destinos_salvos">
             <span id="titulo_destinos">Dados</span>
 
-            <a href="queroir/">
+            <a href="pedidos/">
                 <div class="quero_fui"><img src="../img/history.png" alt="icone quero ir">
-                    <p>Histórico de pedidos</p><span>0 pedidos</span>
+                    <p>Histórico de pedidos</p><span><?php echo $PedidoCompleto ?> pedidos</span>
                 </div>
             </a>
 
