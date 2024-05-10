@@ -13,13 +13,38 @@
     <?php
     include('../../connection.php');
     session_start();
+
+    $sql = "SELECT 
+            DATE_FORMAT(Dt_Pedido, '%e de ') as Dia,
+            CASE 
+                WHEN MONTHNAME(Dt_Pedido) = 'January' THEN 'Janeiro'
+                WHEN MONTHNAME(Dt_Pedido) = 'February' THEN 'Fevereiro'
+                WHEN MONTHNAME(Dt_Pedido) = 'March' THEN 'Março'
+                WHEN MONTHNAME(Dt_Pedido) = 'April' THEN 'Abril'
+                WHEN MONTHNAME(Dt_Pedido) = 'May' THEN 'Maio'
+                WHEN MONTHNAME(Dt_Pedido) = 'June' THEN 'Junho'
+                WHEN MONTHNAME(Dt_Pedido) = 'July' THEN 'Julho'
+                WHEN MONTHNAME(Dt_Pedido) = 'August' THEN 'Agosto'
+                WHEN MONTHNAME(Dt_Pedido) = 'September' THEN 'Setembro'
+                WHEN MONTHNAME(Dt_Pedido) = 'October' THEN 'Outubro'
+                WHEN MONTHNAME(Dt_Pedido) = 'November' THEN 'Novembro'
+                WHEN MONTHNAME(Dt_Pedido) = 'December' THEN 'Dezembro'
+            END AS Mes,
+            DATE_FORMAT(Dt_Pedido, '%Y') as Ano,
+            Forma_Pagamento,
+            Status,
+            Valor_total,
+            Cod_Pedido 
+        FROM Pedido 
+        WHERE fk_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+    $result = $conn->query($sql);
     ?>
     <iframe src="../../barrasNav.php" class="iframenav"></iframe>
     <section id="info">
         <div id="pneuMurcho">
             <img src="../../img/history.png" alt="icone quero ir">
             <p id="infoP1">HISTÓRICO DE PEDIDOS</p>
-            <p id="infoP2">123 pedidos feitos</p>
+            <p id="infoP2"><?php echo $result->num_rows;?> pedidos feitos</p>
         </div>
         <form action="" method="get">
             <input type="text" name="busca" id="busca" placeholder="Pesquisar todos os pedidos">
@@ -28,67 +53,54 @@
     </section>
 
     <section id="pedidos">
-        <div id="caixa_pedidos">
-            <div id="textoInfo">
-                <div class="alignStatusPedido">
-                    <div class="alignPedido">
-                        <p id="pedidoP1">Pedido realizado</p>
-                        <p id="statusP1">10 de janeiro de 2020</p>
-                    </div>
-                    <div class="alignPedido">
-                        <p id="pedidoP2">Valor total</p>
-                        <p id="statusP2">R$ 123,45</p>
-                    </div>
-                    <div class="alignPedido">
-                        <p id="pedidoP3">Status</p>
-                        <p id="statusP3">Entregue</p>
-                    </div>
-                </div>
-                <p id="pedidoP4">Pedido Nº2</p>
-            </div>
-            <div id="produto_caixa">
-                <img src="../../img/produto-2615-cadeira-gamer-75495.jpg" alt="">
-                <div>
-                    <p id="caixaP1">PC Gamer AMD Ryzen 5 5600G 6 Núcleos 4.40Ghz, Gráficos</p>
-                    <p id="caixaP2">Quantidade: <span id="quantidade">1</span></p>
-                </div>
-            </div>
-        </div>
-        <div id="caixa_pedidos">
-            <div id="textoInfo">
-                <div class="alignStatusPedido">
-                    <div class="alignPedido">
-                        <p id="pedidoP1">Pedido realizado</p>
-                        <p id="statusP1">10 de janeiro de 2020</p>
-                    </div>
-                    <div class="alignPedido">
-                        <p id="pedidoP2">Valor total</p>
-                        <p id="statusP2">R$ 123,45</p>
-                    </div>
-                    <div class="alignPedido">
-                        <p id="pedidoP3">Status</p>
-                        <p id="statusP3">Entregue</p>
-                    </div>
-                </div>
-                <p id="pedidoP4">Pedido Nº2</p>
-            </div>
-
-            <div id="produto_caixa">
-                <img src="../../img/produto-2615-cadeira-gamer-75495.jpg" alt="">
-                <div>
-                    <p id="caixaP1">PC Gamer AMD Ryzen 5 5600G 6 Núcleos 4.40Ghz, Gráficos</p>
-                    <p id="caixaP2">Quantidade: <span id="quantidade">1</span></p>
-                </div>
-            </div>
-            <div id="produto_caixa">
-                <img src="../../img/produto-2615-cadeira-gamer-75495.jpg" alt="">
-                <div>
-                    <p id="caixaP1">PC Gamer AMD Ryzen 5 5600G 6 Núcleos 4.40Ghz, Gráficos</p>
-                    <p id="caixaP2">Quantidade: <span id="quantidade">2</span></p>
-                </div>
-            </div>
-        </div>
-
+        <?php 
+            $i = 0;
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $i++;
+                    $data_formatada = $row['Dia'] . $row['Mes'] . ' de ' . $row['Ano'];
+                    echo '<div id="caixa_pedidos">';
+                    echo '<div id="textoInfo">';
+                    echo '<div class="alignStatusPedido">';
+                    echo '<div class="alignPedido">';
+                    echo '<p id="pedidoP1">Pedido realizado</p>';
+                    echo '<p id="statusP1">' . $data_formatada . '</p>';
+                    echo '</div>';
+                    echo '<div class="alignPedido">';
+                    echo '<p id="pedidoP2">Valor total</p>';
+                    echo '<p id="statusP2">R$ ' . $row['Valor_total'] . '</p>';
+                    echo '</div>';
+                    echo '<div class="alignPedido">';
+                    echo '<p id="pedidoP3">Status</p>';
+                    echo '<p id="statusP3">' . $row['Status'] . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<p id="pedidoP4">Pedido Nº' . $i .'</p>';
+                    echo '</div>';
+                    $sqlT = "SELECT fk_Cod_Produto_Tipo, Quantidade FROM Tem WHERE fk_Cod_Pedido = '{$row['Cod_Pedido']}'";
+                    $resultT = $conn->query($sqlT);
+                    if ($resultT && $resultT->num_rows > 0) {
+                        while ($rowT = $resultT->fetch_assoc()) {
+                            $sqlP = "SELECT Marca, Modelo, Imagem FROM Produto_Tipo WHERE Cod_Produto = '{$rowT['fk_Cod_Produto_Tipo']}'";
+                            $resultP = $conn->query($sqlP);
+                            $rowP = $resultP->fetch_assoc();
+                            echo '<div id="produto_caixa">';
+                            echo '<img src="data:image/jpeg;base64, ' . base64_encode($rowP['Imagem']) . ' " alt="">';
+                            echo '<div>';
+                            echo '<p id="caixaP1">' . $rowP['Marca'] . ' ' . $rowP['Modelo'] . '</p>';
+                            echo '<p id="caixaP2">Quantidade: <span id="quantidade">' . $rowT['Quantidade'] .'</span></p>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    }
+                    echo '</div>';
+                }
+            } else {
+                echo '<div class="avisoPerigoso">';
+                echo '<p id="avisoPesquisa">Nenhum há pedidos</p>';
+                echo '</div>';
+            }
+        ?>
     </section>
 </body>
 

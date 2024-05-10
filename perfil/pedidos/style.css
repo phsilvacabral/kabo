@@ -409,6 +409,18 @@ a:link {
     border-right: 1px solid rgba(102, 102, 102, 0.5);
 }
 
+.avisoPerigoso {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#avisoPesquisa {
+    font-family: 'poppins_medio';
+    font-size: 20px;
+    color: white;
+}
+
 @media (max-width: 840px) {
     #info {
         display: flex;
