@@ -1,3 +1,7 @@
+DROP DATABASE kabo;
+CREATE DATABASE kabo;
+USE kabo;
+
 CREATE TABLE Usuario (
     Cod_Usuario INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(100) NOT NULL,
@@ -7,7 +11,7 @@ CREATE TABLE Usuario (
     Senha CHAR(32) NOT NULL,
     Genero CHAR(1),
     Tipo_Usuario CHAR(1) NOT NULL,
-    Imagem LONGBLOB,
+	Imagem LONGBLOB,
     fk_Cod_Endereco INT,
     UNIQUE (Email, CPF)
 );
@@ -19,7 +23,7 @@ CREATE TABLE Endereco (
     Numero VARCHAR(5),
     Bairro VARCHAR(50) NOT NULL,
     Estado CHAR(2) NOT NULL,
-    Cidade VARCHAR(50)NOT NULL
+    Cidade VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Cartao_pagamento (
@@ -34,11 +38,11 @@ CREATE TABLE Cartao_pagamento (
 
 CREATE TABLE Pedido (
     Cod_Pedido INT PRIMARY KEY AUTO_INCREMENT,
-	fk_Cod_Usuario INT,
+    fk_Cod_Usuario INT,
     Dt_Pedido DATE,
     Forma_Pagamento VARCHAR(20),
     Status VARCHAR(20),
-    Valor_total FLOAT
+    Valor_total INT
 );
 
 CREATE TABLE CPU (
@@ -88,7 +92,7 @@ CREATE TABLE Memoria_Ram (
 CREATE TABLE Fonte (
     Cod_Fonte INT PRIMARY KEY AUTO_INCREMENT,
     Potencia INT,
-	Voltagem INT,
+    Voltagem INT,
     Corrente INT,
     Certificacao VARCHAR(20),
     Modular BOOLEAN,
@@ -128,9 +132,9 @@ CREATE TABLE Teclado (
     Cod_Teclado INT PRIMARY KEY AUTO_INCREMENT,
     Tipo VARCHAR(50),
     Layout VARCHAR(10),
-    Tamanho VARCHAR(20),
+    Tamanho VARCHAR(30),
     Formato VARCHAR(5),
-    Switch VARCHAR(20),
+    Switch VARCHAR(30),
     Cor VARCHAR(10),
     Iluminacao VARCHAR(10),
     Conexao VARCHAR(10),
@@ -160,6 +164,11 @@ CREATE TABLE Headset (
     Iluminacao VARCHAR(10)
 );
 
+CREATE TABLE KitProduto (
+    Cod_KitProduto INT PRIMARY KEY AUTO_INCREMENT,
+    Publico_Alvo VARCHAR(50)
+);
+
 CREATE TABLE Cupom (
     Cod_Cupom INT PRIMARY KEY AUTO_INCREMENT,
     fk_Cod_Usuario INT,
@@ -169,15 +178,16 @@ CREATE TABLE Cupom (
 CREATE TABLE Produto_Tipo (
     Cod_Produto INT PRIMARY KEY AUTO_INCREMENT,
     Descricao VARCHAR(100) NOT NULL,
-    Preco FLOAT NOT NULL,
+    Preco INT NOT NULL,
     Modelo VARCHAR(100) NOT NULL,
     Marca VARCHAR(100) NOT NULL,
     Qtd_estoque INT NOT NULL,
-    Imagem BLOB NOT NULL,
+    Imagem LONGBLOB NOT NULL,
     fk_Cod_PlacaMae INT,
     fk_Cod_GPU INT,
     fk_Cod_Fonte INT,
     fk_Cod_Gabinete INT,
+    fk_Cod_KitProduto INT,
     fk_Cod_Monitor INT,
     fk_Cod_Mouse INT,
     fk_Cod_Headset INT,
@@ -189,12 +199,6 @@ CREATE TABLE Produto_Tipo (
 
 CREATE TABLE Tem (
     fk_Cod_Pedido INT,
-    fk_Cod_Produto_Tipo INT,
-    Quantidade INT
-);
-
-CREATE TABLE AdicionaCarrinho (
-    fk_Cod_Usuario INT,
     fk_Cod_Produto_Tipo INT,
     Quantidade INT
 );
@@ -241,30 +245,34 @@ ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_5
     REFERENCES Gabinete (Cod_Gabinete);
  
 ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_6
+    FOREIGN KEY (fk_Cod_KitProduto)
+    REFERENCES KitProduto (Cod_KitProduto);
+ 
+ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_7
     FOREIGN KEY (fk_Cod_Monitor)
     REFERENCES Monitor (Cod_Monitor);
  
-ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_7
+ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_8
     FOREIGN KEY (fk_Cod_Mouse)
     REFERENCES Mouse (Cod_Mouse);
  
-ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_8
+ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_9
     FOREIGN KEY (fk_Cod_Headset)
     REFERENCES Headset (Cod_Headset);
  
-ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_9
+ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_10
     FOREIGN KEY (fk_Cod_MemRAM)
     REFERENCES Memoria_Ram (Cod_MemRAM);
  
-ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_10
+ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_11
     FOREIGN KEY (fk_Cod_Armazenamento)
     REFERENCES Armazenamento (Cod_Armazenamento);
  
-ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_11
+ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_12
     FOREIGN KEY (fk_Cod_Teclado)
     REFERENCES Teclado (Cod_Teclado);
  
-ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_12
+ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_13
     FOREIGN KEY (fk_Cod_CPU)
     REFERENCES CPU (Cod_CPU);
  
@@ -277,13 +285,3 @@ ALTER TABLE Tem ADD CONSTRAINT FK_Tem_2
     FOREIGN KEY (fk_Cod_Produto_Tipo)
     REFERENCES Produto_Tipo (Cod_Produto)
     ON DELETE RESTRICT;
- 
-ALTER TABLE AdicionaCarrinho ADD CONSTRAINT FK_AdicionaCarrinho_1
-    FOREIGN KEY (fk_Cod_Usuario)
-    REFERENCES Usuario (Cod_Usuario)
-    ON DELETE SET NULL;
- 
-ALTER TABLE AdicionaCarrinho ADD CONSTRAINT FK_AdicionaCarrinho_2
-    FOREIGN KEY (fk_Cod_Produto_Tipo)
-    REFERENCES Produto_Tipo (Cod_Produto)
-    ON DELETE SET NULL;
