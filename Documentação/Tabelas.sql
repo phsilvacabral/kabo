@@ -199,7 +199,7 @@ CREATE TABLE AdicionaCarrinho (
     Quantidade INT
 );
  
-ALTER TABLE Usuario ADD CONSTRAINT FK_Usuario_2
+ALTER TABLE Usuario ADD CONSTRAINT FK_Endereco_2
     FOREIGN KEY (fk_Cod_Endereco)
     REFERENCES Endereco (Cod_Endereco)
     ON DELETE RESTRICT;
@@ -253,7 +253,7 @@ ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_8
     REFERENCES Headset (Cod_Headset);
  
 ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_9
-    FOREIGN KEY (fk_Ram_MemRAM)
+    FOREIGN KEY (fk_Cod_MemRAM)
     REFERENCES Memoria_Ram (Cod_MemRAM);
  
 ALTER TABLE Produto_Tipo ADD CONSTRAINT FK_Produto_Tipo_10
