@@ -71,13 +71,12 @@
         <section class="secondnavbar">
             <a href=""><button class="boxsecondnavbar">Monte seu PC</button></a>
             <button class="boxsecondnavbar">PC pré-montado</button>
-            <button class="boxsecondnavbar">CPU</button>
-            <button class="boxsecondnavbar">Placa de Vídeo</button>
-            <button class="boxsecondnavbar">Processador</button>
-            <button class="boxsecondnavbar">Memórias</button>
-            <button class="boxsecondnavbar">Placa Mãe</button>
-            <button class="boxsecondnavbar">Gabinete</button>
-
+            <a href="cpu/" target="_parent"><button class="boxsecondnavbar">Processador</button></a>
+            <a href="gpu/" target="_parent"><button class="boxsecondnavbar">Placa de Vídeo</button></a>
+            <a href="armazenamento/" target="_parent"><button class="boxsecondnavbar">Armazenamento</button></a>
+            <a href="memoriaRam/" target="_parent"><button class="boxsecondnavbar">Memória</button></a>
+            <a href="placaMae/" target="_parent"><button class="boxsecondnavbar">Placa Mãe</button></a>
+            <a href="gabinete/" target="_parent"><button class="boxsecondnavbar">Gabinete</button></a>
         </section>
     </header>
 </body>

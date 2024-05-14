@@ -37,24 +37,24 @@
             <div class="dados_footer" id="links_footer">
                 <p>Departamentos</p>
                 <ul>
-                    <li><a href="nacionais/">Memória</a></li>
-                    <li><a href="internacionais/">Processador</a></li>
-                    <li><a href="blog/">Placa de vídeo</a></li>
-                    <li><a href="perfil/">Gabinete</a></li>
-                    <li><a href="123recompensa/">Monitor</a></li>
+                    <li><a href="memoriaRam/" target="_parent">Memória</a></li>
+                    <li><a href="cpu/" target="_parent">Processador</a></li>
+                    <li><a href="gpu/" target="_parent">Placa de vídeo</a></li>
+                    <li><a href="gabinete/" target="_parent">Gabinete</a></li>
+                    <li><a href="monitor/" target="_parent">Monitor</a></li>
                 </ul>
             </div>
 
             <div class="dados_footer" id="links_footer">
                 <p>Links</p>
                 <ul>
-                    <li><a href="nacionais/">Home</a></li>
-                    <li><a href="internacionais/">Perfil</a></li>
+                    <li><a href="/kabo" target="_parent">Home</a></li>
+                    <li><a href="/kabo/perfil" target="_parent">Perfil</a></li>
                     <li><a href="blog/">Carrinho</a></li>
                 </ul>
             </div>
 
-            <div id="copy123folhas"><a href="../">&copy;Kabo</a></div>
+            <div id="copy123folhas"><a href="/kabo" target="_parent">&copy;Kabo</a></div>
         </div>
     </footer>
 

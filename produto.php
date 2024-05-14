@@ -18,37 +18,37 @@
     <iframe src="barrasNav.php" frameborder="0" class="iframenav"></iframe>
 
     <?php if ($tipo == "CPU") {
-        include ('./cpu/index.php');
+        include ('./cpu/cpu.php');
     }
     if ($tipo == "GPU") {
-        include ('./gpu/index.php');
+        include ('./gpu/gpu.php');
     }
     if ($tipo == "Placa_Mae") {
-        include ('./placaMae/index.php');
+        include ('./placaMae/placaMae.php');
     }
     if ($tipo == "Memoria_Ram") {
-        include ('./memoriaRam/index.php');
+        include ('./memoriaRam/memoriaRam.php');
     }
     if ($tipo == "Armazenamento") {
-        include ('./armazenamento/index.php');
+        include ('./armazenamento/armazenamento.php');
     }
     if ($tipo == "Fonte") {
-        include ('./fonte/index.php');
+        include ('./fonte/fonte.php');
     }
     if ($tipo == "Gabinete") {
-        include ('./gabinete/index.php');
+        include ('./gabinete/gabinete.php');
     }
     if ($tipo == "Monitor") {
-        include ('./monitor/index.php');
+        include ('./monitor/monitor.php');
     }
     if ($tipo == "Mouse") {
-        include ('./mouse/index.php');
+        include ('./mouse/mouse.php');
     }
     if ($tipo == "Headset") {
-        include ('./headset/index.php');
+        include ('./headset/headset.php');
     }
     if ($tipo == "Teclado") {
-        include ('./teclado/index.php');
+        include ('./teclado/teclado.php');
     }
     ?>
 
