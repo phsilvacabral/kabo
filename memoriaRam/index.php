@@ -4,7 +4,7 @@
 
             <?php
             $id = $_GET['id'];
-            $sql = "SELECT * FROM Produto_Tipo JOIN Gabinete ON fk_Cod_Gabinete = Gabinete.Cod_Gabinete WHERE Cod_Produto = $id";
+            $sql = "SELECT * FROM Produto_Tipo JOIN Memoria_Ram ON fk_Cod_MemRAM = Memoria_Ram.Cod_memRam WHERE Cod_Produto = $id";
             $result = $conn->query($sql);
             $sqlEndereco = "SELECT * FROM Endereco";
             $resultEndereco = $conn->query($sqlEndereco);
@@ -12,12 +12,13 @@
             $resultUsuario = $conn->query($sqlUsuario);
             ?>
 
+            <!-- echo 'CPU ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Frequencia'] . 'Hz ' . $row['Tipo_Mem'] . ' ' . $row['Nucleos'] . ' núcleos'; -->
             <?php while ($row = $result->fetch_assoc() and $rowEndereco = $resultEndereco->fetch_assoc() and $rowUsuario = $resultUsuario->fetch_assoc()) { ?>
                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" id="fotoProduto">
                 <div class="alignTexts">
                     <p id="descricaoMarcaModelo">
                         <?php
-                        echo 'Gabinete ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Slot_GPU'] . ' slots p/ GPU ' . $row['Tamanho_GPU']
+                        echo 'Memoria Ram' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Cap_Mem'] . 'GB ' . $row['Tipo_Mem'] . ' ' . $row['Vel_Mem'] . 'Mb/s';
                         ?>
                     </p>
 
@@ -30,36 +31,20 @@
                         <img src="img/chip.png" alt="">
                         <p id="titleespecificacoes">ESPECIFICAÇÕES TÉCNICAS</p>
                     </div>
-
                     <p id="especificacoes"></p>
                     <div class="alignInRow">
-                        <p>Marca</p>
-                        <p><?php echo $row['Marca'] ?></p>
+                        <p>Tipo Memória</p>
+                        <p><?php echo $row['Tipo_Mem'] ?></p>
                     </div>
                     <div class="alignInRow">
-                        <p>Modelo</p>
-                        <p><?php echo $row['Modelo'] ?></p>
+                        <p>Velocidade Memória</p>
+                        <p><?php echo $row['Vel_Mem'] ?></p>
                     </div>
                     <div class="alignInRow">
-                        <p>Tamanho</p>
-                        <p><?php echo $row['Tamanho'] ?></p>
+                        <p>Capacidade Memória</p>
+                        <p><?php echo $row['Cap_Mem'] ?></p>
                     </div>
-                    <div class="alignInRow">
-                        <p>Tamanho PM</p>
-                        <p><?php echo $row['Tamanho_PM'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tamanho FT</p>
-                        <p><?php echo $row['Tamanho_FT'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tamanho GPU</p>
-                        <p><?php echo $row['Tamanho_GPU'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Slot GPU</p>
-                        <p><?php echo $row['Slot_GPU'] ?></p>
-                    </div>
+
                 </div>
 
                 <div class="areaAddCarrinho">

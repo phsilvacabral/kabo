@@ -2,9 +2,9 @@
     <div class="boxfundo2">
         <div class="alignConteudo">
 
-            <?php
+        <?php
             $id = $_GET['id'];
-            $sql = "SELECT * FROM Produto_Tipo JOIN Gabinete ON fk_Cod_Gabinete = Gabinete.Cod_Gabinete WHERE Cod_Produto = $id";
+            $sql = "SELECT * FROM Produto_Tipo JOIN Placa_Mae ON fk_Cod_PlacaMae = Placa_Mae.Cod_PlacaMae WHERE Cod_Produto = $id";
             $result = $conn->query($sql);
             $sqlEndereco = "SELECT * FROM Endereco";
             $resultEndereco = $conn->query($sqlEndereco);
@@ -12,12 +12,14 @@
             $resultUsuario = $conn->query($sqlUsuario);
             ?>
 
+            <!-- echo 'CPU ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Frequencia'] . 'Hz ' . $row['Tipo_Mem'] . ' ' . $row['Nucleos'] . ' núcleos'; -->
+
             <?php while ($row = $result->fetch_assoc() and $rowEndereco = $resultEndereco->fetch_assoc() and $rowUsuario = $resultUsuario->fetch_assoc()) { ?>
                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" id="fotoProduto">
                 <div class="alignTexts">
                     <p id="descricaoMarcaModelo">
                         <?php
-                        echo 'Gabinete ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Slot_GPU'] . ' slots p/ GPU ' . $row['Tamanho_GPU']
+                         echo 'Placa Mãe' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Soquete'] . ' ' . $row['Tipo_Mem'] . ' ' . $row['Vel_Mem'] . 'Mb/s';
                         ?>
                     </p>
 
@@ -30,36 +32,39 @@
                         <img src="img/chip.png" alt="">
                         <p id="titleespecificacoes">ESPECIFICAÇÕES TÉCNICAS</p>
                     </div>
-
                     <p id="especificacoes"></p>
                     <div class="alignInRow">
-                        <p>Marca</p>
-                        <p><?php echo $row['Marca'] ?></p>
+                        <p>Soquete</p>
+                        <p><?php echo $row['Soquete'] ?></p>
                     </div>
                     <div class="alignInRow">
-                        <p>Modelo</p>
-                        <p><?php echo $row['Modelo'] ?></p>
+                        <p>Tipo Memória</p>
+                        <p><?php echo $row['Tipo_Mem'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Velocidade Memória</p>
+                        <p><?php echo $row['Vel_Mem'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>PCIE</p>
+                        <p><?php echo $row['PCIe'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>M2</p>
+                        <p><?php echo $row['M2'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>SATA</p>
+                        <p><?php echo $row['SATA'] ?></p>
                     </div>
                     <div class="alignInRow">
                         <p>Tamanho</p>
                         <p><?php echo $row['Tamanho'] ?></p>
                     </div>
                     <div class="alignInRow">
-                        <p>Tamanho PM</p>
-                        <p><?php echo $row['Tamanho_PM'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tamanho FT</p>
-                        <p><?php echo $row['Tamanho_FT'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tamanho GPU</p>
-                        <p><?php echo $row['Tamanho_GPU'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Slot GPU</p>
-                        <p><?php echo $row['Slot_GPU'] ?></p>
-                    </div>
+                        <p>Chipset</p>
+                        <p><?php echo $row['Chipset'] ?></p>
+                    </div>                   
                 </div>
 
                 <div class="areaAddCarrinho">

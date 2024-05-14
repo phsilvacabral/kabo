@@ -1,51 +1,155 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<div class="moveboxfundo">
+    <div class="boxfundo2">
+        <div class="alignConteudo">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../produtos.css">
-    <title>Monitor</title>
-</head>
+            <?php
+            $id = $_GET['id'];
+            $sql = "SELECT * FROM Produto_Tipo JOIN Monitor ON fk_Cod_Monitor = Monitor.Cod_Monitor WHERE Cod_Produto = $id";
+            $result = $conn->query($sql);
+            $sqlEndereco = "SELECT * FROM Endereco";
+            $resultEndereco = $conn->query($sqlEndereco);
+            $sqlUsuario = "SELECT * FROM Usuario";
+            $resultUsuario = $conn->query($sqlUsuario);
+            ?>
 
-<body>
-    <?php
-    include ('../connection.php');
-    session_start();
-    ?>
-    <iframe src="../barrasNav.php" class="iframenav"></iframe>
+            <?php while ($row = $result->fetch_assoc() and $rowEndereco = $resultEndereco->fetch_assoc() and $rowUsuario = $resultUsuario->fetch_assoc()) { ?>
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" id="fotoProduto">
+                <div class="alignTexts">
+                    <p id="descricaoMarcaModelo">
+                        <?php
+                        echo 'Monitor ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Taxa_Att'] . 'Hz  ' . ' ' . $row['Tempo_Resposta'] . 'ms ' . $row['Tamanho'] . ' ' . $row['Tipo_Painel'] . ' ' . $row['Resolucao'];
+                        ?>
+                    </p>
 
-    <main>
+                    <div class="alignImgTitleDescricao">
+                        <img src="img/escrita.png" alt="">
+                        <p id="titleDescricao">DESCRIÇÃO</p>
+                    </div>
+                    <p id="descricao"><?php echo $row['Descricao'] ?></p>
+                    <div class="alignImgTitleDescricao">
+                        <img src="img/chip.png" alt="">
+                        <p id="titleespecificacoes">ESPECIFICAÇÕES TÉCNICAS</p>
+                    </div>
 
-    <h1 id = "titulo_produto">Monitores</h1>
-    <p id = "descricao_tipo">Monitores são telas que exibem informações do computador. Vêm em diferentes tamanhos e tecnologias, como LCD e LED. Essenciais para visualização e interação com o conteúdo digital.</p>
+                    <p id="especificacoes"></p>
+                    <div class="alignInRow">
+                        <p>Marca</p>
+                        <p><?php echo $row['Marca'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Modelo</p>
+                        <p><?php echo $row['Modelo'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Tamanho</p>
+                        <p><?php echo $row['Tamanho'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Tipo Painel</p>
+                        <p><?php echo $row['Tipo_Painel'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Resolução</p>
+                        <p><?php echo $row['Resolucao'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Proporção</p>
+                        <p><?php echo $row['Proporcao'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Taxa Atualização</p>
+                        <p><?php echo $row['Taxa_Att'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>HDMI</p>
+                        <p><?php echo $row['HDMI'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>DP</p>
+                        <p><?php echo $row['DP'] ?></p>
+                    </div>
+                    <div class="alignInRow">
+                        <p>Tempo Resposta</p>
+                        <p><?php echo $row['Tempo_Resposta'] ?></p>
+                    </div>
 
-    <div class="caixas">
-                    <?php
-                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Monitor.* FROM Produto_Tipo p 
-                    JOIN Monitor ON p.fk_Cod_Monitor = Monitor.Cod_Monitor
-                    WHERE p.fk_Cod_Monitor IS NOT NULL LIMIT 10;";
-                    $result = $conn->query($sql);
-                    while ($row = $result->fetch_assoc()) { ?>
-                        <div class="bordacaixas">
-                            <a href="monitor/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
-                                <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
-                                <div class="linha0">
-                                    <div class="moverdescricaocaixa">
-                                        <div class="escritacaixa"><?php echo 'Monitor ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Taxa_Att'] . 'Hz  ' . ' ' . $row['Tempo_Resposta'] . 'ms ' . $row['Tamanho'] . ' ' . $row['Tipo_Painel'] . ' ' . $row['Resolucao'] ?></div>
-                                    </div>
-                                    <p class="precocaixa">R$ <?php echo number_format($row['Preco'], 2, ',', '.'); ?></p>
-                                    <p class="parcelamentopreco">10 x R$<?php echo number_format($row['Preco'] / 10, 2, ',', '.'); ?> sem juros no cartão de crédito</p>
-                                </div>
-                            </a>
-                        </div>
-                    <?php } ?>
                 </div>
-    </main>
 
-    <iframe src="../Rodape.php" class="iframefooter"></iframe>
+                <div class="areaAddCarrinho">
+                    <div class="alignPreco">
+                        <p>R$ <?php echo $row['Preco'] ?> </p>
+                        <p>&ensp;á vista</p>
+                    </div>
+                    <p id="textSemJuros">10 x <?php echo $row['Preco'] / 10 ?> sem juros no cartão de crédito</p>
 
-</body>
+                    <div class="alignDados">
+                        <p>Enviar para <?php echo $rowUsuario['Nome'] ?> - <?php echo $rowEndereco['Cidade'] ?> -
+                            <?php echo $rowEndereco['CEP'] ?>
+                        </p>
+                    </div>
+                    <p id="entregaGratis">Entrega Grátis</p>
 
-</html>
+                    <?php if ($row['Qtd_estoque'] == 0) { ?>
+                        <script>
+                            var elements = document.getElementsByClassName('areaAddCarrinho');
+                            for (var i = 0; i < elements.length; i++) {
+                                elements[i].style.display = 'none';
+                                elements[i].insertAdjacentHTML('afterend', "<p id='esgotado'>Esgotado!</p>");
+                            }
+                        </script>
+                    <?php } ?>
+                    <div class="quantidade">
+                        <p>Quantidade:</p>
+                    </div>
+                    <div class="number-control">
+                        <div class="number-left" onclick="diminuirValor()"></div>
+                        <input type="number" name="number" id="numberInput" class="number-quantity" min="1" max="10"
+                            value="1" step="1">
+                        <div class="number-right" onclick="incrementarValor()"></div>
+                    </div>
+
+                    <script>
+                        function incrementarValor() {
+                            var input = document.getElementById('numberInput');
+                            var currentValue = parseInt(input.value);
+                            var maxValue = parseInt(input.max);
+                            if (currentValue < maxValue) {
+                                input.value = currentValue + 1;
+                            }
+                        }
+
+                        function diminuirValor() {
+                            var input = document.getElementById('numberInput');
+                            var currentValue = parseInt(input.value);
+                            var minValue = parseInt(input.min);
+                            if (currentValue > minValue) {
+                                input.value = currentValue - 1;
+                            }
+                        }
+
+
+                        // buttonAdd.getElementsByTagName('p')[0]
+                        function addToCart() {
+                            var addButton = document.querySelector('.buttonAdd');
+                            var addedMessage = document.querySelector('.buttonAdded');
+
+                            addButton.style.display = 'none';
+                            addedMessage.style.visibility = 'visible';
+                        }
+                    </script>
+
+                    <div class="buttonAdd" onclick="addToCart()">
+                        <img src="img/carrinho.png" alt="" id="imgCarrinho">
+                        <p>Adicionar ao Carrinho</p>
+                    </div>
+
+                    <div class="buttonAdded" style="visibility:hidden;">
+                        <p>✓ Adicionado com Sucesso</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php } ?>
