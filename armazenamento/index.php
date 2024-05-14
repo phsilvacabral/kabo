@@ -29,7 +29,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="armazenamento/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="../produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Armazenamento" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">

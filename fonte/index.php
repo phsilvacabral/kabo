@@ -1,152 +1,51 @@
-<div class="moveboxfundo">
-    <div class="boxfundo2">
-        <div class="alignConteudo">
+<!DOCTYPE html>
+<html lang="pt-br">
 
-            <?php
-            $id = $_GET['id'];
-            $sql = "SELECT * FROM Produto_Tipo JOIN Fonte ON fk_Cod_Fonte = Fonte.Cod_Fonte WHERE Cod_Produto = $id";
-            $result = $conn->query($sql);
-            if (isset($_SESSION["Cod_Usuario"])) {
-                $sqlEndereco = "SELECT * FROM Endereco WHERE Cod_Endereco = '{$_SESSION['Cod_Usuario']}'";
-                $resultEndereco = $conn->query($sqlEndereco);
-                $sqlUsuario = "SELECT * FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-                $resultUsuario = $conn->query($sqlUsuario);
-                $sqlCarrinho = "INSERT INTO AdicionaCarrinho VALUES ";
-                $rowEndereco = $resultEndereco->fetch_assoc();
-                $rowUsuario = $resultUsuario->fetch_assoc();
-            }
-            ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../produtos.css">
+    <title>Fontes</title>
+</head>
 
-            <?php while ($row = $result->fetch_assoc()) { ?>
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" id="fotoProduto">
-                <div class="alignTexts">
-                    <p id="descricaoMarcaModelo">
-                        <?php
-                        echo 'Fonte ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Potencia'] . 'W ' . $row['Voltagem'] . ' VCA, ' . $row['Certificacao']
-                        ?>
-                    </p>
+<body>
+    <?php
+    include ('../connection.php');
+    session_start();
+    ?>
+    <iframe src="../barrasNav.php" class="iframenav"></iframe>
 
-                    <div class="alignImgTitleDescricao">
-                        <img src="img/escrita.png" alt="">
-                        <p id="titleDescricao">DESCRIÇÃO</p>
-                    </div>
-                    <p id="descricao"><?php echo $row['Descricao'] ?></p>
-                    <div class="alignImgTitleDescricao">
-                        <img src="img/chip.png" alt="">
-                        <p id="titleespecificacoes">ESPECIFICAÇÕES TÉCNICAS</p>
-                    </div>
+    <main>
 
-                    <p id="especificacoes"></p>
-                    <div class="alignInRow">
-                        <p>Marca</p>
-                        <p><?php echo $row['Marca'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Modelo</p>
-                        <p><?php echo $row['Modelo'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Potencia</p>
-                        <p><?php echo $row['Potencia'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Voltagem</p>
-                        <p><?php echo $row['Voltagem'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Corrente</p>
-                        <p><?php echo $row['Corrente'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Certificacao</p>
-                        <p><?php echo $row['Certificacao'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Modular</p>
-                        <p><?php echo $row['Modular'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tamanho</p>
-                        <p><?php echo $row['Tamanho'] ?></p>
-                    </div>
-                </div>
+    <h1 id = "titulo_produto">Fontes</h1>
+    <p id = "descricao_tipo">As fontes de alimentação são essenciais para os computadores, convertendo a corrente elétrica para fornecer energia aos componentes. Elas garantem que todos os outros dispositivos do computador recebam a energia necessária para funcionar corretamente.</p>
 
-                <div class="areaAddCarrinho">
-                    <div class="alignPreco">
-                        <p>R$ <?php echo $row['Preco'] ?> </p>
-                        <p>&ensp;á vista</p>
-                    </div>
-                    <p id="textSemJuros">10 x <?php echo $row['Preco'] / 10 ?> sem juros no cartão de crédito</p>
+    <div class="caixas">
                     <?php
-                        if (isset($_SESSION["Cod_Usuario"])) {
-                            echo '<div class="alignDados">';
-                            echo "<p>Enviar para $rowUsuario[Nome] - $rowEndereco[Cidade] - $rowEndereco[CEP]</p>";
-                            echo '</div>';
-                            echo '<p id="entregaGratis">Entrega Grátis</p>';
-                        }
-
-                    ?>
-                    <?php if ($row['Qtd_estoque'] == 0) { ?>
-                        <script>
-                            var elements = document.getElementsByClassName('areaAddCarrinho');
-                            for (var i = 0; i < elements.length; i++) {
-                                elements[i].style.display = 'none';
-                                elements[i].insertAdjacentHTML('afterend', "<p id='esgotado'>Esgotado!</p>");
-                            }
-                        </script>
+                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Fonte.* FROM Produto_Tipo p 
+                    JOIN Fonte ON p.fk_Cod_Fonte = Fonte.Cod_Fonte
+                    WHERE p.fk_Cod_Fonte IS NOT NULL LIMIT 10";
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <div class="bordacaixas">
+                            <a href="../produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Fonte" class="linkcaixa">
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
+                                <div class="linha0">
+                                    <div class="moverdescricaocaixa">
+                                        <div class="escritacaixa"><?php echo 'Fonte ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Potencia'] . 'W ' . $row['Voltagem'] . ' VCA, ' . $row['Certificacao'] ?></div>
+                                    </div>
+                                    <p class="precocaixa">R$ <?php echo number_format($row['Preco'], 2, ',', '.'); ?></p>
+                                    <p class="parcelamentopreco">10 x R$<?php echo number_format($row['Preco'] / 10, 2, ',', '.'); ?> sem juros no cartão de crédito</p>
+                                </div>
+                            </a>
+                        </div>
                     <?php } ?>
-                    <div class="quantidade">
-                        <p>Quantidade:</p>
-                    </div>
-                    <div class="number-control">
-                        <div class="number-left" onclick="diminuirValor()"></div>
-                        <input type="number" name="number" id="numberInput" class="number-quantity" min="1" max="10"
-                            value="1" step="1">
-                        <div class="number-right" onclick="incrementarValor()"></div>
-                    </div>
-
-                    <script>
-                        function incrementarValor() {
-                            var input = document.getElementById('numberInput');
-                            var currentValue = parseInt(input.value);
-                            var maxValue = parseInt(input.max);
-                            if (currentValue < maxValue) {
-                                input.value = currentValue + 1;
-                            }
-                        }
-
-                        function diminuirValor() {
-                            var input = document.getElementById('numberInput');
-                            var currentValue = parseInt(input.value);
-                            var minValue = parseInt(input.min);
-                            if (currentValue > minValue) {
-                                input.value = currentValue - 1;
-                            }
-                        }
-
-
-                        // buttonAdd.getElementsByTagName('p')[0]
-                        function addToCart() {
-                            var addButton = document.querySelector('.buttonAdd');
-                            var addedMessage = document.querySelector('.buttonAdded');
-
-                            addButton.style.display = 'none';
-                            addedMessage.style.visibility = 'visible';
-                        }
-                    </script>
-
-                    <div class="buttonAdd" onclick="addToCart()">
-                        <img src="img/carrinho.png" alt="" id="imgCarrinho">
-                        <p>Adicionar ao Carrinho</p>
-                    </div>
-
-                    <div class="buttonAdded" style="visibility:hidden;">
-                        <p>✓ Adicionado com Sucesso</p>
-                    </div>
-
                 </div>
-            </div>
-        </div>
-    </div>
+    </main>
 
-<?php } ?>
+    <iframe src="../Rodape.php" class="iframefooter"></iframe>
+
+</body>
+
+</html>
