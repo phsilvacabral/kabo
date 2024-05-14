@@ -14,7 +14,7 @@
     include('connection.php');
     session_start();
     ?>
-    <iframe src="barrasNav.php" class="iframenav"></iframe>
+    <iframe src="barrasNav.php" class="iframenav" style="height: 120px;"></iframe>
 
     <section>
         <div class="slideshow-container">
@@ -79,7 +79,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="cpu/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=CPU" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -112,7 +112,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="gpu/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=GPU" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -145,7 +145,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="plaamae/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Placa_Mae" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -178,7 +178,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="ram/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Memoria_Ram" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -209,7 +209,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="armazenamento/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Armazenamento" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -242,7 +242,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="fonte/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Fonte" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -275,7 +275,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="gabinete/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Gabinete" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -308,7 +308,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="monitor/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Monitor" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -341,7 +341,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="mouse/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Mouse" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -374,7 +374,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="headset/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Headset" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -407,7 +407,7 @@
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="teclado/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Teclado" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
