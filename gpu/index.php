@@ -1,189 +1,51 @@
-<div class="moveboxfundo">
-    <div class="boxfundo2">
-        <div class="alignConteudo">
+<!DOCTYPE html>
+<html lang="pt-br">
 
-            <?php
-            $id = $_GET['id'];
-            $sql = "SELECT * FROM Produto_Tipo JOIN GPU ON fk_Cod_GPU = GPU.Cod_GPU WHERE Cod_Produto = $id";
-            $result = $conn->query($sql);
-            
-            if (isset($_SESSION["Cod_Usuario"])) {
-                $sqlEndereco = "SELECT * FROM Endereco WHERE Cod_Endereco = '{$_SESSION['Cod_Usuario']}'";
-                $resultEndereco = $conn->query($sqlEndereco);
-                $sqlUsuario = "SELECT * FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-                $resultUsuario = $conn->query($sqlUsuario);
-                $sqlCarrinho = "INSERT INTO AdicionaCarrinho VALUES ";
-                $rowEndereco = $resultEndereco->fetch_assoc();
-                $rowUsuario = $resultUsuario->fetch_assoc();
-            } 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../produtos.css">
+    <title>GPU</title>
+</head>
 
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $selectItem = "SELECT * FROM AdicionaCarrinho WHERE fk_Cod_Produto_Tipo = $id";
-                $resultItem = $conn->query($selectItem);
-                if ($resultItem->num_rows > 0) {
-                    $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : 1;
-                    $sqlCarrinho = "UPDATE AdicionaCarrinho SET Quantidade = $quantidade WHERE fk_Cod_Produto_Tipo = $id and fk_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-                    $stmt = $conn->prepare($sqlCarrinho);
-                    $stmt->execute();
-                } else {
-                    $quantidade = isset($_POST['quantidade']) ? $_POST['quantidade'] : 1;
-                    $sqlCarrinho = "INSERT INTO AdicionaCarrinho VALUES ('{$_SESSION['Cod_Usuario']}', '$id', '$quantidade')";
-                    $stmt = $conn->prepare($sqlCarrinho);
-                    $stmt->execute();
-                }
-            }
-            ?>
+<body>
+    <?php
+    include ('../connection.php');
+    session_start();
+    ?>
+    <iframe src="../barrasNav.php" class="iframenav"></iframe>
 
-            <?php while ($row = $result->fetch_assoc()) { ?>
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" id="fotoProduto">
-                <div class="alignTexts">
-                    <p id="descricaoMarcaModelo">
-                        <?php
-                        echo 'GPU ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Tam_Memoria'] . 'GB ' . $row['Tipo_Mem'] . ' ' . $row['Nucleos'] . ' núcleos';
-                        ?>
-                    </p>
+    <main>
 
-                    <div class="alignImgTitleDescricao">
-                        <img src="img/escrita.png" alt="">
-                        <p id="titleDescricao">DESCRIÇÃO</p>
-                    </div>
-                    <p id="descricao"><?php echo $row['Descricao'] ?></p>
-                    <div class="alignImgTitleDescricao">
-                        <img src="img/chip.png" alt="">
-                        <p id="titleespecificacoes">ESPECIFICAÇÕES TÉCNICAS</p>
-                    </div>
-                    <p id="especificacoes"></p>
-                    <div class="alignInRow">
-                        <p>PCIE</p>
-                        <p><?php echo $row['PCIe'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Núcleos</p>
-                        <p><?php echo $row['Nucleos'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tamanho Memória</p>
-                        <p><?php echo $row['Tam_Memoria'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Velocidade Memória</p>
-                        <p><?php echo $row['Vel_Mem'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>TDP</p>
-                        <p><?php echo $row['TDP'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>SLOT</p>
-                        <p><?php echo $row['Slot'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tamanho</p>
-                        <p><?php echo $row['Tamanho'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tipo Memória</p>
-                        <p><?php echo $row['Tipo_Mem'] ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Velocidade Memória Compatível</p>
-                        <p><?php echo $row['Vel_Mem'] ?></p>
-                    </div>
-                </div>
+    <h1 id = "titulo_produto">GPUs</h1>
+    <p id = "descricao_tipo">Uma GPU, ou Unidade de Processamento Gráfico, é um componente de hardware projetado para processar e renderizar imagens em computadores. Ela é essencial para jogos, design gráfico e simulações científicas.</p>
 
-
-                <div class="areaAddCarrinho">
-                    <div class="alignPreco">
-                        <p>R$ <?php echo $row['Preco'] ?> </p>
-                        <p>&ensp;á vista</p>
-                    </div>
-                    <p id="textSemJuros">10 x <?php echo $row['Preco'] / 10 ?> sem juros no cartão de crédito</p>
+    <div class="caixas">
                     <?php
-                        if (isset($_SESSION["Cod_Usuario"])) {
-                            echo '<div class="alignDados">';
-                            echo "<p>Enviar para $rowUsuario[Nome] - $rowEndereco[Cidade] - $rowEndereco[CEP]</p>";
-                            echo '</div>';
-                            echo '<p id="entregaGratis">Entrega Grátis</p>';
-                        }
-
-                    ?>
-                    <?php if ($row['Qtd_estoque'] == 0) { ?>
-                        <script>
-                            var elements = document.getElementsByClassName('areaAddCarrinho');
-                            for (var i = 0; i < elements.length; i++) {
-                                elements[i].style.display = 'none';
-                                elements[i].insertAdjacentHTML('afterend', "<p id='esgotado'>Esgotado!</p>");
-                            }
-                        </script>
+                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, GPU.* FROM Produto_Tipo p 
+                    JOIN GPU ON p.fk_Cod_GPU = GPU.Cod_GPU 
+                    WHERE p.fk_Cod_GPU IS NOT NULL LIMIT 10";
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <div class="bordacaixas">
+                            <a href="../produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=GPU" class="linkcaixa">
+                                <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
+                                <div class="linha0">
+                                    <div class="moverdescricaocaixa">
+                                        <div class="escritacaixa"><?php echo 'GPU ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Tam_Memoria'] . 'GB ' . $row['Tipo_Mem'] . ' ' . $row['Nucleos'] . ' núcleos' ?></div>
+                                    </div>
+                                    <p class="precocaixa">R$ <?php echo number_format($row['Preco'], 2, ',', '.'); ?></p>
+                                    <p class="parcelamentopreco">10 x R$<?php echo number_format($row['Preco'] / 10, 2, ',', '.'); ?> sem juros no cartão de crédito</p>
+                                </div>
+                            </a>
+                        </div>
                     <?php } ?>
-                    <div class="quantidade">
-                        <p>Quantidade:</p>
-                    </div>
-                    <form action="" method="post">
-                        <div class="number-control">
-                            <div class="number-left" onclick="diminuirValor()"></div>
-                            <input type="number" name="quantidade" id="numberInput" class="number-quantity" min="1" max="10"
-                                value="1" step="1">
-                            <div class="number-right" onclick="incrementarValor()"></div>
-                        </div>
-
-                        <script>
-                            function incrementarValor() {
-                                var input = document.getElementById('numberInput');
-                                var currentValue = parseInt(input.value);
-                                var maxValue = parseInt(input.max);
-                                if (currentValue < maxValue) {
-                                    input.value = currentValue + 1;
-                                }
-                            }
-
-                            function diminuirValor() {
-                                var input = document.getElementById('numberInput');
-                                var currentValue = parseInt(input.value);
-                                var minValue = parseInt(input.min);
-                                if (currentValue > minValue) {
-                                    input.value = currentValue - 1;
-                                }
-                            }
-
-
-                            // buttonAdd.getElementsByTagName('p')[0]
-                            function addToCart() {
-                                var addButton = document.querySelector('.buttonAdd');
-                                var addedMessage = document.querySelector('.buttonAdded');
-
-                                addButton.style.display = 'none';
-                                addedMessage.style.visibility = 'visible';
-                            } function addToCart(event) {
-                                event.preventDefault(); // Impede o envio do formulário
-
-                                var form = event.target.closest('form');
-                                var formData = new FormData(form);
-
-                                var xhr = new XMLHttpRequest();
-                                xhr.onreadystatechange = function () {
-                                    if (xhr.readyState == 4 && xhr.status == 200) {
-                                        // Exibir resposta ou fazer outras operações após o sucesso
-                                        var response = xhr.responseText;
-                                        console.log(response); // Exemplo: exibir a resposta no console
-                                    }
-                                };
-                                xhr.open(form.method, form.action, true);
-                                xhr.send(formData);
-                            }
-                        </script>
-
-                        <input type="submit" value="Adicionar ao Carrinho" class="buttonAdd">
-
-                        <div class="buttonAdded" style="visibility:hidden;">
-                            <p>✓ Adicionado com Sucesso</p>
-                        </div>
-                    </form>
-
                 </div>
-            </div>
-        </div>
-    </div>
-    </div>
+    </main>
 
-<?php } ?>
+    <iframe src="../Rodape.php" class="iframefooter"></iframe>
+
+</body>
+
+</html>
