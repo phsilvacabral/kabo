@@ -6,10 +6,17 @@
             $id = $_GET['id'];
             $sql = "SELECT * FROM Produto_Tipo JOIN GPU ON fk_Cod_GPU = GPU.Cod_GPU WHERE Cod_Produto = $id";
             $result = $conn->query($sql);
-            $sqlEndereco = "SELECT * FROM Endereco WHERE Cod_Endereco = '{$_SESSION['Cod_Usuario']}'";
-            $resultEndereco = $conn->query($sqlEndereco);
-            $sqlUsuario = "SELECT * FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
-            $resultUsuario = $conn->query($sqlUsuario);
+            
+            if (isset($_SESSION["Cod_Usuario"])) {
+                $sqlEndereco = "SELECT * FROM Endereco WHERE Cod_Endereco = '{$_SESSION['Cod_Usuario']}'";
+                $resultEndereco = $conn->query($sqlEndereco);
+                $sqlUsuario = "SELECT * FROM Usuario WHERE Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+                $resultUsuario = $conn->query($sqlUsuario);
+                $sqlCarrinho = "INSERT INTO AdicionaCarrinho VALUES ";
+                $rowEndereco = $resultEndereco->fetch_assoc();
+                $rowUsuario = $resultUsuario->fetch_assoc();
+            } 
+
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $selectItem = "SELECT * FROM AdicionaCarrinho WHERE fk_Cod_Produto_Tipo = $id";
                 $resultItem = $conn->query($selectItem);
@@ -24,11 +31,10 @@
                     $stmt = $conn->prepare($sqlCarrinho);
                     $stmt->execute();
                 }
-
             }
             ?>
 
-            <?php while ($row = $result->fetch_assoc() and $rowEndereco = $resultEndereco->fetch_assoc() and $rowUsuario = $resultUsuario->fetch_assoc()) { ?>
+            <?php while ($row = $result->fetch_assoc()) { ?>
                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" id="fotoProduto">
                 <div class="alignTexts">
                     <p id="descricaoMarcaModelo">
@@ -92,14 +98,15 @@
                         <p>&ensp;á vista</p>
                     </div>
                     <p id="textSemJuros">10 x <?php echo $row['Preco'] / 10 ?> sem juros no cartão de crédito</p>
+                    <?php
+                        if (isset($_SESSION["Cod_Usuario"])) {
+                            echo '<div class="alignDados">';
+                            echo "<p>Enviar para $rowUsuario[Nome] - $rowEndereco[Cidade] - $rowEndereco[CEP]</p>";
+                            echo '</div>';
+                            echo '<p id="entregaGratis">Entrega Grátis</p>';
+                        }
 
-                    <div class="alignDados">
-                        <p>Enviar para <?php echo $rowUsuario['Nome'] ?> - <?php echo $rowEndereco['Cidade'] ?> -
-                            <?php echo $rowEndereco['CEP'] ?>
-                        </p>
-                    </div>
-                    <p id="entregaGratis">Entrega Grátis</p>
-
+                    ?>
                     <?php if ($row['Qtd_estoque'] == 0) { ?>
                         <script>
                             var elements = document.getElementsByClassName('areaAddCarrinho');
