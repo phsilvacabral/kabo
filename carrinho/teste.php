@@ -85,9 +85,9 @@
                             </div>
                         </div>
                         <div class="divPrecoRemover">
-                            <p class="precoInvisivel" style="display: none; height: 0px"><?php echo $preco; ?></p>
+                            <p class="precoInvisivel" style="display: none; height: 0px"><?php echo $preco;?></p>
                             <p class="precoItem">R$ </p>
-                            <p class="parcelamentoCesta">10 x sem juros no cartão</p>
+                            <p class="parcelamentoCesta">10 x  sem juros no cartão</p>
                             <p class="removerItem">Remover</p>
                         </div>
                     </div><?php } ?>
@@ -152,11 +152,11 @@
                 <div id="divCupom" class="divsResumo">
                     <p id="textoCupom" class="textosResumo">Cupom de desconto: </p>
                     <span id="maisCupom">+</span>
+
                     <form action="" id="formCupom">
                         <input type="text" name="cupom" id="cupom" placeholder="Adicionar cupom">
                         <button id="botaoCupom">Aplicar</button>
                     </form>
-                    <span id="cupomUsado"></span>
                 </div>
 
                 <div id="divFreteResumo" class="divsResumo">
@@ -261,7 +261,7 @@
                 });
                 $('#qtdCarrinho').text(soma + ' itens');
             }
-
+        
             $('.number-quantity').change(function(e) {
                 e.preventDefault();
                 var form = $(this).closest('form');
@@ -273,18 +273,18 @@
                         console.log(response);
                     }
                 });
-
+        
                 if ($(this).val() == 0) {
                     $(this).closest('.itemCesta').fadeOut(200);
                 }
-
+        
                 atualizarSoma();
             });
-
+        
             $('.removerItem').click(function() {
                 $(this).closest('.itemCesta').find('.number-quantity').val(0).trigger('change');
             });
-
+        
             atualizarSoma();
         });
 
@@ -336,23 +336,23 @@
                 });
                 $('#valorSubtotal').text('R$ ' + subtotal.toFixed(2).replace('.', ','));
             }
-
+        
             /* função para atualizar o preço dos itens */
             $(document).ready(function() {
-                $('.number-quantity').on('change keyup', function() {
-                    var quantidade = parseInt($(this).val());
-                    var precoUnitarioText = $(this).closest('.itemCesta').find('.precoInvisivel').text().replace('R$', '').replace(',', '.');
-                    var precoUnitario = parseFloat(precoUnitarioText);
-                    if (!isNaN(quantidade) && !isNaN(precoUnitario)) {
-                        var precoTotal = (precoUnitario * quantidade).toFixed(2);
-                        $(this).closest('.itemCesta').find('.precoItem').text('R$ ' + precoTotal.replace('.', ','));
-                        var parcelamento = (precoTotal / 10).toFixed(2);
-                        $(this).closest('.itemCesta').find('.parcelamentoCesta').text('10 x R$ ' + parcelamento.replace('.', ',') + ' sem juros no cartão');
-                    }
-                    atualizarSubtotal();
-                }).trigger('change');
-            });
-
+            $('.number-quantity').on('change keyup', function() {
+                var quantidade = parseInt($(this).val());
+                var precoUnitarioText = $(this).closest('.itemCesta').find('.precoInvisivel').text().replace('R$', '').replace(',', '.');
+                var precoUnitario = parseFloat(precoUnitarioText);
+                if (!isNaN(quantidade) && !isNaN(precoUnitario)) {
+                    var precoTotal = (precoUnitario * quantidade).toFixed(2);
+                    $(this).closest('.itemCesta').find('.precoItem').text('R$ ' + precoTotal.replace('.', ','));
+                    var parcelamento = (precoTotal / 10).toFixed(2);
+                    $(this).closest('.itemCesta').find('.parcelamentoCesta').text('10 x R$ ' + parcelamento.replace('.', ',') + ' sem juros no cartão');
+                }
+                atualizarSubtotal();
+            }).trigger('change');
+        });
+        
             /* função para esvaziar carrinho */
             $('#esvaziarCarrinho').click(function() {
                 $('.number-quantity').val(0).trigger('change');
@@ -360,7 +360,7 @@
                     window.location.href = "../carrinho/";
                 }, 200);
             });
-
+        
             /* função para remover item individual */
             $('.removerItem').click(function() {
                 $(this).closest('.itemCesta').find('.number-quantity').val(0).trigger('change');
@@ -377,7 +377,7 @@
                     }, 200);
                 }
             });
-
+        
             // Atualiza o subtotal quando a página é carregada
             atualizarSubtotal();
         });
@@ -399,22 +399,10 @@
                             var valorTotalFinal = parseFloat(valorTotalFinalText);
                             if (!isNaN(valorTotalFinal)) {
                                 var valorComDesconto = valorTotalFinal - (valorTotalFinal * (desconto / 100));
-                                $('#valorTotalFinal').text('R$ ' + valorComDesconto.toLocaleString('pt-BR', {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                }));
-
-                                // Esconde o formulário do cupom com um efeito de fade out
-                                $('#formCupom').fadeOut(function() {
-                                    // Mostra o cupom usado com um efeito de fade in
-                                    $('#cupomUsado').text('- R$ ' + (valorTotalFinal - valorComDesconto).toLocaleString('pt-BR', {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
-                                    })).fadeIn();
-                                });
+                                $('#valorTotalFinal').text('R$ ' + valorComDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                             }
                         } else {
-                            $('#formCupom').val('')
+                            // Código para lidar com a situação em que o cupom não é válido
                         }
                     }
                 });
