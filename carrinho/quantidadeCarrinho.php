@@ -1,5 +1,5 @@
 <?php
-include('../connection.php');
+include('connection.php');
 session_start();
 
 $Cod_Usuario = $_SESSION['Cod_Usuario'];
