@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="spaceperfil">
-                    <a href=""><img src="img/carrinho.png" alt="carrinho" class="carrinho"></a>
+                    <a href="carrinho/" target="_parent"><img src="img/carrinho.png" alt="carrinho" class="carrinho"></a>
                     <?php if (!isset($_SESSION['Cod_Usuario'])) : ?>
                         <a href="login/" target="_parent">
                             <figure>
