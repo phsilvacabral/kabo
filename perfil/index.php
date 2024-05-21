@@ -85,7 +85,7 @@
                 </div>
             </a>
 
-            <a href="../carrinho/">
+            <a href="cartoes/">
                 <div class="quero_fui"><img src="../img/card.png" alt="icone já fui">
                     <p>Meus cartões</p><span>0 adicionados</span>
                 </div>
