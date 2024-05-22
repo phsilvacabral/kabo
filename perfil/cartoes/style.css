@@ -94,6 +94,34 @@ body {
     gap: 20px;
 }
 
+.addCartao {
+    max-width: 360px;
+    width: 100%;
+    min-height: 110px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border: 1px solid rgba(240, 51, 51, 1);
+    border-radius: 2px;
+}
+
+.addCartao:hover {
+    box-shadow: 0px 0px 75px 0px rgba(240, 51, 51, 0.25) inset;
+
+}
+
+.addCartao p {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+    font-size: 30px;
+    font-weight: 900;
+}
+
 .caixasCartao {
     max-width: 360px;
     width: 100%;
@@ -107,9 +135,12 @@ body {
 }
 
 @media (max-width:400px) {
-    .caixasCartao{
+    .caixasCartao {
         display: flex;
         flex-direction: column;
+        max-width: 190px;
+    }
+    .addCartao{
         max-width: 190px;
     }
 }
@@ -192,14 +223,14 @@ body {
     font-family: 'poppins_medio';
 }
 
-.dialog{
+.dialog {
     margin: auto auto;
     background-color: rgba(30, 30, 30, 1);
     border: 1px solid rgba(240, 51, 51, 1);
     color: rgba(255, 255, 255, 1);
 }
 
-#popUp::backdrop{
+#popUp::backdrop {
     opacity: 0.4;
     background-color: #1E1E1E;
 }
@@ -219,7 +250,7 @@ body {
     flex-direction: column;
 }
 
-.dialog section div{
+.dialog section div {
     display: flex;
     flex-direction: column;
 }
@@ -230,21 +261,21 @@ body {
     gap: 10px;
 }
 
-.dialog #titularCartao{
+.dialog #titularCartao {
     width: 180px;
     height: 30px;
     background-color: rgba(30, 30, 30, 1);
     border: 1px solid rgba(240, 51, 51, 1);
     color: rgba(255, 255, 255, 1);
-    
+
 }
 
-.dialog div label{
+.dialog div label {
     font-size: 16px;
     font-family: "poppins_medio";
 }
 
-.dialog #dataVencimentoPopUp{
+.dialog #dataVencimentoPopUp {
     width: 70px;
     height: 30px;
     background-color: rgba(30, 30, 30, 1);
@@ -254,7 +285,7 @@ body {
     font-family: "poppins_medio";
 }
 
-#cancel{
+#cancel {
     height: 25px;
     width: 90px;
     background-color: rgba(88, 46, 47, 1);
@@ -264,7 +295,7 @@ body {
     font-family: "poppins_medio";
 }
 
-#enviarSubmit{
+#enviarSubmit {
     height: 25px;
     width: 60px;
     background-color: rgba(167, 52, 55, 1);
@@ -274,27 +305,89 @@ body {
     font-family: "poppins_medio";
 }
 
-.dialog label{
+.dialog label {
     font-size: 16px;
 }
 
-#textoExcluir{
+#textoExcluir {
     color: rgba(255, 255, 255, 1);
     font-size: 20px;
     font-family: "poppins_medio";
 }
 
-#popUpExcluir form{
+#popUpExcluir form {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
 
-#confirmarSubmit{
+#confirmarSubmit {
     width: 100px;
     height: 25px;
     background-color: rgba(167, 52, 55, 1);
     border: none;
     color: rgba(255, 255, 255, 1);
+}
+
+
+#addcartaoPopUp {
+    width: 400px;
+    height: 300px;
+    margin: auto auto;
+    background-color: rgba(30, 30, 30, 1);
+    border: 1px solid rgba(240, 51, 51, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+#addcartaoPopUp::backdrop{
+    opacity: 0.4;
+    background-color: #1E1E1E;
+}
+
+#addcartaoPopUp menu {
+    gap: 10px;
+    display: flex;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+}
+
+#cancelAddCartao {
+    height: 25px;
+    width: 90px;
+    background-color: rgba(88, 46, 47, 1);
+    border: 1px solid rgba(240, 51, 51, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    font-family: "poppins_medio";
+}
+
+.inputsPopUpAddCartao {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px 0 0 0;
+    gap: 20px;
+}
+
+.inputsPopUpAddCartao input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.inputsPopUpAddCartao input {
+    width: 180px;
+    height: 30px;
+    background-color: rgba(30, 30, 30, 1);
+    border: 1px solid rgba(240, 51, 51, 1);
+    color: rgba(255, 255, 255, 1);
+    border-radius: 2px;
+    text-align: center;
+    font-family: "poppins";
+}
+
+body {
+    font-family: "poppins";
 }
