@@ -14,7 +14,7 @@
     include('connection.php');
     session_start();
     ?>
-    <iframe src="barrasNav.php" class="iframenav" style="height: 120px;"></iframe>
+    <iframe src="barrasNav.php" class="iframenav" style="height: 132px;"></iframe>
 
     <section>
         <div class="slideshow-container">
@@ -73,13 +73,13 @@
 
                 <div class="caixas">
                     <?php
-                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, CPU.* FROM Produto_Tipo p  
+                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, p.Qtd_estoque, CPU.* FROM Produto_Tipo p  
                     JOIN CPU ON p.fk_Cod_CPU = CPU.Cod_CPU 
-                    WHERE p.fk_Cod_CPU IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_CPU IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=CPU" class="linkcaixa">
+                            <a href="cpu/cpu.php?id=<?php echo $row['Cod_Produto'];?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">

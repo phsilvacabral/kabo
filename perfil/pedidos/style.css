@@ -200,25 +200,6 @@ a:link {
     background-color: rgba(240, 51, 51, 1);
 }
 
-.slideshow-container {
-    max-width: 1500px;
-    position: relative;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-}
-
-.mySlides {
-    display: flex;
-    justify-content: center;
-    width: 97%;
-}
-
-.propaganda {
-    width: 100%;
-    max-height: 400px;
-}
-
 .input_textos{
     position: relative;
     display: flex;
@@ -230,13 +211,12 @@ a:link {
 
 /* Daniel Gambiarras */
 
-
 #info {
     margin: 15px 30px 30px 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center; /* Adicionado para alinhar verticalmente os itens */
+    align-items: center;
 }
 
 #pneuMurcho {
@@ -262,16 +242,16 @@ a:link {
     font-family: 'poppins_bold';
     font-size: 20px;
     color: white;
-    margin-right: 10px;/* Para alinhar à esquerda e empurrar o outro conteúdo para a direita */
+    margin-right: 10px;
 }
 
 #busca {
-    display: flex; /* Adicionado para alinhar o ícone à direita */
-    justify-content: space-between; /* Adicionado para posicionar o texto e o ícone nos extremos */
-    align-items: center; /* Adicionado para alinhar verticalmente os itens */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-image: url('../../img/lupa.png');
     background-repeat: no-repeat;
-    background-position: 3% 50%; /* Posição do ícone */
+    background-position: 3% 50%;
     background-size: 20px;
     width: 340px;
     height: 35px;
@@ -310,11 +290,12 @@ a:link {
 
 #caixa_pedidos {
     background: rgba(51, 51, 51, 0.5);
-    width: 100%; /* removido o width fixo */
-    min-width: 200px; /* adicione uma largura mínima para evitar que o contêiner fique muito estreito */
+    width: 100%;
+    min-width: 200px;
     height: auto;
     font-family: 'poppins';
     margin-bottom: 20px;
+    padding: 0 0 10px 0;
     border: 1px solid #F03333;
     border-radius: 2px;
     display: flex;
@@ -341,6 +322,9 @@ a:link {
 #pedidoP1, #pedidoP2, #pedidoP3, #pedidoP4 {
     margin-top: 10px;
     color: white;
+}
+#pedidoP4{
+    margin: 10px 20px 0 0;
 }
 
 .alignStatusPedido{
@@ -371,14 +355,13 @@ a:link {
 
 #produto_caixa {
     background-color: white;
-    flex-grow: 1; /* para ocupar o espaço restante */
+    flex-grow: 1;
     height: 80px;
     display: flex;
     align-items: center;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin: 0 20px 10px 20px;
     border: 1px solid #F03333;
+    border-radius: 2px;
 }
 
 #caixaP1, #caixaP2 {
@@ -404,8 +387,9 @@ a:link {
 }
 
 #produto_caixa img {
-    width: 60px;
-    height: 60px;
+    padding: 10px;
+    width: 80px;
+    height: 80px;
     border-right: 1px solid rgba(102, 102, 102, 0.5);
 }
 

@@ -16,14 +16,7 @@
     <header class="navegar">
         <nav>
             <div class="barranav">
-                <div src="img/menu.png" alt="" class="menu" onclick="notifyParent()"></div>
-                <script>
-                    function notifyParent() {
-                        window.parent.postMessage("openPopup", "*");
-                    }
-                </script>
-
-                <a><img src="img/logo_branco.png" alt="logo_kabo" class="logo"></a>
+                <a href="../kabo/" target="_parent"><img src="img/logo_branco.png" alt="logo_kabo" class="logo"></a>
 
                 <div class="divbusca"><span>Busque aqui</span><img src="img/lupa.png" alt="Buscar" id="lupa_busca">
                 </div>
@@ -65,7 +58,6 @@
                     endif; ?>
                 </div>
             </div>
-            <div class="divbusca"><span>Busque aqui</span><img src="img/lupa.png" alt="Buscar" id="lupa_busca"></div>
         </nav>
 
         <section class="secondnavbar">
