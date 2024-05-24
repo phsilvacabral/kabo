@@ -6,32 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="../produtos.css">
-    <title>CPU</title>
+    <title>CPUs</title>
 </head>
 
 <body>
     <?php
-    include ('../connection.php');
+    include('../connection.php');
     session_start();
     ?>
     <iframe src="../barrasNav.php" class="iframenav"></iframe>
 
     <main>
 
-    <h1 id = "titulo_produto">CPUs</h1>
-    <p id = "descricao_tipo">A CPU, ou processador, é o cérebro do seu desktop, responsável por dar vida a tudo. Imagine um chefe de cozinha recebendo pedidos (instruções) de programas e os dividindo em tarefas para seus funcionários (núcleos) executarem. Mais núcleos significam mais rapidez!</p>
+        <h1 id="titulo_produto">CPUs</h1>
+        <p id="descricao_tipo">A CPU, ou processador, é o cérebro do seu desktop, responsável por dar vida a tudo. Imagine um chefe de cozinha recebendo pedidos (instruções) de programas e os dividindo em tarefas para seus funcionários (núcleos) executarem. Mais núcleos significam mais rapidez!</p>
 
         <div class="caixas">
             <?php
-            $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, CPU.* FROM Produto_Tipo p  
+            $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, p.Qtd_estoque, CPU.* FROM Produto_Tipo p  
                     JOIN CPU ON p.fk_Cod_CPU = CPU.Cod_CPU 
-                    WHERE p.fk_Cod_CPU IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_CPU IS NOT NULL AND p.Qtd_estoque > 0";
             $result = $conn->query($sql);
             while ($row = $result->fetch_assoc()) { ?>
                 <div class="bordacaixas">
-                    <a href="../produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=CPU" class="linkcaixa">
-                        <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt=""
-                            class="fotodentro">
+                    <a href="cpu.php?id=<?php echo $row['Cod_Produto'];?>" class="linkcaixa">
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                         <div class="linha0">
                             <div class="moverdescricaocaixa">
                                 <div class="escritacaixa">
@@ -45,7 +44,7 @@
                         </div>
                     </a>
                 </div>
-            <?php } ?>
+            <?php } $conn->close()?>
         </div>
     </main>
 

@@ -6,7 +6,7 @@
             $id = $_GET['id'];
             $sql = "SELECT * FROM Produto_Tipo JOIN GPU ON fk_Cod_GPU = GPU.Cod_GPU WHERE Cod_Produto = $id";
             $result = $conn->query($sql);
-            
+
             if (isset($_SESSION["Cod_Usuario"])) {
                 $sqlEndereco = "SELECT * FROM Endereco WHERE Cod_Endereco = '{$_SESSION['Cod_Usuario']}'";
                 $resultEndereco = $conn->query($sqlEndereco);
@@ -15,7 +15,7 @@
                 $sqlCarrinho = "INSERT INTO AdicionaCarrinho VALUES ";
                 $rowEndereco = $resultEndereco->fetch_assoc();
                 $rowUsuario = $resultUsuario->fetch_assoc();
-            } 
+            }
 
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $selectItem = "SELECT * FROM AdicionaCarrinho WHERE fk_Cod_Produto_Tipo = $id";
@@ -99,12 +99,12 @@
                     </div>
                     <p id="textSemJuros">10 x <?php echo $row['Preco'] / 10 ?> sem juros no cartão de crédito</p>
                     <?php
-                        if (isset($_SESSION["Cod_Usuario"])) {
-                            echo '<div class="alignDados">';
-                            echo "<p>Enviar para $rowUsuario[Nome] - $rowEndereco[Cidade] - $rowEndereco[CEP]</p>";
-                            echo '</div>';
-                            echo '<p id="entregaGratis">Entrega Grátis</p>';
-                        }
+                    if (isset($_SESSION["Cod_Usuario"])) {
+                        echo '<div class="alignDados">';
+                        echo "<p>Enviar para $rowUsuario[Nome] - $rowEndereco[Cidade] - $rowEndereco[CEP]</p>";
+                        echo '</div>';
+                        echo '<p id="entregaGratis">Entrega Grátis</p>';
+                    }
 
                     ?>
                     <?php if ($row['Qtd_estoque'] == 0) { ?>
@@ -122,8 +122,7 @@
                     <form action="" method="post">
                         <div class="number-control">
                             <div class="number-left" onclick="diminuirValor()"></div>
-                            <input type="number" name="quantidade" id="numberInput" class="number-quantity" min="1" max="10"
-                                value="1" step="1">
+                            <input type="number" name="quantidade" id="numberInput" class="number-quantity" min="1" max="10" value="1" step="1">
                             <div class="number-right" onclick="incrementarValor()"></div>
                         </div>
 
@@ -154,14 +153,16 @@
 
                                 addButton.style.display = 'none';
                                 addedMessage.style.visibility = 'visible';
-                            } function addToCart(event) {
+                            }
+
+                            function addToCart(event) {
                                 event.preventDefault(); // Impede o envio do formulário
 
                                 var form = event.target.closest('form');
                                 var formData = new FormData(form);
 
                                 var xhr = new XMLHttpRequest();
-                                xhr.onreadystatechange = function () {
+                                xhr.onreadystatechange = function() {
                                     if (xhr.readyState == 4 && xhr.status == 200) {
                                         // Exibir resposta ou fazer outras operações após o sucesso
                                         var response = xhr.responseText;
@@ -181,9 +182,9 @@
                     </form>
 
                 </div>
-            </div>
         </div>
     </div>
-    </div>
+</div>
+</div>
 
 <?php } ?>
