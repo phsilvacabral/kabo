@@ -21,7 +21,7 @@ $result = $stmt->get_result();
 $quantidadeCarrinho = $result->fetch_assoc()['Quantidade'];
 
 // Updadte de quantidade
-if ($estoque > 0 && $quantidadeCarrinho < 10 && $estoque >= $quantidadeCarrinho && $quantidade > 0) {
+if ($estoque > 0 && $quantidadeCarrinho < 10 && $quantidade > 0) {
     $stmt = $conn->prepare('UPDATE AdicionaCarrinho SET Quantidade = ? WHERE fk_Cod_Usuario = ? AND fk_Cod_Produto_Tipo = ?');
     $stmt->bind_param('iii', $quantidade, $Cod_Usuario, $Cod_Produto);
     $stmt->execute();
@@ -31,11 +31,5 @@ if ($estoque > 0 && $quantidadeCarrinho < 10 && $estoque >= $quantidadeCarrinho 
         $stmt->bind_param('ii', $Cod_Usuario, $Cod_Produto);
         $stmt->execute();
     }
-    /*if ($estoque == 0) {
-            echo 'Estoque esgotado';
-        }
-        if ($estoque <= $quantidadeCarrinho) {
-            echo 'Estoque máximo atingido';
-        }*/
 }
 $stmt->close();

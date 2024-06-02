@@ -89,13 +89,16 @@ $(document).ready(function () {
         var input = $(this).siblings('.number-quantity');
         var valorAtual = parseInt(input.val());
         var valorMaximo = parseInt(input.attr('max'));
+        var avisoEstoqueMaximo = $(this).siblings('.estoqueMaximoQtd');
 
         if (valorAtual < valorMaximo) {
             input.val(valorAtual + 1).trigger('change');
+            avisoEstoqueMaximo.css('display', 'none');
         }
 
         if (valorAtual + 1 >= valorMaximo) {
             $(this).css('display', 'none');
+            avisoEstoqueMaximo.css('display', 'block');
         }
     });
 });
@@ -106,20 +109,20 @@ $('.number-left').click(function () {
     var input = $(this).siblings('.number-quantity');
     var valorAtual = parseInt(input.val());
     var valorMinimo = parseInt(input.attr('min'));
+    var avisoEstoqueMaximo = $(this).siblings('.estoqueMaximoQtd');
 
     if (valorAtual > valorMinimo) {
         input.val(valorAtual - 1).trigger('change');
-    }
-
-    if (valorAtual - 1 < parseInt(input.attr('max'))) {
-        $(this).siblings('.number-right').css('display', 'block');
+        if (valorAtual - 1 < parseInt(input.attr('max'))) {
+            $(this).siblings('.number-right').css('display', 'block');
+            avisoEstoqueMaximo.css('display', 'none'); // Oculta o aviso
+        }
     }
 
     if (valorAtual - 1 == 0) {
         $(this).closest('.itemCesta').find('.removerItem').click();
     }
 });
-
 
 /* função para atualizar subtotal de acordo com o preço dos itens */
 $(document).ready(function () {
@@ -336,6 +339,28 @@ $(document).ready(function () {
         var valorCompra = $('#valorCompra').val();
         var cartaoSelecionado = $('#cartaoSelecionado').val();
 
+        if (cartaoSelecionado === '') {
+            var dialog = document.querySelector('#dialogErro');
+            var dialogTitulo = document.querySelector('#dialogTitulo');
+            var avisoDialog = document.querySelector('#avisoDialog');
+            var botaoDialog = document.querySelector('#botaoDialog');
+
+            dialogTitulo.textContent = 'Erro ao finalizar compra';
+            avisoDialog.textContent = 'Por favor, adicione um cartão antes de finalizar a compra!';
+            botaoDialog.textContent = 'Ok';
+
+            botaoDialog.onclick = function () {
+                dialog.classList.add('fadeOut');
+                setTimeout(function () {
+                    dialog.close();
+                }, 201);
+            };
+
+            dialog.classList.remove('fadeOut');
+            dialog.showModal();
+            return;
+        }
+
         $.ajax({
             url: 'finalizarCompra.php',
             type: 'POST',
@@ -347,11 +372,51 @@ $(document).ready(function () {
             },
             success: function (response) {
                 if (response.trim() === 'Compra finalizada') {
-                    // Abre um link
                     window.location.href = '../perfil/pedidos/';
+                } else if (response.trim() === 'Carrinho vazio') {
+                    window.location.reload();
                 } else {
-                    // Trata a resposta do servidor em caso de erro
-                    console.error('Erro na finalização da compra: ', response);
+                    var responses = JSON.parse(response);
+
+                    if (responses.length > 0) {
+                        // Abre o diálogo
+                        var dialog = document.querySelector('#dialogErro');
+                        dialog.showModal();
+
+                        // Adiciona um ouvinte de evento ao botão
+                        document.querySelector('#botaoDialog').addEventListener('click', function () {
+                            for (var i = 0; i < responses.length; i += 2) {
+                                // Encontra o input correspondente usando o código do produto
+                                var input = document.querySelector('input[name="Cod_Produto"][value="' + responses[i] + '"]').parentNode.querySelector('.number-quantity');
+
+                                // Atualiza a quantidade
+                                input.value = responses[i + 1];
+
+                                // Atualiza o atributo value
+                                input.setAttribute('value', responses[i + 1]);
+
+                                // Dispara o evento change
+                                input.dispatchEvent(new Event('change'));
+                            }
+
+                            // Fecha o diálogo
+                            dialog.close();
+
+                            // Verifica se ainda existem produtos no carrinho
+                            var existeItem = false;
+                            document.querySelectorAll('.number-quantity').forEach(function (input) {
+                                if (parseInt(input.value) > 0) {
+                                    existeItem = true;
+                                    return false;
+                                }
+                            });
+                            if (!existeItem) {
+                                setTimeout(function () {
+                                    window.location.href = "../carrinho/";
+                                }, 200);
+                            }
+                        });
+                    }
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

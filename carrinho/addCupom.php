@@ -13,19 +13,19 @@ $row = $result->fetch_assoc();
 
 if ($result->num_rows == 0) {
     if ($Cod_Uso == 'TESTE') {
-        echo '50,'.$Cod_Uso;
+        echo '50,' . $Cod_Uso;
     } elseif ($Cod_Uso == 'GRATIS100') {
-        echo '100,'.$Cod_Uso;
+        echo '100,' . $Cod_Uso;
     } elseif ($Cod_Uso == 'KABO12') {
-        echo '12,'.$Cod_Uso;
+        echo '12,' . $Cod_Uso;
     } elseif ($Cod_Uso == 'BEMVINDO') {
-        echo '10,'.$Cod_Uso;
-    } elseif ($Cod_Uso == ''){
-        echo 'Insira um cupom!';
-    } else{
+        echo '10,' . $Cod_Uso;
+    } else {
         echo 'Cupom inválido!';
     }
-} else{
+} elseif ($Cod_Uso == '') {
+    echo 'Insira um cupom!';
+} else {
     echo 'Cupom já utilizado!';
 }
 $conn->close();

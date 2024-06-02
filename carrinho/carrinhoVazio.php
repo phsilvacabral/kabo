@@ -68,7 +68,7 @@ if (!isset($_SESSION['Cod_Usuario'])) {
     <nav>
         <div id="divNav1">
             <span id="setaVoltar" onclick="voltar()">&#10094;</span>
-            <img src="../img/logo_neon.png" alt="logo" id="logo">
+            <a href="../"><img src="../img/logo_neon.png" alt="logo" id="logo"></a>
         </div>
         <div id="divNav2">
             <h1 id="tituloCarrinho">Carrinho</h1>
