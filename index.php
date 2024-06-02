@@ -20,15 +20,15 @@
         <div class="slideshow-container">
 
             <a href="" class="mySlides">
-                <img src="img/i581338.jpeg" class="propaganda">
+                <img src="img/propaganda1.png" class="propaganda">
             </a>
 
             <a href="" class="mySlides">
-                <img src="img/mouseTeclado.jpg" class="propaganda">
+                <img src="img/propaganda2.png" class="propaganda">
             </a>
 
             <a href="" class="mySlides">
-                <img src="img_principais/Component 2.png" class="propaganda">
+                <img src="img/propaganda3.png" class="propaganda">
             </a>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -73,13 +73,13 @@
 
                 <div class="caixas">
                     <?php
-                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, p.Qtd_estoque, CPU.* FROM Produto_Tipo p  
+                    $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, CPU.* FROM Produto_Tipo p  
                     JOIN CPU ON p.fk_Cod_CPU = CPU.Cod_CPU 
                     WHERE p.fk_Cod_CPU IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="cpu/cpu.php?id=<?php echo $row['Cod_Produto'];?>" class="linkcaixa">
+                            <a href="cpu/cpu.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -108,11 +108,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, GPU.* FROM Produto_Tipo p 
                     JOIN GPU ON p.fk_Cod_GPU = GPU.Cod_GPU 
-                    WHERE p.fk_Cod_GPU IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_GPU IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=GPU" class="linkcaixa">
+                            <a href="gpu/gpu.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -132,7 +132,7 @@
 
             <div class="titulocaixa">
                 <p>Placa mãe</p>
-                <a href="placamae/">Ver todos ></a>
+                <a href="placaMae/">Ver todos ></a>
             </div>
             <div class="joinboxelements">
                 <button class="setaesquerda">&#10094;</button>
@@ -141,11 +141,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Placa_Mae.* FROM Produto_Tipo p 
                     JOIN Placa_Mae ON p.fk_Cod_PlacaMae = Placa_Mae.Cod_PlacaMae 
-                    WHERE p.fk_Cod_PlacaMae IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_PlacaMae IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Placa_Mae" class="linkcaixa">
+                            <a href="placaMae/placaMae.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -162,6 +162,57 @@
                 <button class="setadireita">&#10095;</button>
             </div>
 
+            <div class="titulocaixa">
+                <p>Marcas</p>
+            </div>
+            <div class="linkmovecaixasrecomendadas">
+                <div class="movecaixasrecomendadas">
+                    <a href="busca.php?b=intel" class="bordacaixasrecomendadas">
+                        <img src="img/Intel-logo.png" class="caixasrecomendadas">
+                        <p class="marca">Intel</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="busca.php?b=amd" class="bordacaixasrecomendadas">
+                        <img src="img/amd-logo.png" class="caixasrecomendadas">
+                        <p class="marca">AMD</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="busca.php?b=kingston" class="bordacaixasrecomendadas">
+                        <img src="img/kingston-logo.jpg" class="caixasrecomendadas">
+                        <p class="marca">Kingston</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="busca.php?b=razer" class="bordacaixasrecomendadas">
+                        <img src="img/razer-logo.png" class="caixasrecomendadas">
+                        <p class="marca">Razer</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+
+                </div>
+                <div class="movecaixasrecomendadas">
+                    <a href="busca.php?b=logitech" class="bordacaixasrecomendadas">
+                        <img src="img/logitech-logo.png" class="caixasrecomendadas">
+                        <p class="marca">Logitech</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="busca.php?b=corsair" class="bordacaixasrecomendadas">
+                        <img src="img/corsair-logo.png" class="caixasrecomendadas">
+                        <p class="marca">Corsair</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="busca.php?b=hyperX" class="bordacaixasrecomendadas">
+                        <img src="img/hyper-x-logo.png" class="caixasrecomendadas">
+                        <p class="marca">HyperX</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+                    <a href="busca.php?b=msi" class="bordacaixasrecomendadas">
+                        <img src="img/msi-logo.png" class="caixasrecomendadas">
+                        <p class="marca">MSI</p>
+                        <p class="verprodutos">ver produtos ></p>
+                    </a>
+
+                </div>
+            </div>
 
             <div class="titulocaixa">
                 <p>Memória RAM</p>
@@ -174,11 +225,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Memoria_RAM.* FROM Produto_Tipo p 
                     JOIN Memoria_RAM ON p.fk_Cod_MemRAM = Memoria_RAM.Cod_MemRAM 
-                    WHERE p.fk_Cod_MemRAM IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_MemRAM IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Memoria_Ram" class="linkcaixa">
+                            <a href="ram/ram.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -205,11 +256,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Armazenamento.* FROM Produto_Tipo p 
                     JOIN Armazenamento ON p.fk_Cod_Armazenamento = Armazenamento.Cod_Armazenamento
-                    WHERE p.fk_Cod_Armazenamento IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_Armazenamento IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Armazenamento" class="linkcaixa">
+                            <a href="armazenamento/armazenamento.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -238,11 +289,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Fonte.* FROM Produto_Tipo p 
                     JOIN Fonte ON p.fk_Cod_Fonte = Fonte.Cod_Fonte
-                    WHERE p.fk_Cod_Fonte IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_Fonte IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Fonte" class="linkcaixa">
+                            <a href="fonte/fonte.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -271,11 +322,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Gabinete.* FROM Produto_Tipo p 
                     JOIN Gabinete ON p.fk_Cod_Gabinete = Gabinete.Cod_Gabinete
-                    WHERE p.fk_Cod_Gabinete IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_Gabinete IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Gabinete" class="linkcaixa">
+                            <a href="gabinete/gabinete.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -304,11 +355,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Monitor.* FROM Produto_Tipo p 
                     JOIN Monitor ON p.fk_Cod_Monitor = Monitor.Cod_Monitor
-                    WHERE p.fk_Cod_Monitor IS NOT NULL LIMIT 10;";
+                    WHERE p.fk_Cod_Monitor IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10;";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Monitor" class="linkcaixa">
+                            <a href="monitor/monitor.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -337,11 +388,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Mouse.* FROM Produto_Tipo p 
                     JOIN Mouse ON p.fk_Cod_Mouse = Mouse.Cod_Mouse
-                    WHERE p.fk_Cod_Mouse IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_Mouse IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Mouse" class="linkcaixa">
+                            <a href="mouse/mouse.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
@@ -370,15 +421,15 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Headset.* FROM Produto_Tipo p
                     JOIN Headset ON p.fk_Cod_Headset = Headset.Cod_Headset
-                    WHERE p.fk_Cod_Headset IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_Headset IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Headset" class="linkcaixa">
+                            <a href="headset/headset.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
-                                        <div class="escritacaixa"><?php echo 'Headset ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Tipo_Conexao'] . ' ' . $row['Frequencia_Audio'].'Hz '.$row['Cor'] ?></div>
+                                        <div class="escritacaixa"><?php echo 'Headset ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Tipo_Conexao'] . ' ' . $row['Frequencia_Audio'] . 'Hz ' . $row['Cor'] ?></div>
                                     </div>
                                     <p class="precocaixa">R$ <?php echo number_format($row['Preco'], 2, ',', '.'); ?></p>
                                     <p class="parcelamentopreco">10 x R$<?php echo number_format($row['Preco'] / 10, 2, ',', '.'); ?> sem juros no cartão de crédito</p>
@@ -403,15 +454,15 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Teclado.* FROM Produto_Tipo p 
                     JOIN Teclado ON p.fk_Cod_Teclado = Teclado.Cod_Teclado
-                    WHERE p.fk_Cod_Teclado IS NOT NULL LIMIT 10;";
+                    WHERE p.fk_Cod_Teclado IS NOT NULL AND p.Qtd_estoque > 0 LIMIT 10;";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="produto.php?id=<?php echo $row['Cod_Produto']; ?>&tipo=Teclado" class="linkcaixa">
+                            <a href="teclado/teclado.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">
-                                        <div class="escritacaixa"><?php echo $row['Tipo'].' '.$row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Cor'] . ' ' . $row['Iluminacao'] ?></div>
+                                        <div class="escritacaixa"><?php echo $row['Tipo'] . ' ' . $row['Marca'] . ' ' . $row['Modelo'] . ' ' . $row['Cor'] . ' ' . $row['Iluminacao'] ?></div>
                                     </div>
                                     <p class="precocaixa">R$ <?php echo number_format($row['Preco'], 2, ',', '.'); ?></p>
                                     <p class="parcelamentopreco">10 x R$<?php echo number_format($row['Preco'] / 10, 2, ',', '.'); ?> sem juros no cartão de crédito</p>
@@ -421,61 +472,9 @@
                     <?php } ?>
                 </div>
                 <button class="setadireita">&#10095;</button>
-
-
-            </div>
-            <div class="titulocaixa">
-                <p>Marcas</p>
             </div>
 
-            <div class="linkmovecaixasrecomendadas">
-                <div class="movecaixasrecomendadas">
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
 
-                </div>
-                <div class="movecaixasrecomendadas">
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
-                    <a href="" class="bordacaixasrecomendadas">
-                        <img src="img/i581338.jpeg" class="caixasrecomendadas">
-                        <p class="marca">Samsung</p>
-                        <p class="verprodutos">ver produtos ></p>
-                    </a>
-
-                </div>
-            </div>
     </section>
 
     <script>

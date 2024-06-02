@@ -18,7 +18,16 @@
             <div class="barranav">
                 <a href="../kabo/" target="_parent"><img src="img/logo_branco.png" alt="logo_kabo" class="logo"></a>
 
-                <div class="divbusca"><span>Busque aqui</span><img src="img/lupa.png" alt="Buscar" id="lupa_busca">
+                <div class="divbusca">
+                    <form action="busca.php" method="get" target="_parent" id="searchForm">
+                        <input type="text" name="b" placeholder="Busque aqui">
+                        <img src="img/lupa.png" alt="Buscar" id="lupa_busca">
+                    </form>
+                    <script>
+                        document.getElementById('lupa_busca').addEventListener('click', function() {
+                            document.getElementById('searchForm').submit();
+                        });
+                    </script>
                 </div>
 
                 <div class="spaceperfil">
@@ -54,21 +63,21 @@
                                     <figcaption><?php echo $_clienteLogado ?></figcaption>
                                 </figure>
                             </a>
-                        <?php }
+                    <?php }
                     endif; ?>
                 </div>
             </div>
         </nav>
 
         <section class="secondnavbar">
-            <a href=""><button class="boxsecondnavbar">Monte seu PC</button></a>
-            <button class="boxsecondnavbar">PC pré-montado</button>
             <a href="cpu/" target="_parent"><button class="boxsecondnavbar">Processador</button></a>
             <a href="gpu/" target="_parent"><button class="boxsecondnavbar">Placa de Vídeo</button></a>
             <a href="armazenamento/" target="_parent"><button class="boxsecondnavbar">Armazenamento</button></a>
-            <a href="memoriaRam/" target="_parent"><button class="boxsecondnavbar">Memória</button></a>
+            <a href="ram/" target="_parent"><button class="boxsecondnavbar">Memória</button></a>
             <a href="placaMae/" target="_parent"><button class="boxsecondnavbar">Placa Mãe</button></a>
             <a href="gabinete/" target="_parent"><button class="boxsecondnavbar">Gabinete</button></a>
+            <a href="monitor/" target="_parent"><button class="boxsecondnavbar">Fonte</button></a>
+            <a href="mouse/" target="_parent"><button class="boxsecondnavbar">Mouse</button></a>
         </section>
     </header>
 </body>

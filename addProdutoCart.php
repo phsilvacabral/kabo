@@ -25,10 +25,12 @@ if(mysqli_num_rows($result) > 0) {
         // Atualizar a quantidade do produto no carrinho
         $query = "UPDATE AdicionaCarrinho SET Quantidade = Quantidade + $quantidade WHERE fk_Cod_Usuario = $usuario AND fk_Cod_Produto_Tipo = $Cod_Produto";
         mysqli_query($conn, $query);
-    } else{
+    } else if($estoque > 0){
         $minimo = min($estoque, 10);
         $query = "UPDATE AdicionaCarrinho SET Quantidade = $minimo WHERE fk_Cod_Usuario = $usuario AND fk_Cod_Produto_Tipo = $Cod_Produto";
         mysqli_query($conn, $query);
+    } else {
+        echo "Estoque esgotado!";
     }
 } else {
     // O produto não está no carrinho
@@ -42,6 +44,9 @@ if(mysqli_num_rows($result) > 0) {
         // Inserir o produto no carrinho
         $query = "INSERT INTO AdicionaCarrinho (fk_Cod_Usuario, fk_Cod_Produto_Tipo, Quantidade) VALUES ($usuario, $Cod_Produto, $quantidade)";
         mysqli_query($conn, $query);
+    }
+    else {
+        echo "Estoque esgotado!";
     }
 }
 ?>

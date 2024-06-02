@@ -39,9 +39,13 @@ $(document).ready(function () {
                 },
                 function (data, status) {
                     console.log("Status: " + status + "\n" + data);
-                    $(".buttonAdd").fadeOut(function() {
-                        $(".buttonAdded").fadeIn();
-                    });
+                    if(data.trim() == "Estoque esgotado!") {
+                        location.reload();
+                    } else {
+                        $(".buttonAdd").fadeOut(function() {
+                            $(".buttonAdded").fadeIn();
+                        });
+                    }
                 });
         }
     });
