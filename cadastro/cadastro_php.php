@@ -32,7 +32,7 @@ try {
     $checkQuery = "SELECT * FROM Usuario WHERE Email = '$Email' OR CPF = '$CPF'";
     $checkResult = $conn->query($checkQuery);
     if ($checkResult && $checkResult->num_rows > 0) {
-        throw new Exception('Ocorreu um erro ao executar a operação.');
+        throw new Exception('Usuário com o mesmo CPF ou E-mail já cadastrado!');
     } else {
         // Verifica se o endereço já existe
         $sqlCheckEndereco = "SELECT Cod_Endereco FROM Endereco WHERE CEP = '$CEP' AND Logradouro = '$Logradouro' AND Numero = '$Numero' AND Bairro = '$Bairro' AND Cidade = '$Cidade' AND Estado = '$Estado'";
@@ -60,13 +60,36 @@ try {
             $_SESSION["Cod_Usuario"] = $row["Cod_Usuario"];
             $_SESSION["Tipo_Usuario"] = $row["Tipo_Usuario"];
 
-            header("Location: /kabo/perfil");
+            header("Location: /kabo/perfil/");
             exit;
         } else {
             throw new Exception('Ocorreu um erro ao executar a operação.');
         }
     }
-} catch (Exception $e) {
-    echo '<script>alert("' . $e->getMessage() . '"); history.go(-1);</script>';
+} catch (Exception $e) { ?>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+    <dialog id="dialogErro">
+        <h3 id="dialogTitulo">Erro ao finalizar cadastro</h3>
+        <p id="avisoDialog"><?php echo $e->getMessage() ?></p>
+        <button id="botaoDialog">Ok</button>
+    </dialog>
+
+    <script>
+        var dialog = document.querySelector('#dialogErro');
+        var botaoDialog = document.querySelector('#botaoDialog');
+        botaoDialog.onclick = function() {
+            dialog.classList.add('fadeOut');
+            setTimeout(function() {
+                dialog.close();
+            }, 201);
+            history.go(-1);
+        };
+
+        dialog.classList.remove('fadeOut');
+        dialog.showModal();
+    </script>
+<?php
     exit;
 }
