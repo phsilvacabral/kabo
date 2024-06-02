@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../../cadastro/style.css">
+</head>
 <?php
     include("connection.php");
 
@@ -16,20 +19,52 @@
                 header("Location: /kabo/perfil/");
             } else {
 ?>
-<script>
-    alert("Senha incorreta");
-    history.go(-1);
-</script>
+    <dialog id="dialogErro">
+        <h3 id="dialogTitulo">Erro ao fazer login</h3>
+        <p id="avisoDialog">Senha incorreta!</p>
+        <button id="botaoDialog">Ok</button>
+    </dialog>
+
+    <script>
+        var dialog = document.querySelector('#dialogErro');
+        var botaoDialog = document.querySelector('#botaoDialog');
+        botaoDialog.onclick = function() {
+            dialog.classList.add('fadeOut');
+            setTimeout(function() {
+                dialog.close();
+            }, 201);
+            history.go(-1);
+        };
+
+        dialog.classList.remove('fadeOut');
+        dialog.showModal();
+    </script>
 <?php
             }
         }
     }
     else {
 ?>
-<script>
-    alert("Login incorreto");
-    history.go(-1);
-</script>
+    <dialog id="dialogErro">
+        <h3 id="dialogTitulo">Erro ao fazer login</h3>
+        <p id="avisoDialog">Login incorreto!</p>
+        <button id="botaoDialog">Ok</button>
+    </dialog>
+
+    <script>
+        var dialog = document.querySelector('#dialogErro');
+        var botaoDialog = document.querySelector('#botaoDialog');
+        botaoDialog.onclick = function() {
+            dialog.classList.add('fadeOut');
+            setTimeout(function() {
+                dialog.close();
+            }, 201);
+            history.go(-1);
+        };
+
+        dialog.classList.remove('fadeOut');
+        dialog.showModal();
+    </script>
 <?php
     }
 ?>

@@ -39,13 +39,13 @@
                 $imgPerfil = $rowP['Imagem'];
                 if ($imgPerfil == null) {
             ?>
-                    <img src="../img/perfil_padrao.png" alt="">
-                    <p><?php echo $_clienteLogado ?></p>
+                    <a href="../perfil/"><img src="../img/perfil_padrao.png" alt="">
+                    <p><?php echo $_clienteLogado ?></p></a>
                 <?php 
                 } else {
                     $imagemBase64 = base64_encode($imgPerfil); ?>
-                    <img src="data:image/jpeg;base64,<?php echo $imagemBase64 ?>"  alt="Perfil">
-                    <p><?php echo $_clienteLogado ?></p>
+                    <a href="../perfil/"><img src="data:image/jpeg;base64,<?php echo $imagemBase64 ?>"  alt="Perfil">
+                    <p><?php echo $_clienteLogado ?></p></a>
                 <?php
                 }
                 ?>
