@@ -25,11 +25,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Memoria_RAM.* FROM Produto_Tipo p 
                     JOIN Memoria_RAM ON p.fk_Cod_MemRAM = Memoria_RAM.Cod_MemRAM 
-                    WHERE p.fk_Cod_MemRAM IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_MemRAM IS NOT NULL AND p.Qtd_estoque > 0";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="ram/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="ram.php?id=<?php echo $row['Cod_Produto'];?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">

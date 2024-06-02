@@ -35,6 +35,16 @@
     $rowP = $resultP->fetch_assoc();
     $PedidoCompleto = $rowP['Total_Pedido'];
 
+    $sqlC = "SELECT SUM(Quantidade) AS Total_Quantidade FROM AdicionaCarrinho WHERE fk_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+    $resultC = $conn->query($sqlC);
+    $rowC = $resultC->fetch_assoc();
+    $TotalQuantidade = ($rowC['Total_Quantidade'] > 0 ? $rowC['Total_Quantidade'] : 0);
+
+    $sqlCartao = "SELECT COUNT(*) AS Total_Cartao FROM Cartao_Pagamento WHERE fk_Cod_Usuario = '{$_SESSION['Cod_Usuario']}'";
+    $resultCartao = $conn->query($sqlCartao);
+    $rowCartao = $resultCartao->fetch_assoc();
+    $TotalCartao = ($rowCartao['Total_Cartao'] > 0 ? $rowCartao['Total_Cartao'] : 0);
+
     if (!isset($_SESSION["Cod_Usuario"])) {
         header("Location: /kabo/");
         exit();
@@ -81,13 +91,13 @@
 
             <a href="../carrinho/">
                 <div class="quero_fui"><img src="../img/cart.png" alt="icone já fui">
-                    <p>Carrinho</p><span>0 itens</span>
+                    <p>Carrinho</p><span><?php echo $TotalQuantidade?> itens</span>
                 </div>
             </a>
 
             <a href="cartoes/">
                 <div class="quero_fui"><img src="../img/card.png" alt="icone já fui">
-                    <p>Meus cartões</p><span>0 adicionados</span>
+                    <p>Meus cartões</p><span><?php echo $TotalCartao;?> adicionados</span>
                 </div>
             </a>
         </div>

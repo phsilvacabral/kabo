@@ -25,11 +25,11 @@
                     <?php
                     $sql = "SELECT p.Cod_Produto, p.Marca, p.Modelo, p.Preco, p.Imagem, Placa_Mae.* FROM Produto_Tipo p 
                     JOIN Placa_Mae ON p.fk_Cod_PlacaMae = Placa_Mae.Cod_PlacaMae 
-                    WHERE p.fk_Cod_PlacaMae IS NOT NULL LIMIT 10";
+                    WHERE p.fk_Cod_PlacaMae IS NOT NULL AND p.Qtd_estoque > 0";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) { ?>
                         <div class="bordacaixas">
-                            <a href="plaamae/p=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
+                            <a href="placaMae.php?id=<?php echo $row['Cod_Produto']; ?>" class="linkcaixa">
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($row['Imagem']); ?>" alt="" class="fotodentro">
                                 <div class="linha0">
                                     <div class="moverdescricaocaixa">

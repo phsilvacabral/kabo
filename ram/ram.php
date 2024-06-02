@@ -6,7 +6,7 @@ $usuario = isset($_SESSION['Cod_Usuario']) ? $_SESSION['Cod_Usuario'] : '';
 $id = $_GET['id']; /* id produto */
 
 /* select para produto */
-$sqlProduto = "SELECT * FROM Produto_Tipo JOIN Teclado ON fk_Cod_Teclado = Teclado.Cod_Teclado WHERE Cod_Produto = $id";
+$sqlProduto = "SELECT * FROM Produto_Tipo JOIN Memoria_Ram ON fk_Cod_MemRAM = Memoria_Ram.Cod_MemRam WHERE Cod_Produto = $id";
 $resultProduto = $conn->query($sqlProduto);
 $rowProduto = $resultProduto->fetch_assoc();
 $descricao = $rowProduto['Descricao'];
@@ -16,7 +16,7 @@ $marca = $rowProduto['Marca'];
 $estoque = $rowProduto['Qtd_estoque'];
 $imagem = base64_encode($rowProduto['Imagem']);
 
-$descricaoEspecificacoes = $rowProduto['Tipo'].' '.$rowProduto['Marca'] . ' ' . $rowProduto['Modelo'] . ' ' . $rowProduto['Cor'] . ' ' . $rowProduto['Iluminacao'];
+$descricaoEspecificacoes = 'Memória RAM ' . $rowProduto['Marca'] . ' ' . $rowProduto['Modelo'] . ' ' . $rowProduto['Cap_Mem'] . 'GB ' . $rowProduto['Tipo_Mem'] . ' ' . $rowProduto['Vel_Mem'] . 'Mb/s';
 
 /* select para endereço */
 if ($usuario != '') {
@@ -75,38 +75,17 @@ if ($usuario != '') {
                         <p><?php echo $modelo; ?></p>
                     </div>
                     <div class="alignInRow">
-                        <p>Layout</p>
-                        <p><?php echo $rowProduto['Layout']; ?></p>
+                        <p>Tipo da memória</p>
+                        <p><?php echo $rowProduto['Tipo_Mem']; ?></p>
                     </div>
                     <div class="alignInRow">
-                        <p>Tamanho</p>
-                        <p><?php echo $rowProduto['Tamanho']; ?></p>
+                        <p>Velocidade da memória</p>
+                        <p><?php echo $rowProduto['Vel_Mem'];?>Mbps</p>
                     </div>
                     <div class="alignInRow">
-                        <p>Formato</p>
-                        <p><?php echo $rowProduto['Formato']; ?></p>
+                        <p>Capacidade da memória</p>
+                        <p><?php echo $rowProduto['Cap_Mem'];?>GB</p>
                     </div>
-                    <div class="alignInRow">
-                        <p>Switch</p>
-                        <p><?php echo $rowProduto['Switch']; ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Cor</p>
-                        <p><?php echo $rowProduto['Cor']; ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Iluminação</p>
-                        <p><?php echo $rowProduto['Iluminacao']; ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Conexão</p>
-                        <p><?php echo $rowProduto['Conexao']; ?></p>
-                    </div>
-                    <div class="alignInRow">
-                        <p>Tipo de conexão</p>
-                        <p><?php echo $rowProduto['Tipo_Conexao']; ?></p>
-                    </div>
-
                 </div>
 
                 <div class="areaAddCarrinho">

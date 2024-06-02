@@ -85,7 +85,7 @@
                             document.getElementById('cidade').value = data.localidade;
                             document.getElementById('estado').value = data.uf;
                         } else {
-                            alert('CEP não encontrado');
+                            showDialog('Erro', 'CEP não encontrado');
                         }
                     })
                     .catch(error => console.error('Erro ao buscar CEP:', error));
@@ -113,11 +113,11 @@
                     extensaoArquivo != 'jpg' &&
                     extensaoArquivo != 'jpeg') {
                     input.value = '';
-                    alert("É preciso selecionar um arquivo de imagem (gif, png, jpg ou jpeg)");
+                    showDialog('Erro', "É preciso selecionar um arquivo de imagem (gif, png, jpg ou jpeg)");
                 }
             } else {
                 input.value = '';
-                alert("Selecione um caminho de arquivo válido");
+                showDialog('Erro', "Selecione um caminho de arquivo válido");
             }
             if (input.files && input.files[0]) {
                 var arquivoTam = input.files[0].size / 1024 / 1024;
@@ -130,7 +130,7 @@
                     reader.readAsDataURL(input.files[0]);
                 } else {
                     input.value = '';
-                    alert("O arquivo precisa ser uma imagem com menos de 16 MB");
+                    showDialog('Erro', "O arquivo precisa ser uma imagem com menos de 16 MB");
                 }
             } else {
 
@@ -144,7 +144,7 @@
             <span id="X" onclick="voltarPagina()"><a href="../">&times;</a></span>
 
             <div class="alinharelementos">
-                <img src="../../img/logo_neon.png" alt="logo" id="logo">
+                <a href="../../"><img src="../../img/logo_neon.png" alt="logo" id="logo"></a>
             </div>
 
             <div class="alinharelementosescrita">
@@ -228,9 +228,40 @@
         </div>
 
     </main>
+
+    <dialog id="dialogErro">
+        <h3 id="dialogTitulo">Erro</h3>
+        <p id="avisoDialog"></p>
+        <button id="botaoDialog">Ok</button>
+    </dialog>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
     <script>
+        // função modal
+        function showDialog(titulo, texto) {
+            var dialog = document.querySelector('#dialogErro');
+            var dialogTitulo = document.querySelector('#dialogTitulo');
+            var avisoDialog = document.querySelector('#avisoDialog');
+            var botaoDialog = document.querySelector('#botaoDialog');
+
+            dialogTitulo.textContent = titulo;
+            avisoDialog.textContent = texto;
+            botaoDialog.textContent = 'Ok';
+
+            botaoDialog.onclick = function() {
+                dialog.classList.add('fadeOut');
+                setTimeout(function() {
+                    dialog.close();
+                    dialog.classList.remove('fadeOut');
+                }, 201);
+            };
+
+            dialog.classList.remove('fadeOut');
+            dialog.showModal();
+        }
+
+
         const txtSenhaAtual = document.getElementById('senhaAtual')
         const txtSenhaNova = document.getElementById('senhaNova')
         const txtSenhaConfirmar = document.getElementById('senhaConfirmar')
@@ -264,39 +295,39 @@
                                             if (txtSenhaNova.value === txtSenhaConfirmar.value) {
                                                 return true;
                                             } else {
-                                                window.alert('As senhas não combinam!')
+                                                showDialog('Erro', 'As senhas não combinam!')
                                                 return false
                                             }
                                         } else {
-                                            window.alert('Senha atual incorreta!')
+                                            showDialog('Erro', 'Senha atual incorreta!')
                                             return false
                                         }
                                     } else {
-                                        window.alert('Estado inválido!')
+                                        showDialog('Erro', 'Estado inválido!')
                                         return false
                                     }
                                 } else {
-                                    window.alert('Cidade inválido!')
+                                    showDialog('Erro', 'Cidade inválido!')
                                     return false
                                 }
                             } else {
-                                window.alert('Bairro inválido!')
+                                showDialog('Erro', 'Bairro inválido!')
                                 return false
                             }
                         } else {
-                            window.alert('Logradouro inválido!')
+                            showDialog('Erro', 'Logradouro inválido!')
                             return false
                         }
                     } else {
-                        window.alert('Email inválido!')
+                        showDialog('Erro', 'Email inválido!')
                         return false
                     }
                 } else {
-                    window.alert('CEP inválido!')
+                    showDialog('Erro', 'CEP inválido!')
                     return false
                 }
             } else {
-                window.alert('Nome inválido!')
+                showDialog('Erro', 'Nome inválido!')
                 return false
             }
         }

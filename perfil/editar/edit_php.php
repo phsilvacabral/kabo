@@ -40,7 +40,7 @@ if (empty($Senha)) {
                 // Obter o Cod_Endereco do novo endereço
                 $Cod_Endereco = $conn->insert_id;
             } else {
-                throw new Exception('Ocorreu um erro ao inserir o novo endereço.');
+                throw new Exception('Ocorreu um erro ao inserir o novo endereço!');
             }
         }
         // Atualizar o usuário
@@ -53,10 +53,33 @@ if (empty($Senha)) {
             header("Location: /kabo/perfil/");
             exit;
         } else {
-            throw new Exception('Ocorreu um erro ao atualizar o usuário.');
+            throw new Exception('Ocorreu um erro ao atualizar o usuário!');
         }
-    } catch (Exception $e) {
-        echo '<script>alert("' . $e->getMessage() . '"); history.go(-1);</script>';
+    } catch (Exception $e) { ?>
+        <head>
+            <link rel="stylesheet" href="style.css">
+        </head>
+        <dialog id="dialogErro">
+            <h3 id="dialogTitulo">Erro ao editar perfil</h3>
+            <p id="avisoDialog"><?php echo $e->getMessage() ?></p>
+            <button id="botaoDialog">Ok</button>
+        </dialog>
+
+        <script>
+            var dialog = document.querySelector('#dialogErro');
+            var botaoDialog = document.querySelector('#botaoDialog');
+            botaoDialog.onclick = function() {
+                dialog.classList.add('fadeOut');
+                setTimeout(function() {
+                    dialog.close();
+                }, 201);
+                history.go(-1);
+            };
+
+            dialog.classList.remove('fadeOut');
+            dialog.showModal();
+        </script>
+    <?php
         exit;
     }
 } else {
@@ -90,10 +113,34 @@ if (empty($Senha)) {
             header("Location: /kabo/perfil/");
             exit;
         } else {
-            throw new Exception('Ocorreu um erro ao executar a operação.');
+            throw new Exception('Ocorreu um erro ao executar a operação!');
         }
-    } catch (Exception $e) {
-        echo '<script>alert("' . $e->getMessage() . '"); history.go(-1);</script>';
+    } catch (Exception $e) { ?>
+
+        <head>
+            <link rel="stylesheet" href="style.css">
+        </head>
+        <dialog id="dialogErro">
+            <h3 id="dialogTitulo">Erro ao editar perfil</h3>
+            <p id="avisoDialog"><?php echo $e->getMessage() ?></p>
+            <button id="botaoDialog">Ok</button>
+        </dialog>
+
+        <script>
+            var dialog = document.querySelector('#dialogErro');
+            var botaoDialog = document.querySelector('#botaoDialog');
+            botaoDialog.onclick = function() {
+                dialog.classList.add('fadeOut');
+                setTimeout(function() {
+                    dialog.close();
+                }, 201);
+                history.go(-1);
+            };
+
+            dialog.classList.remove('fadeOut');
+            dialog.showModal();
+        </script>
+<?php
         exit;
     }
 }

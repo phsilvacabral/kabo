@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../../img/card.png" type="image/x-icon">
     <title>Cartões</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -88,8 +89,7 @@
                         <p id="dataVencimento"><?php echo date('m/Y', strtotime($row['Dt_Vencimento'])); ?></p>
                         <input type="button" class="editar" name="editar" value="Editar"
                             onclick="abrirPopUp(<?php echo $row['Cod_Cartao']; ?>)">
-                        <input type="button" name="lixeira" id="lixeira" value="Excluir"
-                            onclick="abrirPopUpExcluir(<?php echo $row['Cod_Cartao']; ?>)">
+                        <img src="../../img/lixeira.png" id="lixeira" onclick="abrirPopUpExcluir(<?php echo $row['Cod_Cartao']; ?>)">
                     </form>
                 </div>
             <?php } ?>

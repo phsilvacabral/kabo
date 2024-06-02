@@ -34,7 +34,7 @@
             <input type="password" class="input-login" placeholder="Senha" name="txtPassword" maxlength="20" required>
 
             <div id="buttons">
-                <a id="criar-button" href="../cadastro/index.php">Criar conta</a>
+                <a id="criar-button" href="../cadastro/">Criar conta</a>
                 <input type="submit" id="entrar-button" value="Entrar">
             </div>
         </form>
