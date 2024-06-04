@@ -224,6 +224,16 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
+#regraSenha{
+    font-family: 'poppins_medio';
+    color: #ffffff;
+    font-size: 12px;
+    margin: 0px 40px 10px 40px;
+    text-align: start;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.8);
+}
+
 #enviarsubmit{
     margin: 40px 0 40px 50%;
     width: 130px;

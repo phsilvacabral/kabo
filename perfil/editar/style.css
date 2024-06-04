@@ -234,6 +234,32 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
+#bntTrocarSenha{
+    font-family: 'poppins_medio';
+    color: #f03333;
+    font-size: 12px;
+    margin: 0px 40px 10px 40px;
+    text-align: start;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.8);
+}
+#bntTrocarSenha:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.esconder{
+    display: none;
+}
+#regraSenha{
+    font-family: 'poppins_medio';
+    color: #ffffff;
+    font-size: 12px;
+    margin: 0px 40px 10px 40px;
+    text-align: start;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.8);
+}
+
 #botoes{
     display: flex;
     justify-content: space-between;

@@ -189,9 +189,26 @@
                     <input type="email" name="email" id="email" value="<?php echo $Email ?>" placeholder="E-mail" maxlength="100" class="campocheio" readonly>
 
                     <input type="password" name="txtSenhaAtual" value="" id="senhaAtual" placeholder="Digite a senha atual" class="campocheio" maxlength="20" required>
-                    <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a nova senha" class="campocheio" maxlength="20">
-                    <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a nova senha" class="campocheio" maxlength="20">
 
+                    <p id="bntTrocarSenha">Trocar senha</p>
+                    <div class="esconder">
+                        <p id="regraSenha">A senha deve ter ao menos uma letra maiúscula e minúscula e um número. Ao todo, no mínimo oito caracteres.</p>
+                        <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a nova senha" class="campocheio" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                        <input type="password" name="txtSenha" value=""id="senhaConfirmar" placeholder="Confirme a nova senha" class="campocheio" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                    </div>
+
+
+                    <script>
+                        document.getElementById('bntTrocarSenha').addEventListener('click', function() {
+                            var divEsconder = document.querySelector('.esconder');
+                            divEsconder.style.display = 'block';
+
+                            var camposSenha = divEsconder.querySelectorAll('input[type=password]');
+                            for (var i = 0; i < camposSenha.length; i++) {
+                                camposSenha[i].required = true;
+                            }
+                        });
+                    </script>
                 </div>
 
                 <div id="botoes">
@@ -217,7 +234,7 @@
                     <form action="" id="form_senha" method="get">
 
                         <div style="display: flex; align-items: center;">
-                            <input type="password" id="senha_excluir" name="senha_excluir" placeholder="Confirme com sua senha" required>
+                            <input type="password" id="senha_excluir" name="senha_excluir" placeholder="Confirme com sua senha" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                         </div>
 
                         <input type="submit" value="Excluir" id="botao_excluir_popup">

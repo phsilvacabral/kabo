@@ -12,8 +12,8 @@ $codUsuario = $_SESSION['Cod_Usuario'];
 list($month, $year) = explode('/', $vencimento);
 $vencimentoFormatted = $year . '-' . $month . '-01';
 
-$checkCardQuery = $conn->prepare("SELECT * FROM Cartao_pagamento WHERE Numero = ?");
-$checkCardQuery->bind_param("s", $numero);
+$checkCardQuery = $conn->prepare("SELECT * FROM Cartao_pagamento WHERE Numero = ? AND fk_Cod_Usuario = ?");
+$checkCardQuery->bind_param("si", $numero, $codUsuario);
 $checkCardQuery->execute();
 $checkCardQuery->store_result();
 

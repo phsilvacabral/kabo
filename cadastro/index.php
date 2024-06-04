@@ -102,9 +102,9 @@
 
                     <input type="email" name="email" id="email" value="" placeholder="E-mail" maxlength="100" class="campocheio" required>
 
-                    <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a senha" class="campocheio" maxlength="20" required>
-                    <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a senha" class="campocheio" maxlength="20" required>
-
+                    <p id="regraSenha">A senha deve ter ao menos uma letra maiúscula e minúscula e um número. Ao todo, no mínimo oito caracteres.</p>
+                    <input type="password" name="txtSenhaNova" value="" id="senhaNova" placeholder="Digite a senha" class="campocheio" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                    <input type="password" name="txtSenha" value="" id="senhaConfirmar" placeholder="Confirme a senha" class="campocheio" maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                 </div>
                 <input type="submit" value="Criar conta" id="enviarsubmit">
             </form>
