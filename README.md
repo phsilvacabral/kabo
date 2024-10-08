@@ -1,7 +1,7 @@
 ![logo_neon](https://github.com/user-attachments/assets/f6b2b61b-2ac6-4ceb-bbc9-41b16dc51deb)
 
 # Sobre
-Kabo foi um projeto de finalização do 3º período da matéria de experiência criativa. Foi usado HTML e CSS puro para o front, além do jQuery. Para o back, usamos PHP e MySQL para o banco de dados. Para o planejamento, fizemos histórias de usuário com critérios de aceite para cada cenário do sistema. Para a definição das histórias, fizemos um quadro PBB (Product Backlog Building), onde identificamos as personas, as features para cada persona, os problemas que essas personas teriam e as espectativas que elas teriam em usar o nosso sistema. Para o planejamento do design, foi feito uma prototipação no Figma: https://www.figma.com/design/nzBZwgl8vvj3ltIDNeNrou/Kab%C3%B4?m=auto&t=kuxl0m1cQbY4U3hW-1
+Kabo foi um projeto de finalização do 3º período da matéria de experiência criativa. A proposta foi fazer um e-commerce de peças para a montagem de um desktop, além do gerenciamento do site. Foi usado HTML e CSS puro para o front, além do jQuery. Para o back, usamos PHP e MySQL para o banco de dados. Para o planejamento, fizemos histórias de usuário com critérios de aceite para cada cenário do sistema. Para a definição das histórias, fizemos um quadro PBB (Product Backlog Building), onde identificamos as personas, as features para cada persona, os problemas que essas personas teriam e as espectativas que elas teriam em usar o nosso sistema. Para o planejamento do design, foi feito uma prototipação no Figma: https://www.figma.com/design/nzBZwgl8vvj3ltIDNeNrou/Kab%C3%B4?m=auto&t=kuxl0m1cQbY4U3hW-1
 
 # Instalação e execução
 ### 1. Aplicativos necessários
